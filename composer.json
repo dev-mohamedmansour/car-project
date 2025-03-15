@@ -1,0 +1,24 @@
+{
+  "name": "vendor_name/car-project",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "mohamed",
+      "email": "mohamedmansour0037@gmail.com"
+    }
+  ],
+  "version": "1.0.0",
+  "require": {
+    "php": "^8.4",
+    "ext-mysqli": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Car\\": "Logic/"
+
+    }
+  }
+
+}
