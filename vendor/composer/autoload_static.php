@@ -21,6 +21,7 @@ class ComposerStaticInit83aef6bfe1f1c59a30a5e5f7f7955a1a
     );
 
     public static $classMap = array (
+        'Car\\Models\\Db' => __DIR__ . '/../..' . '/Logic/Models/Db.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

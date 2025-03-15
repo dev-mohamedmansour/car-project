@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head>
+	  <?php
+		  // incloud header
+			 $userId = $_SESSION['userId'];
+			 // if not user redirect to login page
+			 if (!isset($userId)) {
+					header('location:Auth.php#signup-form');
+			 }
+	  ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
