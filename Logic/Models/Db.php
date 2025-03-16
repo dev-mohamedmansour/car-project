@@ -151,7 +151,7 @@
 					$this->runQuery();
 					$q = mysqli_fetch_assoc($this->query);
 					if ($q == []) {
-						  echo "<h2 style='color: red'>Data Not Found</h2>";
+//						  reecho "<h2 style='color: red'>Data Not Found</h2>";
 					} elseif ($q != []) {
 						  return $q;
 					}

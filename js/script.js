@@ -18,7 +18,7 @@ for (let i = 0; i < btnClick.length; i++) {
 
 // Form
 
-function formValidate() {
+function loginValidate() {
     var Email = document.getElementById("Email").value;
     var Password = document.getElementById("Password").value;
     var error = document.getElementById("error");
@@ -45,44 +45,44 @@ function formValidate() {
 
 // Validate registration form
 
-function formValidate2() {
-    var Username2 = document.getElementById("Username2").value;
-    var Email2 = document.getElementById("Email2").value;
-    var Password2 = document.getElementById("Password2").value;
-    var error2 = document.getElementById("error2");
-    var text = "";
-
-    error2.classList.add("error-message");
-    error2.style.display = "block";
-
-    // ✅ التحقق من اسم المستخدم
-    if (Username2.length < 3) {
-        text = "Please Enter a Valid Username (at least 5 characters)";
-        error2.innerHTML = text;
-        return false;
-    }
-
-    // ✅ التحقق من البريد الإلكتروني
-    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(Email2)) {
-        text = "Please Enter a Valid Email";
-        error2.innerHTML = text;
-        return false;
-    }
-
-    // ✅ التحقق من كلمة المرور
-    // let passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    // if (!passwordRegex.test(Password2)) {
-    //   text = "Password must be at least 8 characters, contain a capital letter, a number, and a special character.";
-    //   error2.innerHTML = text;
-    //   return false;
-    // }
-
-    // ✅ إخفاء الخطأ عند نجاح التحقق
-    // error2.style.display = "none";
-    // alert("Form submitted successfully");
-    // return true;
-}
+// function registerValidate2() {
+//     var Username2 = document.getElementById("Username2").value;
+//     var Email2 = document.getElementById("Email2").value;
+//     var Password2 = document.getElementById("Password2").value;
+//     var error2 = document.getElementById("error2");
+//     var text = "";
+//
+//     error2.classList.add("error-message");
+//     error2.style.display = "block";
+//
+//     // ✅ التحقق من اسم المستخدم
+//     if (Username2.length < 3) {
+//         text = "Please Enter a Valid Username (at least 5 characters)";
+//         error2.innerHTML = text;
+//         return false;
+//     }
+//
+//     // ✅ التحقق من البريد الإلكتروني
+//     let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+//     if (!emailRegex.test(Email2)) {
+//         text = "Please Enter a Valid Email";
+//         error2.innerHTML = text;
+//         return false;
+//     }
+//
+//     // ✅ التحقق من كلمة المرور
+//     // let passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+//     // if (!passwordRegex.test(Password2)) {
+//     //   text = "Password must be at least 8 characters, contain a capital letter, a number, and a special character.";
+//     //   error2.innerHTML = text;
+//     //   return false;
+//     // }
+//
+//     // ✅ إخفاء الخطأ عند نجاح التحقق
+//     // error2.style.display = "none";
+//     // alert("Form submitted successfully");
+//     // return true;
+// }
 
 
 function formValidate3() {
