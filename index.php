@@ -4,11 +4,20 @@
 <head>
 	  <?php
 		  // incloud header
+		  session_start();
 			 $userId = $_SESSION['userId'];
 			 // if not user redirect to login page
 			 if (!isset($userId)) {
-					header('location:Auth.php#signup-form');
+					header('location:Auth.php');
 			 }
+				if (!empty($_SESSION['success'])
+				) {
+					  echo '<div id="error-message" class="error-message">'
+							. htmlspecialchars($_SESSION['success'])
+							. '</div>';
+					  unset($_SESSION['success']); // Clear the error message after displaying
+				}
+			 
 	  ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

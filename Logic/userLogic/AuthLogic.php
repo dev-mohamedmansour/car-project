@@ -91,8 +91,8 @@
 			 if ($emailCheck) {
 					$_SESSION['error'] = "Email already exists.";
 					echo $_SESSION['error'];
-					die();
-//					header('location:Auth.php');
+//					die();
+					header('location:Auth.php');
 			 } else {
 					
 					$data = [
@@ -105,16 +105,18 @@
 					$userInsert = $dbAction->insert("users", $data)->execution();
 					if ($userInsert) {
 						  $_SESSION['error'] = ""; // Clear any previous error
-						  $getUserId = $dbAction->select("id", "users")
+						  $getUser = $dbAction->select("*", "users")
 								->where("email", "=", $data['email'])
 								->getRow();
-						  echo "<pre>";
-						  var_dump($getUserId);
-						  echo "</pre>";
-
-						  $_SESSION['success'] = "Sign-up successful. You can now log in.";
-						  echo $_SESSION['success'] ;
-						  die();
+						  $_SESSION['success']
+								= "Sign-up successful. You can now log in.";
+						  $_SESSION['userName'] = $getUser['name'];
+						  $_SESSION['userEmail'] = $getUser['email'];
+						  $_SESSION['userId'] = $getUser['id'];
+//						  echo "<pre>";
+//						  var_dump($_SESSION);
+//						  echo "</pre>";
+//						  die();
 						  header('location:index.php');
 					} else {
 						  $_SESSION['error'] = "Sign-up failed. Please try again.";

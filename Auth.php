@@ -117,7 +117,7 @@
 									    <!--									    onsubmit="return formValidate2();" novalidate-->
 									    <h3 class="mb-4 text-center">
 											 Sign Up</h3>
-									    <form method="post" action="Logic/userLogic/AuthLogic.php">
+									    <form method="post" action="">
 											 <div id="error2"></div>
 											 <div data-mdb-input-init
 												 class="form-outline mb-4">
