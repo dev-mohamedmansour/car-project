@@ -68,7 +68,6 @@
 				 <div class="col-md-12 col-lg-6">
 								  <?php
 										 include "Logic/userLogic/AuthLogic.php";
-										 session_start();
 										 if (isset($_SESSION['error'])
 											  && !empty($_SESSION['error'])
 										 ) {
@@ -78,39 +77,69 @@
 												unset($_SESSION['error']); // Clear the error message after displaying
 										 }
 								  ?>
-					   <div id="wrap2" class="wrap" style="display: none;">
+					   <div id="wrap" class="wrap" style="display: none;">
 							<div class="login-wrap p-4 p-md-5">
 								  <div id="login-form">
-									    <!--									    <h3 class="mb-4 text-center">Sign In</h3>-->
-									    <!--									    <form method="post" onsubmit="return formValidate();" novalidate>-->
-									    <!--											 <div id="error"></div>-->
-									    <!--											 <div data-mdb-input-init class="form-outline mb-4">-->
-									    <!--												   <input class="form-control" type="email" name="login-email" id="Email" required>-->
-									    <!--												   <label class="form-label" for="Email">Email</label>-->
-									    <!--											 </div>-->
-									    <!--											 <div data-mdb-input-init class="form-outline mb-4">-->
-									    <!--												   <input type="password" id="Password" name="login-password" class="form-control" required/>-->
-									    <!--												   <label class="form-label" for="Password">Password</label>-->
-									    <!--											 </div>-->
-									    <!--											 <div class="form-group">-->
-									    <!--												   <button type="submit" name="sign-in" class="submit form-control btn px-3">Sign In</button>-->
-									    <!--											 </div>-->
-									    <!--											 <div class="form-container">-->
-									    <!--												   <div class="form-links">-->
-									    <!--														<label class="remember-me">-->
-									    <!--															  <input type="checkbox" checked>-->
-									    <!--															  <span class="custom-checkbox"></span>-->
-									    <!--															  Remember Me-->
-									    <!--														</label>-->
-									    <!--														<a href="#" class="forgot-password">Forgot Password?</a>-->
-									    <!--												   </div>-->
-									    <!--												   <p class="text-center">Not a member? <a onclick="showSignup()" class="sign-link">SignUp</a></p>-->
-									    <!--											 </div>-->
-									    <!--									    </form>-->
+									    <h3 class="mb-4 text-center">
+											 Sign In</h3>
+<!--									    onsubmit="return formValidate();"-->
+<!--									    novalidate-->
+									    <form method="post">
+											 <div id="error"></div>
+											 <div data-mdb-input-init
+												 class="form-outline mb-4">
+												   <input class="form-control"
+														type="email"
+														name="login-email"
+														id="Email"
+														required>
+												   <label class="form-label"
+														for="Email">Email</label>
+											 </div>
+											 <div data-mdb-input-init
+												 class="form-outline mb-4">
+												   <input type="password"
+														id="Password"
+														name="login-password"
+														class="form-control"
+														required/>
+												   <label class="form-label"
+														for="Password">Password</label>
+											 </div>
+											 <div class="form-group">
+												   <button
+														type="submit"
+														name="sign-in"
+														value="sign-in"
+														class="submit form-control btn px-3">
+														Sign In
+												   </button>
+											 </div>
+											 <div class="form-container">
+												   <div class="form-links">
+														<label class="remember-me">
+															  <input type="checkbox"
+																    checked>
+															  <span class="custom-checkbox"></span>
+															  Remember
+															  Me
+														</label>
+														<a href="#"
+														   class="forgot-password">Forgot
+															  Password?</a>
+												   </div>
+												   <p class="text-center">
+														Not a
+														member? <a
+															  onclick="showSignup()"
+															  class="sign-link">SignUp</a>
+												   </p>
+											 </div>
+									    </form>
 								  </div>
 							</div>
 					   </div>
-					   <div id="wrap" class="wrap"
+					   <div id="wrap2" class="wrap"
 						   style="display: block;">
 							<div class="login-wrap p-4 p-md-5">
 								  <div id="signup-form">
@@ -146,6 +175,7 @@
 														class="form-control"
 														name="phone"
 														id="phone"
+														maxlength="11"
 														required>
 												   <label class="form-label"
 														for="phone">Phone</label>
@@ -156,6 +186,7 @@
 														class="form-control"
 														name="register-password"
 														id="Password2"
+														maxlength="30"
 														required/>
 												   <label class="form-label"
 														for="Password2">Password</label>
@@ -163,6 +194,7 @@
 											 <div class="form-group">
 												   <button
 														type="submit"
+														value="sign-up"
 														name="sign-up"
 														class="submit form-control btn px-3">
 														Sign Up

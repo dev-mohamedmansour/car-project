@@ -5,6 +5,7 @@
 	  require_once __DIR__ . "/../../vendor/autoload.php";
 	  
 	  $dbAction = new Db();
+	  session_start();
 	  
 	  /**
 		* Validates an email address by checking its format and domain existence.
@@ -84,17 +85,14 @@
 			 ); // Secure password hashing
 			 
 			 // Check if email already exists in the database
-			 $emailCheck = $dbAction->select("email", "users")
-				  ->where("email", "=", $email)
+			 $checkEmailOrPhone = $dbAction->select("*", "users")
+				  ->where("email", "=", $email)->orWhere("phone", "=", $phone)
 				  ->getRow();
 			 
-			 if ($emailCheck) {
-					$_SESSION['error'] = "Email already exists.";
-					echo $_SESSION['error'];
-//					die();
+			 if ($checkEmailOrPhone) {
+					$_SESSION['error'] = "Email or Phone already exists.";
 					header('location:Auth.php');
 			 } else {
-					
 					$data = [
 						 "name"     => $name,
 						 "email"    => $email,
@@ -104,7 +102,7 @@
 					
 					$userInsert = $dbAction->insert("users", $data)->execution();
 					if ($userInsert) {
-						  $_SESSION['error'] = ""; // Clear any previous error
+						  $_SESSION['error'] = "";
 						  $getUser = $dbAction->select("*", "users")
 								->where("email", "=", $data['email'])
 								->getRow();
@@ -113,10 +111,7 @@
 						  $_SESSION['userName'] = $getUser['name'];
 						  $_SESSION['userEmail'] = $getUser['email'];
 						  $_SESSION['userId'] = $getUser['id'];
-//						  echo "<pre>";
-//						  var_dump($_SESSION);
-//						  echo "</pre>";
-//						  die();
+						  
 						  header('location:index.php');
 					} else {
 						  $_SESSION['error'] = "Sign-up failed. Please try again.";
@@ -130,7 +125,6 @@
 			 if (empty($_POST['login-email']) || empty($_POST['login-password'])) {
 					$_SESSION['error'] = "Please fill all the fields.";
 					header('location:Auth.php');
-					exit();
 			 }
 			 
 			 $filterEmail = strip_tags($_POST['login-email']);
@@ -139,31 +133,29 @@
 			 );
 			 
 			 $filterPassword = strip_tags($_POST['login-password']);
-			 $password = $filterPassword; // Store plain password for verification
+			 $password = $filterPassword;
 			 
 			 $selectUser = $dbAction->select("*", "users")
 				  ->where("email", "=", $email)
 				  ->getRow();
-			 
 			 if ($selectUser
 				  && password_verify(
 						$password, $selectUser['password']
 				  )
 			 ) {
-//					if ($selectUser['role'] == 'admin') {
-//						  $_SESSION['adminName'] = $selectUser['name'];
-//						  $_SESSION['adminEmail'] = $selectUser['email'];
-//						  $_SESSION['adminId'] = $selectUser['id'];
-//						  header('location:admin');
-//					  ($selectUser['role'] == 'user') {
-					$_SESSION['userName'] = $selectUser['name'];
-					$_SESSION['userEmail'] = $selectUser['email'];
-					$_SESSION['userId'] = $selectUser['id'];
-//						  $_SESSION['userCityId'] = $selectUser['city_id'];
-					header('location:index.php');
-					
-			 } else {
-					$_SESSION['error'] = "Email or password is not exist!";
-					header('location:Auth.php');
+					if ($selectUser['role'] == 'user') {
+						  $_SESSION['userName'] = $selectUser['name'];
+						  $_SESSION['userEmail'] = $selectUser['email'];
+						  $_SESSION['userId'] = $selectUser['id'];
+						  header('location:index.php');
+					} elseif ($selectUser['role'] == 'admin') {
+						  $_SESSION['adminName'] = $selectUser['name'];
+						  $_SESSION['adminEmail'] = $selectUser['email'];
+						  $_SESSION['adminId'] = $selectUser['id'];
+						  header('location:index.php');
+					} else {
+						  $_SESSION['error'] = "Email or password is not exist!";
+						  header('location:Auth.php');
+					}
 			 }
 	  }
