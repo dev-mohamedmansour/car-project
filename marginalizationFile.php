@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	  <?php
 			 session_start();
 			 // if not user redirect to login page
-			 			 if (!isset($_SESSION['userId'])) {
-			 					header('location:Auth.php');
-			 			 }
-			 			 if (!empty($_SESSION['success'])
-			 			 ) {
-			 					echo '<div id="error-message" class="error-message">'
-			 						 . htmlspecialchars($_SESSION['success'])
-			 						 . '</div>';
-			 					unset($_SESSION['success']); // Clear the error message after displaying
-			 			 }
+			 //			 if (!isset($_SESSION['userId'])) {
+			 //					header('location:Auth.php');
+			 //			 }
+			 if (!empty($_SESSION['success'])
+			 ) {
+					echo '<div id="error-message" class="error-message">'
+						 . htmlspecialchars($_SESSION['success'])
+						 . '</div>';
+					unset($_SESSION['success']); // Clear the error message after displaying
+			 }
 			 
 			 //			 require_once 'Logic/userLogic/homeLogic.php';
 			 //		  getDetailsOfUser();
@@ -21,7 +22,7 @@
 	  ?>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <title>Car House | Home</title>
+	  <title>Document</title>
 	  <link rel="preconnect" href="https://fonts.googleapis.com">
 	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	  <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap"
@@ -35,7 +36,6 @@
 		   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	  <link rel="stylesheet"
 		   href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	  <!-- MDB -->
 	  <link rel="stylesheet" href="css/all.min.css">
@@ -163,40 +163,49 @@
 <section id="form" class="container Form">
 	  <h4 class="text-center mb-4 fw-bold">Book Your Service Appointment with
 		    Ease!</h4>
-	  <form onsubmit="return formValidate3();" novalidate>
+	  <?php
+	  
+	  ?>
+	  <form method="post" onsubmit="return formValidate3();" novalidate>
 		    <div id="error"></div>
 		    <div class="row mb-4">
 				 <div class="col">
 					   <div data-mdb-input-init class="form-outline">
 							<input class="form-control" type="text"
 								  id="firstName" name="firstName"
-								  required maxlength="20">
+								  required>
 							<label class="form-label" for="firstName">First
-								  Name</label>
+								  name</label>
 					   </div>
 				 </div>
 				 <div class="col">
 					   <div data-mdb-input-init class="form-outline">
 							<input class="form-control" type="text"
-								  id="lastName" name="lastName" required
-								  maxlength="40">
+								  id="lastName" name="lastName"
+								  required>
 							<label class="form-label" for="lastName">Last
-								  Name</label>
+								  name</label>
 					   </div>
 				 </div>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
-				 <input type="email" id="email" class="form-control"
-					   name="bookEmail"
-					   value="<?php echo $_SESSION['userEmail'] ?>"
-					   required/>
-				 <label class="form-label" for="email">Email Address</label>
+				 <input class="form-control" type="tel" id="phone" required>
+				 <label class="form-label" for="phone">Phone Number</label>
+		    </div>
+		    <div data-mdb-input-init class="form-outline mb-4">
+				 <input disabled class="form-control service" type="text"
+					   id="f2-username2">
+		    </div>
+		    <div data-mdb-input-init class="form-outline mb-4">
+				 <input type="email" id="email" class="form-control"/>
+				 <label class="form-label" for="email">Email address</label>
 		    </div>
 		    <div class="row mb-4">
 				 <div class="col">
 					   <div data-mdb-input-init class="form-outline">
 							<input disabled class="form-control d-none"
 								  type="text" id="f2-username2">
+
 							<select class="form-control form-select"
 								   name="make" id="login_make"
 								   form="add_car_mobile">
@@ -209,6 +218,7 @@
 					   <div data-mdb-input-init class="form-outline">
 							<input disabled class="form-control d-none"
 								  type="text" id="f2-username2">
+
 							<select
 								  class="form-control form-select field-validate"
 								  name="model" id="login_model"
@@ -219,28 +229,16 @@
 				 </div>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
-				 <input disabled class="form-control service" type="text"
-					   id="f2-username2">
-		    </div>
-		    <div data-mdb-input-init class="form-outline mb-4">
-				 <input class="form-control" type="tel" id="phone"
-					   name="bookPhone" required maxlength="11" minlength="11"/>
-				 <label class="form-label" for="phone">Phone Number</label>
-		    </div>
-		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input type="datetime-local" id="f2-datetime"
-					   class="form-control" required name="bookTime"/>
+					   class="form-control" required>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
                 <textarea class="form-control"
-					 name="bookNotes" maxlength="500"
-					 placeholder="Additional Notes (optional)"
+					 placeholder="Additional notes (optional)"
 					 id="f2-notes"
 					 rows="3"></textarea>
-				 <label class="form-label" for="f2-notes">Additional Notes</label>
 		    </div>
-		    <button class="submit btn btn-block mb-4" name="submitBook"
-				  value="submitBook" type="submit">Submit Book
+		    <button class="submit btn btn-block mb-4" type="submit">Submit
 		    </button>
 	  </form>
 </section>
@@ -253,10 +251,12 @@
     new WOW().init();
 </script>
 <script>
+
     $(document).ready(function () {
         // تحميل قائمة الشركات المصنعة
         $.getJSON('https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getMakes', function (data) {
-            $('#login_make').append('<option value="">اختر الشركة المصنعة</option>');
+            $("#login_make).append('<option value="
+            ">اختر الشركة المصنعة</option>');
             $.each(data.Makes, function (index, make) {
                 $('#login_make').append('<option value="' + make.make_id + '">' + make.make_display + '</option>');
             });
