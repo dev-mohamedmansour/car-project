@@ -7,6 +7,10 @@
 			 			 if (!isset($_SESSION['userId'])) {
 			 					header('location:Auth.php');
 			 			 }
+//						  echo "<pre>";
+//						  print_r($_SESSION['userId']);
+//						  echo "</pre>";
+//						  die();
 			 			 if (!empty($_SESSION['success'])
 			 			 ) {
 			 					echo '<div id="error-message" class="error-message">'
@@ -14,10 +18,8 @@
 			 						 . '</div>';
 			 					unset($_SESSION['success']); // Clear the error message after displaying
 			 			 }
-			 
 			 //			 require_once 'Logic/userLogic/homeLogic.php';
 			 //		  getDetailsOfUser();
-	  
 	  ?>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">

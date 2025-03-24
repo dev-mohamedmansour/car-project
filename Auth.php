@@ -156,8 +156,8 @@
 														id="Username2"
 														required>
 												   <label class="form-label"
-														for="username2">User
-														name</label>
+														for="username2">Full
+														Name</label>
 											 </div>
 											 <div data-mdb-input-init
 												 class="form-outline mb-4">

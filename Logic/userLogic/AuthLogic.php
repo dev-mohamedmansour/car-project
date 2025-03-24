@@ -1,20 +1,20 @@
 <?php
 	  
 	  use Car\Models\DB;
+	  use PHPMailer\PHPMailer\Exception;
+	  use PHPMailer\PHPMailer\PHPMailer;
 	  
 	  require_once __DIR__ . "/../../vendor/autoload.php";
-	  
 	  $dbAction = new Db();
+	  $mail = new PHPMailer(true);
 	  session_start();
-	  
 	  /**
 		* Validates an email address by checking its format and domain existence.
 		*
 		* @param string $email The email address to be validated.
 		*
 		* @return string Returns "Valid email address." if the email is valid,
-		*                "Invalid email format." if the format is incorrect,
-		*                or "Domain does not exist." if the domain is not valid.
+		* "Invalid email format." if the format is incorrect, or "Domain does not exist." if the domain is not valid.
 		*/
 	  function validateEmailAdvanced(string $email): string
 	  {
@@ -44,7 +44,6 @@
 	  // Sign Up logic
 	  if (isset($_POST['sign-up'])) {
 			 $errorMessage = "";
-			 
 			 // Check if all fields are filled
 			 if (empty($_POST['username']) || empty($_POST['register-email'])
 				  || empty($_POST['phone'])
@@ -54,7 +53,6 @@
 					header('location:Auth.php');
 					exit();
 			 }
-			 
 			 // Validate email format and domain
 			 if (validateEmailAdvanced($_POST['register-email'])
 				  !== "Valid email address."
@@ -63,43 +61,47 @@
 					header('location:Auth.php');
 					
 			 }
-			 
 			 $filterEmail = strip_tags($_POST['register-email']);
 			 $email = mysqli_real_escape_string(
 				  $dbAction->connection, $filterEmail
 			 );
-			 
-			 
 			 // Proceed with sign-up if email does not exist
 			 $filterName = strip_tags($_POST['username']);
 			 $name = mysqli_real_escape_string($dbAction->connection, $filterName);
-			 
 			 $filterPhone = strip_tags($_POST['phone']);
 			 $phone = mysqli_real_escape_string(
 				  $dbAction->connection, $filterPhone
 			 );
-			 
 			 $filterPassword = strip_tags($_POST['register-password']);
 			 $password = password_hash(
 				  $filterPassword, PASSWORD_DEFAULT
 			 ); // Secure password hashing
-			 
+			 // Generate a verification token
+			 try {
+					$verificationToken = bin2hex(
+						 random_bytes(32)
+					); // Generate a random token
+			 } catch (\Random\RandomException $e) {
+					error_log(
+						 "Failed to generate verification token: " . $e->getMessage()
+					);
+					die("An error occurred while processing your request. Please try again later.");
+			 }
 			 // Check if email already exists in the database
 			 $checkEmailOrPhone = $dbAction->select("*", "users")
 				  ->where("email", "=", $email)->orWhere("phone", "=", $phone)
 				  ->getRow();
-			 
 			 if ($checkEmailOrPhone) {
 					$_SESSION['error'] = "Email or Phone already exists.";
 					header('location:Auth.php');
 			 } else {
 					$data = [
-						 "name"     => $name,
-						 "email"    => $email,
-						 "phone"    => $phone,
-						 "password" => $password,
+						 "name"               => $name,
+						 "email"              => $email,
+						 "phone"              => $phone,
+						 "password"           => $password,
+						 "verification_token" => $verificationToken,
 					];
-					
 					$userInsert = $dbAction->insert("users", $data)->execution();
 					if ($userInsert) {
 						  $_SESSION['error'] = "";
@@ -111,8 +113,37 @@
 						  $_SESSION['userName'] = $getUser['name'];
 						  $_SESSION['userEmail'] = $getUser['email'];
 						  $_SESSION['userId'] = $getUser['id'];
-						  
+//						  $_SESSION['token'] = $getUser['verification_token'];
 						  header('location:index.php');
+						  
+						  // Send verification email
+						  try {
+								 // Server settings
+								 $mail->isSMTP();
+								 $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+								 $mail->SMTPAuth = true;
+								 $mail->Username
+									  = 'carhouse001.bn@gmail.com'; // SMTP username
+								 $mail->Password
+									  = 'gwdo dyis wmov sqau'; // SMTP password
+								 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+								 $mail->Port = 587;
+								 // Recipients
+								 $mail->setFrom(
+									  'carhouse001.bn@gmail.com', 'Car House'
+								 );
+								 $mail->addAddress($email); // User's email
+								 // Content
+								 $mail->isHTML(true);
+								 $mail->Subject = 'Email Verification';
+								 $mail->Body
+									  = "Please click the link to verify your email: <a href='https://car-project.test/verify.php?token=$verificationToken'>Verify Email</a>";
+								 $mail->send();
+								 $_SESSION['success'] = 'Verification email sent!';
+						  } catch (Exception $e) {
+								 $_SESSION['error']
+									  = "Email could not be sent. Error: {$mail->ErrorInfo}";
+						  }
 					} else {
 						  $_SESSION['error'] = "Sign-up failed. Please try again.";
 						  header('location:Auth.php');
@@ -126,15 +157,12 @@
 					$_SESSION['error'] = "Please fill all the fields.";
 					header('location:Auth.php');
 			 }
-			 
 			 $filterEmail = strip_tags($_POST['login-email']);
 			 $email = mysqli_real_escape_string(
 				  $dbAction->connection, $filterEmail
 			 );
-			 
 			 $filterPassword = strip_tags($_POST['login-password']);
 			 $password = $filterPassword;
-			 
 			 $selectUser = $dbAction->select("*", "users")
 				  ->where("email", "=", $email)
 				  ->getRow();

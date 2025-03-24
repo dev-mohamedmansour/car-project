@@ -36,18 +36,14 @@
 		   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	  <link rel="stylesheet"
 		   href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 	  <!-- MDB -->
-	  <link rel="stylesheet" href="css/all.min.css">
-	  <link rel="stylesheet" href="css/mdb.min.css">
-	  <link rel="stylesheet" href="css/animate.min.css">
-	  <link rel="stylesheet" href="css/bootstrap.min.css">
-	  <link rel="stylesheet" href="css/style.css">
-
+	  <link rel="stylesheet" href="../css/all.min.css">
+	  <link rel="stylesheet" href="../css/mdb.min.css">
+	  <link rel="stylesheet" href="../css/animate.min.css">
+	  <link rel="stylesheet" href="../css/bootstrap.min.css">
+	  <link rel="stylesheet" href="../css/style.css">
 	  <!-- Bootstrap 5 JavaScript -->
-
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg custom-nav">
 	  <!-- Navbar Toggler Button for Small Screens -->
@@ -69,12 +65,11 @@
 					    data-bs-target="#nav-booking" type="button"
 					    role="tab" aria-controls="nav-booking"
 					    aria-selected="true">
-					   <a href="index.php">
+					   <a href="../index.php">
 							<i class="fas fa-calendar-plus"></i> New
 							Appointment
 					   </a>
 				 </button>
-
 				 <!-- Check Booking Button -->
 				 <button class="nav-link" id="nav-inquiry-tab"
 					    data-bs-toggle="tab" data-bs-target="#nav-inquiry"
@@ -84,7 +79,6 @@
 							<i class="fas fa-search"></i> Check Booking
 					   </a>
 				 </button>
-
 				 <!-- Monthly Maintenance Button -->
 				 <button class="nav-link" id="nav-maintenance-tab"
 					    data-bs-toggle="tab"
@@ -97,13 +91,12 @@
 							Maintenance
 					   </a>
 				 </button>
-
 				 <!-- Contact Us Button -->
 				 <button class="nav-link" id="nav-contact-tab"
 					    data-bs-toggle="tab" data-bs-target="#nav-contact"
 					    type="button" role="tab"
 					    aria-controls="nav-contact" aria-selected="false">
-					   <a href="contact-us.php">
+					   <a href="../contact-us.php">
 							<i class="fas fa-envelope"></i> Contact Us
 					   </a>
 				 </button>
@@ -113,15 +106,13 @@
 					    data-bs-target="#nav-logout" type="button"
 					    role="tab" aria-controls="nav-logout"
 					    aria-selected="false">
-					   <a href="logout.php">
+					   <a href="../logout.php">
 							<i class="fas fa-user-lock"></i> Log out
 					   </a>
 				 </button>
 		    </div>
 	  </div>
 </nav>
-
-
 <section class="hero">
 	  <div class="background-opacity"></div>
 	  <div class="background"></div>
@@ -158,14 +149,9 @@
 		    </div>
 	  </div>
 </section>
-
-
 <section id="form" class="container Form">
 	  <h4 class="text-center mb-4 fw-bold">Book Your Service Appointment with
 		    Ease!</h4>
-	  <?php
-	  
-	  ?>
 	  <form method="post" onsubmit="return formValidate3();" novalidate>
 		    <div id="error"></div>
 		    <div class="row mb-4">
@@ -218,7 +204,6 @@
 					   <div data-mdb-input-init class="form-outline">
 							<input disabled class="form-control d-none"
 								  type="text" id="f2-username2">
-
 							<select
 								  class="form-control form-select field-validate"
 								  name="model" id="login_model"
@@ -242,16 +227,14 @@
 		    </button>
 	  </form>
 </section>
-
-<script src="js/mdb.umd.min.js" type="text/javascript"></script>
-<script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
-<script src="js/wow.min.js" type="text/javascript"></script>
-<script src="js/script.js" type="text/javascript"></script>
+<script src="../js/mdb.umd.min.js" type="text/javascript"></script>
+<script src="../js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<script src="../js/wow.min.js" type="text/javascript"></script>
+<script src="../js/script.js" type="text/javascript"></script>
 <script>
     new WOW().init();
 </script>
 <script>
-
     $(document).ready(function () {
         // تحميل قائمة الشركات المصنعة
         $.getJSON('https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getMakes', function (data) {
@@ -300,5 +283,4 @@
     });
 </script>
 </body>
-
 </html>
