@@ -19,9 +19,10 @@
 					header('location:index.php');
 					
 			 } else {
-					echo 'Invalid token.';
+					$_SESSION['error'] = 'Invalid token.';
+					header('location:index.php');
 			 }
 	  } else {
-			 echo 'No token provided.';
+			 $_SESSION['error'] = 'No token provided.';
 			 header('location:index.php');
 	  }

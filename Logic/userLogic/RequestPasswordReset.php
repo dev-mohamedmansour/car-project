@@ -1,16 +1,39 @@
 <?php
 	  require __DIR__ . '/../../vendor/autoload.php';
 	  session_start();
-//	  require 'vendor/autoload.php'; // Include PHPMailer
 	  use CarHouse\Models\Db;
 	  use PHPMailer\PHPMailer\Exception;
 	  use PHPMailer\PHPMailer\PHPMailer;
 	  
 	  $dbAction = new Db();
+	  /**
+		* @param PHPMailer $mail
+		* @param mixed     $email
+		*
+		* @return void
+		* @throws Exception
+		*/
+	  function serverSettings(PHPMailer $mail, mixed $email): void
+	  {
+			 $mail->isSMTP();
+			 $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+			 $mail->SMTPAuth = true;
+			 $mail->Username
+				  = 'carhouse001.bn@gmail.com'; // SMTP username
+			 $mail->Password = 'gwdo dyis wmov sqau'; // SMTP password
+			 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+			 $mail->Port = 587;
+			 // Recipients
+			 $mail->setFrom('carhouse001.bn@gmail.com', 'Car House');
+			 $mail->addAddress($email); // User's email
+			 // Content
+			 $mail->isHTML(true);
+	  }
 	  
-	  if (isset($_POST['requestPasswordReset'])) {
-			 $email = $_POST['requestPasswordEmail'];
-			 
+	  if (isset($_POST['sendResetPasswordEmail'])
+			&& $_POST['sendResetPasswordEmail'] === 'resetPasswordSentEmail'
+	  ) {
+			 $email = $_POST['resetPasswordEmail'];
 			 // Check if the email exists
 			 $getUser = $dbAction->select("*", "users")->where(
 				  "email", "=", $email
@@ -40,31 +63,23 @@
 					$mail = new PHPMailer(true);
 					try {
 						  // Server settings
-						  $mail->isSMTP();
-						  $mail->Host = 'smtp.gmail.com'; // Your SMTP server
-						  $mail->SMTPAuth = true;
-						  $mail->Username
-								= 'carhouse001.bn@gmail.com'; // SMTP username
-						  $mail->Password = 'gwdo dyis wmov sqau'; // SMTP password
-						  $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-						  $mail->Port = 587;
-						  // Recipients
-						  $mail->setFrom('carhouse001.bn@gmail.com', 'Car House');
-						  $mail->addAddress($email); // User's email
-						  // Content
-						  $mail->isHTML(true);
+						  serverSettings($mail, $email);
 						  $mail->Subject = 'Password Reset';
 						  $mail->Body
-								= "Click the link to reset your password: <a href='https://car-house.test/resetpassword.php?token=$resetToken'>Reset Password</a>";
+								= "Click the link to reset your password: <a href='https://car-house.test/Logic/userLogic/checkTokenResetPassword.php?token=$resetToken'>Reset Password</a>";
 						  $mail->send();
-						  echo 'Password reset email sent!';
+						  $_SESSION['success'] = 'Password reset email sent!';
+						  header('location:successSentEmail.php');
 					} catch (Exception $e) {
-						  echo "Email could not be sent. Error: {$mail->ErrorInfo}";
+						  $_SESSION['error']
+								= "Email could not be sent. Error: {$mail->ErrorInfo}";
+						  header('location:../../resetPassword.php');
 					}
 			 } else {
-					echo 'Email not found.';
+					$_SESSION['error'] = 'Email not found.';
+					header('location:../../resetPassword.php');
 			 }
-	  }else{
-			 echo 'Invalid request.';
-			 header('location:Auth.php');
+	  } else {
+			 $_SESSION['error'] = 'Invalid request.';
+			 header('location:../../resetPassword.php');
 	  }

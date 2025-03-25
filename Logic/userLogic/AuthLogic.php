@@ -119,25 +119,10 @@
 						  // Send verification email
 						  try {
 								 // Server settings
-								 $mail->isSMTP();
-								 $mail->Host = 'smtp.gmail.com'; // Your SMTP server
-								 $mail->SMTPAuth = true;
-								 $mail->Username
-									  = 'carhouse001.bn@gmail.com'; // SMTP username
-								 $mail->Password
-									  = 'gwdo dyis wmov sqau'; // SMTP password
-								 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-								 $mail->Port = 587;
-								 // Recipients
-								 $mail->setFrom(
-									  'carhouse001.bn@gmail.com', 'Car House'
-								 );
-								 $mail->addAddress($email); // User's email
-								 // Content
-								 $mail->isHTML(true);
+								 serverSettings($mail, $email);
 								 $mail->Subject = 'Email Verification';
 								 $mail->Body
-									  = "Please click the link to verify your email: <a href='https://car-house.test/Logic/userLogic/verify.php?token=$verificationToken'>Verify Email</a>";
+									  = "Please click the link to verify your email: <a href='https://car-house.test/verify.php?token=$verificationToken'>Verify Email</a>";
 								 $mail->send();
 								 $_SESSION['success'] = 'Verification email sent!';
 						  } catch (Exception $e) {
@@ -146,7 +131,7 @@
 						  }
 					} else {
 						  $_SESSION['error'] = "Sign-up failed. Please try again.";
-						  header('location:Auth.php');
+						  header('location:../../Auth.php');
 					}
 			 }
 	  }
@@ -155,7 +140,7 @@
 	  if (isset($_POST['sign-in'])) {
 			 if (empty($_POST['login-email']) || empty($_POST['login-password'])) {
 					$_SESSION['error'] = "Please fill all the fields.";
-					header('location:Auth.php');
+					header('location:../../Auth.php');
 			 }
 			 $filterEmail = strip_tags($_POST['login-email']);
 			 $email = mysqli_real_escape_string(
@@ -175,15 +160,15 @@
 						  $_SESSION['userName'] = $selectUser['name'];
 						  $_SESSION['userEmail'] = $selectUser['email'];
 						  $_SESSION['userId'] = $selectUser['id'];
-						  header('location:index.php');
+						  header('location:../../index.php');
 					} elseif ($selectUser['role'] == 'admin') {
 						  $_SESSION['adminName'] = $selectUser['name'];
 						  $_SESSION['adminEmail'] = $selectUser['email'];
 						  $_SESSION['adminId'] = $selectUser['id'];
-						  header('location:index.php');
+						  header('location:../../index.php');
 					} else {
 						  $_SESSION['error'] = "Email or password is not exist!";
-						  header('location:Auth.php');
+						  header('location:../../Auth.php');
 					}
 			 }
 	  }

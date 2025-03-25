@@ -67,10 +67,8 @@
 		    <div class="row justify-content-center">
 				 <div class="col-md-12 col-lg-6">
 								  <?php
-										 include "Logic/userLogic/AuthLogic.php";
-										 if (isset($_SESSION['error'])
-											  && !empty($_SESSION['error'])
-										 ) {
+										 require __DIR__ . '/vendor/autoload.php';
+										 if (!empty($_SESSION['error'])) {
 												echo '<div id="error-message" class="error-message">'
 													 . htmlspecialchars($_SESSION['error'])
 													 . '</div>';
@@ -82,8 +80,8 @@
 								  <div id="login-form">
 									    <h3 class="mb-4 text-center">
 											 Sign In</h3>
-<!--									    onsubmit="return formValidate();"-->
-<!--									    novalidate-->
+									    <!--									    onsubmit="return formValidate();"-->
+									    <!--									    novalidate-->
 									    <form method="post">
 											 <div id="error"></div>
 											 <div data-mdb-input-init
@@ -124,7 +122,7 @@
 															  Remember
 															  Me
 														</label>
-														<a href="#"
+														<a href="resetPassword.php"
 														   class="forgot-password">Forgot
 															  Password?</a>
 												   </div>
