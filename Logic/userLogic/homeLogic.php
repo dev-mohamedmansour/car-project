@@ -1,9 +1,7 @@
 <?php
+	  require __DIR__ . '/../../vendor/autoload.php';
+	  use CarHouse\Models\Db;
 	  
-	  use Car\Models\Db;
-
-//
-	  require_once 'vendor/autoload.php';
 //	  session_start();
 	  
 	  function getDetailsOfUser()

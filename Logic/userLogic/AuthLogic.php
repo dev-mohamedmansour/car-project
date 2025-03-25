@@ -1,13 +1,13 @@
 <?php
-	  
-	  use Car\Models\DB;
+	  require __DIR__ . '/../../vendor/autoload.php';
+	  use CarHouse\Models\Db;
 	  use PHPMailer\PHPMailer\Exception;
 	  use PHPMailer\PHPMailer\PHPMailer;
 	  
-	  require_once __DIR__ . "/../../vendor/autoload.php";
 	  $dbAction = new Db();
 	  $mail = new PHPMailer(true);
 	  session_start();
+	  
 	  /**
 		* Validates an email address by checking its format and domain existence.
 		*
@@ -137,7 +137,7 @@
 								 $mail->isHTML(true);
 								 $mail->Subject = 'Email Verification';
 								 $mail->Body
-									  = "Please click the link to verify your email: <a href='https://car-project.test/verify.php?token=$verificationToken'>Verify Email</a>";
+									  = "Please click the link to verify your email: <a href='https://car-house.test/Logic/userLogic/verify.php?token=$verificationToken'>Verify Email</a>";
 								 $mail->send();
 								 $_SESSION['success'] = 'Verification email sent!';
 						  } catch (Exception $e) {

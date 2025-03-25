@@ -1,7 +1,8 @@
 <?php
+	  require __DIR__ . '/../../vendor/autoload.php';
 	  session_start();
-	  require 'vendor/autoload.php'; // Include PHPMailer
-	  use Car\Models\DB;
+//	  require 'vendor/autoload.php'; // Include PHPMailer
+	  use CarHouse\Models\Db;
 	  use PHPMailer\PHPMailer\Exception;
 	  use PHPMailer\PHPMailer\PHPMailer;
 	  
@@ -54,7 +55,7 @@
 						  $mail->isHTML(true);
 						  $mail->Subject = 'Password Reset';
 						  $mail->Body
-								= "Click the link to reset your password: <a href='https://car-project.test/resetpassword.php?token=$resetToken'>Reset Password</a>";
+								= "Click the link to reset your password: <a href='https://car-house.test/resetpassword.php?token=$resetToken'>Reset Password</a>";
 						  $mail->send();
 						  echo 'Password reset email sent!';
 					} catch (Exception $e) {

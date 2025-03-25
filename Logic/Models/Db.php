@@ -1,7 +1,6 @@
 <?php
 	  
-	  namespace Car\Models;
-	  
+	  namespace CarHouse\Models;
 	  
 	  class Db
 	  {
@@ -11,13 +10,9 @@
 			 
 			 public function __construct()
 			 {
-//					global $config;
 					$this->connection = mysqli_connect(
 						 "localhost", "root", "2772003", "car_house"
 					);
-//					if (!$this->connection) {
-//                   die("Connection failed: ". mysqli_connect_error());
-//               }
 			 }
 			 
 			 public function select($column, $table)
@@ -131,7 +126,6 @@
 					while ($rows = mysqli_fetch_assoc($this->query)) {
 						  $response[] = $rows;
 					}
-					
 					/** @var $response */
 					return $response;
 			 }
@@ -142,7 +136,6 @@
 						 $this->connection,
 						 $this->mysqlLine
 					);
-					
 					return $this->query;
 			 }
 			 

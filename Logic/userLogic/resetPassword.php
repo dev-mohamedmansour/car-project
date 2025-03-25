@@ -1,6 +1,7 @@
 <?php
 	  
-	  use Car\Models\Db;
+	  require __DIR__ . '/../../vendor/autoload.php';
+	  use CarHouse\Models\Db;
 	  
 	  session_start();
 	  $dbAction = new Db();

@@ -1,7 +1,6 @@
 <?php
-	  
-	  use Car\Models\Db;
-	  
+	  require __DIR__ . '/vendor/autoload.php';
+	  use CarHouse\Models\Db;
 	  session_start();
 	  $dbAction = new Db();
 	  if (isset($_GET['token'])) {
@@ -12,10 +11,13 @@
 			 )->getRow();
 			 if ($getUser) {
 					// Mark the user as verified
-					$UpdateUserData = $dbAction->update(
-						 "users", ["verification_token" => null, "verify_email" => 1]
+					$updateUserData = $dbAction->update(
+						 "users", ["verification_token" => "NULL()", "verify_email" => 1]
 					)->where("id", "=", $getUser['id'])->execution();
-					echo 'Email verified successfully!';
+					
+					$_SESSION['success'] = 'Email verified successfully!';
+					header('location:index.php');
+					
 			 } else {
 					echo 'Invalid token.';
 			 }

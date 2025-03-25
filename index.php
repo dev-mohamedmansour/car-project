@@ -2,15 +2,12 @@
 <html lang="en">
 <head>
 	  <?php
-			 session_start();
+				require __DIR__ . '/vendor/autoload.php';
+				session_start();
 			 // if not user redirect to login page
 			 			 if (!isset($_SESSION['userId'])) {
 			 					header('location:Auth.php');
 			 			 }
-//						  echo "<pre>";
-//						  print_r($_SESSION['userId']);
-//						  echo "</pre>";
-//						  die();
 			 			 if (!empty($_SESSION['success'])
 			 			 ) {
 			 					echo '<div id="error-message" class="error-message">'
@@ -18,8 +15,7 @@
 			 						 . '</div>';
 			 					unset($_SESSION['success']); // Clear the error message after displaying
 			 			 }
-			 //			 require_once 'Logic/userLogic/homeLogic.php';
-			 //		  getDetailsOfUser();
+ 
 	  ?>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -165,27 +161,34 @@
 <section id="form" class="container Form">
 	  <h4 class="text-center mb-4 fw-bold">Book Your Service Appointment with
 		    Ease!</h4>
-	  <form onsubmit="return formValidate3();" novalidate>
+	  <form method="post" onsubmit="return formValidate3();" novalidate>
 		    <div id="error"></div>
-		    <div class="row mb-4">
-				 <div class="col">
-					   <div data-mdb-input-init class="form-outline">
-							<input class="form-control" type="text"
-								  id="firstName" name="firstName"
-								  required maxlength="20">
-							<label class="form-label" for="firstName">First
-								  Name</label>
-					   </div>
-				 </div>
-				 <div class="col">
-					   <div data-mdb-input-init class="form-outline">
-							<input class="form-control" type="text"
-								  id="lastName" name="lastName" required
-								  maxlength="40">
-							<label class="form-label" for="lastName">Last
-								  Name</label>
-					   </div>
-				 </div>
+<!--		    <div class="row mb-4">-->
+<!--				 <div class="col">-->
+<!--					   <div data-mdb-input-init class="form-outline">-->
+<!--							<input class="form-control" type="text"-->
+<!--								  id="firstName" name="firstName"-->
+<!--								  required maxlength="20">-->
+<!--							<label class="form-label" for="firstName">First-->
+<!--								  Name</label>-->
+<!--					   </div>-->
+<!--				 </div>-->
+<!--				 <div class="col">-->
+<!--					   <div data-mdb-input-init class="form-outline">-->
+<!--							<input class="form-control" type="text"-->
+<!--								  id="lastName" name="lastName" required-->
+<!--								  maxlength="40">-->
+<!--							<label class="form-label" for="lastName">Last-->
+<!--								  Name</label>-->
+<!--					   </div>-->
+<!--				 </div>-->
+<!--		    </div>-->
+		    <div data-mdb-input-init class="form-outline mb-4">
+				 <input type="text" id="name" class="form-control"
+					   name="bookName"
+					   value="<?php echo $_SESSION['userName'] ?>"
+					   required/>
+				 <label class="form-label" for="name">Full Name</label>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input type="email" id="email" class="form-control"
@@ -200,10 +203,10 @@
 							<input disabled class="form-control d-none"
 								  type="text" id="f2-username2">
 							<select class="form-control form-select"
-								   name="make" id="login_make"
+								   name="carMake" id="login_make"
 								   form="add_car_mobile">
-								  <option value="">Select your Car
-								  </option>
+<!--								  <option value="">-->
+<!--								  </option>-->
 							</select>
 					   </div>
 				 </div>
@@ -213,20 +216,20 @@
 								  type="text" id="f2-username2">
 							<select
 								  class="form-control form-select field-validate"
-								  name="model" id="login_model"
+								  name="carModel" id="login_model"
 								  form="add_car_mobile" disabled>
-								  <option value="">Select Model</option>
+<!--								  <option value="">Select model of car</option>-->
 							</select>
 					   </div>
 				 </div>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input disabled class="form-control service" type="text"
-					   id="f2-username2">
+					   id="f2-username2" name="serviceName">
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input class="form-control" type="tel" id="phone"
-					   name="bookPhone" required maxlength="11" minlength="11"/>
+					   name="bookPhone"  required maxlength="11" minlength="11"/>
 				 <label class="form-label" for="phone">Phone Number</label>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
@@ -251,14 +254,14 @@
 <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
 <script src="js/wow.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
-<script>
-    new WOW().init();
-</script>
+<!--<script>-->
+<!--    new WOW().init();-->
+<!--</script>-->
 <script>
     $(document).ready(function () {
         // تحميل قائمة الشركات المصنعة
         $.getJSON('https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getMakes', function (data) {
-            $('#login_make').append('<option value="">اختر الشركة المصنعة</option>');
+            $('#login_make').append('<option value="">Select your car</option>');
             $.each(data.Makes, function (index, make) {
                 $('#login_make').append('<option value="' + make.make_id + '">' + make.make_display + '</option>');
             });
@@ -266,7 +269,7 @@
         // عند تغيير الشركة المصنعة
         $('#login_make').change(function () {
             var makeId = $(this).val();
-            $('#login_model').empty().append('<option value="">Select Model</option>').prop('disabled', true);
+            $('#login_model').empty().append('<option value="">Select model of car</option>').prop('disabled', true);
             if (makeId) {
                 $.getJSON('https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getModels&make=' + makeId, function (data) {
                     if (data.Models.length > 0) {

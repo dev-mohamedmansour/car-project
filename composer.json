@@ -1,5 +1,5 @@
 {
-  "name": "vendor_name/car-project",
+  "name": "vendor_name/car-house",
   "description": "description",
   "minimum-stability": "stable",
   "license": "proprietary",
@@ -11,14 +11,14 @@
   ],
   "version": "1.0.0",
   "require": {
-    "php": "^8.4",
     "ext-mysqli": "*",
-    "phpmailer/phpmailer": "^6.9"
+    "phpmailer/phpmailer": "^6.9",
+    "free2one/php-accessor": "~0.5.0"
   },
   "autoload": {
     "psr-4": {
-      "Car\\": "Logic/"
+      "CarHouse\\": "Logic/",
+      "CarHouse\\Models\\": "Logic/Models/"
     }
   }
-
 }
