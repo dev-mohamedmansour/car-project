@@ -58,6 +58,16 @@
         border: 1px solid #ff9999;
         border-radius: 5px;
     }
+
+    .success-message {
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #20ad04;
+        border: 1px solid #3014db;
+        border-radius: 5px
+    }
 </style>
 
 <section class="ftco-section">
@@ -66,29 +76,38 @@
 	  <div class="container">
 		    <div class="row justify-content-center">
 				 <div class="col-md-12 col-lg-6">
-								  <?php
-										 require __DIR__ . '/vendor/autoload.php';
-										 if (!empty($_SESSION['error'])) {
-												echo '<div id="error-message" class="error-message">'
-													 . htmlspecialchars($_SESSION['error'])
-													 . '</div>';
-												unset($_SESSION['error']); // Clear the error message after displaying
-										 }
-								  ?>
-					   <div id="wrap" class="wrap" style="display: none;">
+					   <div id="wrap" class="wrap" style="display: block;">
 							<div class="login-wrap p-4 p-md-5">
 								  <div id="login-form">
 									    <h3 class="mb-4 text-center">
 											 Sign In</h3>
-									    <!--									    onsubmit="return formValidate();"-->
-									    <!--									    novalidate-->
-									    <form method="post">
-											 <div id="error"></div>
+									    <form method="post"
+											action="Logic/userLogic/AuthLogic.php"
+											novalidate>
+																		<?php
+																			  session_start();
+																			  if (!empty($_SESSION['error'])) {
+																					 echo '<div id="error-message" class="error-message" style="display: block;">'
+																						  . htmlspecialchars(
+																								$_SESSION['error']
+																						  )
+																						  . '</div>';
+																					 unset($_SESSION['error']); // Clear the error message after displaying
+																			  } elseif (!empty($_SESSION['success'])
+																			  ) {
+																					 echo '<div id="error-message" class="success-message" style="display: block">'
+																						  . htmlspecialchars(
+																								$_SESSION['success']
+																						  )
+																						  . '</div>';
+																					 unset($_SESSION['success']); // Clear the error message after displaying
+																			  }
+																		?>
 											 <div data-mdb-input-init
 												 class="form-outline mb-4">
 												   <input class="form-control"
 														type="email"
-														name="login-email"
+														name="signInEmail"
 														id="Email"
 														required>
 												   <label class="form-label"
@@ -98,7 +117,7 @@
 												 class="form-outline mb-4">
 												   <input type="password"
 														id="Password"
-														name="login-password"
+														name="signInPassword"
 														class="form-control"
 														required/>
 												   <label class="form-label"
@@ -107,8 +126,8 @@
 											 <div class="form-group">
 												   <button
 														type="submit"
-														name="sign-in"
-														value="sign-in"
+														name="sign-inForm"
+														value="sign-inData"
 														class="submit form-control btn px-3">
 														Sign In
 												   </button>
@@ -129,80 +148,10 @@
 												   <p class="text-center">
 														Not a
 														member? <a
-															  onclick="showSignup()"
+															  href="authRegister.php"
 															  class="sign-link">SignUp</a>
 												   </p>
 											 </div>
-									    </form>
-								  </div>
-							</div>
-					   </div>
-					   <div id="wrap2" class="wrap"
-						   style="display: block;">
-							<div class="login-wrap p-4 p-md-5">
-								  <div id="signup-form">
-									    <!--									    onsubmit="return formValidate2();" novalidate-->
-									    <h3 class="mb-4 text-center">
-											 Sign Up</h3>
-									    <form method="post" action="">
-											 <div id="error2"></div>
-											 <div data-mdb-input-init
-												 class="form-outline mb-4">
-												   <input class="form-control"
-														type="text"
-														name="username"
-														id="Username2"
-														required>
-												   <label class="form-label"
-														for="username2">Full
-														Name</label>
-											 </div>
-											 <div data-mdb-input-init
-												 class="form-outline mb-4">
-												   <input type="email"
-														class="form-control"
-														name="register-email"
-														id="Email2"
-														required>
-												   <label class="form-label"
-														for="Email2">Email</label>
-											 </div>
-											 <div data-mdb-input-init
-												 class="form-outline mb-4">
-												   <input type="text"
-														class="form-control"
-														name="phone"
-														id="phone"
-														maxlength="11"
-														required>
-												   <label class="form-label"
-														for="phone">Phone</label>
-											 </div>
-											 <div data-mdb-input-init
-												 class="form-outline mb-4">
-												   <input type="password"
-														class="form-control"
-														name="register-password"
-														id="Password2"
-														maxlength="30"
-														required/>
-												   <label class="form-label"
-														for="Password2">Password</label>
-											 </div>
-											 <div class="form-group">
-												   <button
-														type="submit"
-														value="sign-up"
-														name="sign-up"
-														class="submit form-control btn px-3">
-														Sign Up
-												   </button>
-											 </div>
-											 <p class="text-center">
-												   Already a member?
-												   <a onclick="showLogin()"
-													 class="sign-link">SignIn</a>
-											 </p>
 									    </form>
 								  </div>
 							</div>
@@ -211,25 +160,6 @@
 		    </div>
 	  </div>
 </section>
-
-<!-- JavaScript for Switching Forms -->
-<script>
-    window.onload = function () {
-        document.getElementById('wrap').style.display = 'block'; // Show default form
-        document.getElementById('wrap2').style.display = 'none'; // Hide sign-up form
-    };
-
-    function showSignup() {
-        document.getElementById('wrap').style.display = 'none';
-        document.getElementById('wrap2').style.display = 'block';
-    }
-
-    function showLogin() {
-        document.getElementById('wrap2').style.display = 'none';
-        document.getElementById('wrap').style.display = 'block';
-    }
-</script>
-
 <!-- Custom scripts -->
 <script src="js/mdb.umd.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>

@@ -78,7 +78,7 @@
 												   Go to Sign
 												   In
 												   <a
-														href="Auth.php"
+														href="authLogin.php"
 														class="sign-link">Sign
 														In</a>
 											 </p>

@@ -64,22 +64,25 @@
 	  <div class="container">
 		    <div class="row justify-content-center">
 				 <div class="col-md-12 col-lg-6">
-								  <?php
-//										 require __DIR__ . '/vendor/autoload.php';
-									  session_start();
-										 if (!empty($_SESSION['error'])) {
-												echo '<div id="error-message" class="error-message">'
-													 . htmlspecialchars($_SESSION['error'])
-													 . '</div>';
-												unset($_SESSION['error']); // Clear the error message after displaying
-										 }
-								  ?>
 					   <div id="wrap" class="wrap">
 							<div class="login-wrap p-4 p-md-5">
 								  <div id="login-form">
 									    <h3 class="mb-4 text-center">
 											 Reset Password</h3>
-									    <form method="post" action="Logic/userLogic/RequestPasswordReset.php">
+									    <form method="post"
+											action="Logic/userLogic/RequestPasswordReset.php"
+											novalidate>
+																		<?php
+																			  session_start();
+																			  if (!empty($_SESSION['error'])) {
+																					 echo '<div id="error-message" class="error-message" style="display: block;">'
+																						  . htmlspecialchars(
+																								$_SESSION['error']
+																						  )
+																						  . '</div>';
+																					 unset($_SESSION['error']); // Clear the error message after displaying
+																			  }
+																		?>
 											 <div data-mdb-input-init
 												 class="form-outline mb-4">
 												   <input class="form-control"
@@ -104,7 +107,7 @@
 														Remember
 														Password?
 														<a
-															  href="Auth.php"
+															  href="authLogin.php"
 															  class="sign-link">Sign
 															  In</a>
 												   </p>

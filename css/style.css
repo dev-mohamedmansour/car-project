@@ -34,6 +34,15 @@ body {
     border: 2px solid #7e4141;
 }
 
+.success-message {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #20ad04;
+    border: 1px solid #3014db;
+    border-radius: 5px
+}
 
 
 .ftco-section {
@@ -42,7 +51,7 @@ body {
     height: 100vh;
     overflow: hidden;
     display: flex;
-        align-items: center;
+    align-items: center;
 }
 
 .ftco-section .wrap {
@@ -164,7 +173,7 @@ body {
     transition: background 0.3s, border 0.3s;
 }
 
-.remember-me input:checked+.custom-checkbox::after {
+.remember-me input:checked + .custom-checkbox::after {
     content: '✔';
     font-size: 12px;
     color: white;
@@ -174,7 +183,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.remember-me input:checked+.custom-checkbox {
+.remember-me input:checked + .custom-checkbox {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
 }
@@ -190,7 +199,6 @@ body {
     color: #9B0014;
     text-decoration: underline;
 }
-
 
 
 .sign-link {
@@ -318,8 +326,6 @@ body {
 }
 
 
-
-
 /*
 =========================================
 =========================================
@@ -356,6 +362,7 @@ body {
     background-color: rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
+
 @keyframes moveBackground {
     0% {
         transform: translateX(0) translateY(0);
@@ -369,6 +376,7 @@ body {
         transform: translateX(0) translateY(0);
     }
 }
+
 .hero-content {
     position: relative;
     z-index: 2;
@@ -499,7 +507,6 @@ body {
 */
 
 
-
 /* form */
 
 .Form {
@@ -541,7 +548,7 @@ body {
 /* contact-us page */
 
 #contact h3,
-#contact h5{
+#contact h5 {
     font-family: var(--Monomakh-font);
 }
 
