@@ -124,6 +124,7 @@
 								= "Sign-up successful.";
 						  $_SESSION['userName'] = $getUser['name'];
 						  $_SESSION['userEmail'] = $getUser['email'];
+						  $_SESSION['userPhone'] = $getUser['phone'];
 						  $_SESSION['userId'] = $getUser['id'];
 						  header('Location:../../index.php');
 						  // Send verification email
@@ -172,6 +173,7 @@
 					if ($selectUser['role'] == 'user') {
 						  $_SESSION['userName'] = $selectUser['name'];
 						  $_SESSION['userEmail'] = $selectUser['email'];
+						  $_SESSION['userPhone'] = $selectUser['phone'];
 						  $_SESSION['userId'] = $selectUser['id'];
 						  header('Location:../../index.php');
 					} elseif ($selectUser['role'] == 'admin') {

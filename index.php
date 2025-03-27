@@ -186,35 +186,62 @@
 				 <label class="form-label" for="email">Email Address</label>
 		    </div>
 		    <div class="row mb-4">
+				 <!-- Corrected Car Make Select -->
 				 <div class="col">
 					   <div data-mdb-input-init class="form-outline">
 							<input disabled class="form-control d-none"
 								  type="text" id="f2-username2">
 							<select class="form-control form-select"
-								   name="carMake" id="login_make"
-								   form="add_car_mobile">
+								   name="carMake"
+								   id="login_make">
 							</select>
 					   </div>
 				 </div>
+
+				 <!-- Corrected Car Model Select -->
 				 <div class="col">
 					   <div data-mdb-input-init class="form-outline">
 							<input disabled class="form-control d-none"
 								  type="text" id="f2-username2">
 							<select
 								  class="form-control form-select field-validate"
-								  name="carModel" id="login_model"
-								  form="add_car_mobile" disabled>
+								  name="carModel"
+								  id="login_model"
+								  disabled>
 							</select>
 					   </div>
 				 </div>
+				 <!--				 <div class="col">-->
+				 <!--					   <div data-mdb-input-init class="form-outline">-->
+				 <!--							<input disabled class="form-control d-none"-->
+				 <!--								  type="text" id="f2-username2">-->
+				 <!--							<select class="form-control form-select"-->
+				 <!--								   name="carMake" id="login_make"-->
+				 <!--								   form="add_car_mobile">-->
+				 <!--							</select>-->
+				 <!--					   </div>-->
+				 <!--				 </div>-->
+				 <!--				 <div class="col">-->
+				 <!--					   <div data-mdb-input-init class="form-outline">-->
+				 <!--							<input disabled class="form-control d-none"-->
+				 <!--								  type="text" id="f2-username2">-->
+				 <!--							<select-->
+				 <!--								  class="form-control form-select field-validate"-->
+				 <!--								  name="carModel" id="login_model"-->
+				 <!--								  form="add_car_mobile" disabled>-->
+				 <!--							</select>-->
+				 <!--					   </div>-->
+				 <!--				 </div>-->
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input class="form-control service" type="text"
-					   id="serviceName" name="serviceName" required readonly>
+					   id="serviceName" name="serviceName" required
+					   readonly>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input class="form-control" type="tel" id="phone"
 					   name="bookPhone" required maxlength="11"
+					   value="<?php echo $_SESSION['userPhone'] ?>"
 					   minlength="11"/>
 				 <label class="form-label" for="phone">Phone Number</label>
 		    </div>
