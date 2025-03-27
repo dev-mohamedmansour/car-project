@@ -69,17 +69,17 @@
 								= "Click the link to reset your password: <a href='https://car-house.test/Logic/userLogic/checkTokenResetPassword.php?token=$resetToken'>Reset Password</a>";
 						  $mail->send();
 						  $_SESSION['success'] = 'Password reset email sent!';
-						  header('location:successSentEmail.php');
+						  header('Location:../../successSendEmail.php');
 					} catch (Exception $e) {
 						  $_SESSION['error']
 								= "Email could not be sent. Error: {$mail->ErrorInfo}";
-						  header('location:../../resetPassword.php');
+						  header('Location:../../resetPassword.php');
 					}
 			 } else {
 					$_SESSION['error'] = 'Email not found.';
-					header('location:../../resetPassword.php');
+					header('Location:../../resetPassword.php');
 			 }
 	  } else {
 			 $_SESSION['error'] = 'Invalid request.';
-			 header('location:../../resetPassword.php');
+			 header('Location:../../resetPassword.php');
 	  }

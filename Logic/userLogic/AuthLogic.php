@@ -1,8 +1,10 @@
 <?php
 	  require __DIR__ . '/../../vendor/autoload.php';
+	  
 	  use CarHouse\Models\Db;
 	  use PHPMailer\PHPMailer\Exception;
 	  use PHPMailer\PHPMailer\PHPMailer;
+	  use Random\RandomException;
 	  
 	  $dbAction = new Db();
 	  $mail = new PHPMailer(true);
@@ -42,58 +44,67 @@
 	  }
 	  
 	  // Sign Up logic
-	  if (isset($_POST['sign-up'])) {
-			 $errorMessage = "";
+	  if (isset($_POST['sign-upForm'])&& $_POST['sign-upForm']==='sign-upData') {
 			 // Check if all fields are filled
-			 if (empty($_POST['username']) || empty($_POST['register-email'])
+			 if (empty($_POST['fullName']) || empty($_POST['registerEmail'])
 				  || empty($_POST['phone'])
-				  || empty($_POST['register-password'])
+				  || empty($_POST['registerPassword'])
 			 ) {
 					$_SESSION['error'] = "Please fill all the fields.";
-					header('location:Auth.php');
+					header('Location:../../authRegister.php');
 					exit();
 			 }
 			 // Validate email format and domain
-			 if (validateEmailAdvanced($_POST['register-email'])
+			 if (validateEmailAdvanced($_POST['registerEmail'])
 				  !== "Valid email address."
 			 ) {
 					$_SESSION['error'] = "Invalid email format.";
-					header('location:Auth.php');
-					
+					header('Location:../../authRegister.php');
+					exit();
 			 }
-			 $filterEmail = strip_tags($_POST['register-email']);
+			 
+			 $filterEmail = strip_tags($_POST['registerEmail']);
 			 $email = mysqli_real_escape_string(
 				  $dbAction->connection, $filterEmail
 			 );
+			 
 			 // Proceed with sign-up if email does not exist
-			 $filterName = strip_tags($_POST['username']);
+			 $filterName = strip_tags($_POST['fullName']);
 			 $name = mysqli_real_escape_string($dbAction->connection, $filterName);
+			 
 			 $filterPhone = strip_tags($_POST['phone']);
 			 $phone = mysqli_real_escape_string(
 				  $dbAction->connection, $filterPhone
 			 );
-			 $filterPassword = strip_tags($_POST['register-password']);
+			 
+			 $filterPassword = strip_tags($_POST['registerPassword']);
 			 $password = password_hash(
 				  $filterPassword, PASSWORD_DEFAULT
 			 ); // Secure password hashing
+			 
 			 // Generate a verification token
 			 try {
 					$verificationToken = bin2hex(
 						 random_bytes(32)
 					); // Generate a random token
-			 } catch (\Random\RandomException $e) {
+			 } catch (RandomException $e) {
 					error_log(
 						 "Failed to generate verification token: " . $e->getMessage()
 					);
-					die("An error occurred while processing your request. Please try again later.");
+					$_SESSION['error']
+						 = "An error occurred while processing your request. Please try again later.";
+					header('Location:../../authRegister.php');
+					exit();
 			 }
+			 
 			 // Check if email already exists in the database
 			 $checkEmailOrPhone = $dbAction->select("*", "users")
 				  ->where("email", "=", $email)->orWhere("phone", "=", $phone)
 				  ->getRow();
+			 
 			 if ($checkEmailOrPhone) {
 					$_SESSION['error'] = "Email or Phone already exists.";
-					header('location:Auth.php');
+					header('Location:../../authRegister.php');
 			 } else {
 					$data = [
 						 "name"               => $name,
@@ -102,6 +113,7 @@
 						 "password"           => $password,
 						 "verification_token" => $verificationToken,
 					];
+					
 					$userInsert = $dbAction->insert("users", $data)->execution();
 					if ($userInsert) {
 						  $_SESSION['error'] = "";
@@ -109,13 +121,11 @@
 								->where("email", "=", $data['email'])
 								->getRow();
 						  $_SESSION['success']
-								= "Sign-up successful. You can now log in.";
+								= "Sign-up successful.";
 						  $_SESSION['userName'] = $getUser['name'];
 						  $_SESSION['userEmail'] = $getUser['email'];
 						  $_SESSION['userId'] = $getUser['id'];
-//						  $_SESSION['token'] = $getUser['verification_token'];
-						  header('location:index.php');
-						  
+						  header('Location:../../index.php');
 						  // Send verification email
 						  try {
 								 // Server settings
@@ -127,26 +137,29 @@
 								 $_SESSION['success'] = 'Verification email sent!';
 						  } catch (Exception $e) {
 								 $_SESSION['error']
-									  = "Email could not be sent. Error: {$mail->ErrorInfo}";
+									  = "Email could not be sent. Error: $mail->ErrorInfo";
+								 header('Location:../../authRegister.php');
 						  }
 					} else {
 						  $_SESSION['error'] = "Sign-up failed. Please try again.";
-						  header('location:../../Auth.php');
+						  header('Location:../../authRegister.php');
 					}
 			 }
 	  }
 	  
 	  // Sign In logic
-	  if (isset($_POST['sign-in'])) {
-			 if (empty($_POST['login-email']) || empty($_POST['login-password'])) {
+	  if (isset($_POST['sign-inForm'])
+			&& $_POST['sign-inForm'] === 'sign-inData'
+	  ) {
+			 if (empty($_POST['signInEmail']) || empty($_POST['signInPassword'])) {
 					$_SESSION['error'] = "Please fill all the fields.";
-					header('location:../../Auth.php');
+					header('Location:../../authLogin.php');
 			 }
-			 $filterEmail = strip_tags($_POST['login-email']);
+			 $filterEmail = strip_tags($_POST['signInEmail']);
 			 $email = mysqli_real_escape_string(
 				  $dbAction->connection, $filterEmail
 			 );
-			 $filterPassword = strip_tags($_POST['login-password']);
+			 $filterPassword = strip_tags($_POST['signInPassword']);
 			 $password = $filterPassword;
 			 $selectUser = $dbAction->select("*", "users")
 				  ->where("email", "=", $email)
@@ -160,15 +173,15 @@
 						  $_SESSION['userName'] = $selectUser['name'];
 						  $_SESSION['userEmail'] = $selectUser['email'];
 						  $_SESSION['userId'] = $selectUser['id'];
-						  header('location:../../index.php');
+						  header('Location:../../index.php');
 					} elseif ($selectUser['role'] == 'admin') {
 						  $_SESSION['adminName'] = $selectUser['name'];
 						  $_SESSION['adminEmail'] = $selectUser['email'];
 						  $_SESSION['adminId'] = $selectUser['id'];
-						  header('location:../../index.php');
+						  header('Location:../../index.php');
 					} else {
 						  $_SESSION['error'] = "Email or password is not exist!";
-						  header('location:../../Auth.php');
+						  header('Location:../../authLogin.php');
 					}
 			 }
 	  }

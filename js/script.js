@@ -1,19 +1,25 @@
 let btnClick = document.querySelectorAll(".service-box");
 let form = document.querySelector(".Form");
-let service = document.querySelector(".service");
-
-console.log(service.value);
+let serviceInput = document.querySelector(".service");
 
 for (let i = 0; i < btnClick.length; i++) {
-    btnClick[i].addEventListener("click", function () {
-            form.style.display = "block";
-            btnClick[i].setAttribute("href", "#form");
-            let [text1, text2, text3, text4] = btnClick[i].innerHTML.split(" ");
-            let text = `${text2} ${text4}`;
-            service.value = text;
-            console.log(service);
-        }
-    );
+    btnClick[i].addEventListener("click", function(e) {
+        e.preventDefault(); // Prevent default anchor behavior
+
+        // Show the form
+        form.style.display = "block";
+
+        // Extract service name from the HTML content
+        let serviceText = btnClick[i].textContent.trim();
+        // Remove emoji and extra whitespace
+        serviceText = serviceText.replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim();
+
+        // Set the service input value
+        serviceInput.value = serviceText;
+
+        // Scroll to form if needed
+        document.querySelector("#form").scrollIntoView({ behavior: 'smooth' });
+    });
 }
 
 function formValidate3() {
@@ -84,42 +90,42 @@ function formValidate3() {
 
 // Validate registration form
 
-// function registerValidate2() {
-//     var Username2 = document.getElementById("Username2").value;
-//     var Email2 = document.getElementById("Email2").value;
-//     var Password2 = document.getElementById("Password2").value;
-//     var error2 = document.getElementById("error2");
-//     var text = "";
-//
-//     error2.classList.add("error-message");
-//     error2.style.display = "block";
-//
-//     // ✅ التحقق من اسم المستخدم
-//     if (Username2.length < 3) {
-//         text = "Please Enter a Valid Username (at least 5 characters)";
-//         error2.innerHTML = text;
-//         return false;
-//     }
-//
-//     // ✅ التحقق من البريد الإلكتروني
-//     let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-//     if (!emailRegex.test(Email2)) {
-//         text = "Please Enter a Valid Email";
-//         error2.innerHTML = text;
-//         return false;
-//     }
-//
-//     // ✅ التحقق من كلمة المرور
-//     // let passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-//     // if (!passwordRegex.test(Password2)) {
-//     //   text = "Password must be at least 8 characters, contain a capital letter, a number, and a special character.";
-//     //   error2.innerHTML = text;
-//     //   return false;
-//     // }
-//
-//     // ✅ إخفاء الخطأ عند نجاح التحقق
-//     // error2.style.display = "none";
-//     // alert("Form submitted successfully");
-//     // return true;
-// }
+function registerValidate2() {
+    var Username2 = document.getElementById("Username2").value;
+    var Email2 = document.getElementById("Email2").value;
+    var Password2 = document.getElementById("Password2").value;
+    var error2 = document.getElementById("error2");
+    var text = "";
+
+    error2.classList.add("error-message");
+    error2.style.display = "block";
+
+    // ✅ التحقق من اسم المستخدم
+    if (Username2.length === 3) {
+        text = "Please Enter a Valid Username (at least 5 characters)";
+        error2.innerHTML = text;
+        return false;
+    }
+
+    // ✅ التحقق من البريد الإلكتروني
+    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(Email2)) {
+        text = "Please Enter a Valid Email";
+        error2.innerHTML = text;
+        return false;
+    }
+
+    // ✅ التحقق من كلمة المرور
+    let passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(Password2)) {
+      text = "Password must be at least 8 characters, contain a capital letter, a number, and a special character.";
+      error2.innerHTML = text;
+      return false;
+    }
+
+    // ✅ إخفاء الخطأ عند نجاح التحقق
+    error2.style.display = "none";
+    alert("Form submitted successfully");
+    return true;
+}
 }

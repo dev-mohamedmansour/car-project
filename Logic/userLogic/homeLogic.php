@@ -4,6 +4,11 @@
 	  
 //	  session_start();
 	  
+	  
+	  echo "<pre>";
+	  var_dump($_POST);
+	  echo "</pre>";
+	  die();
 	  function getDetailsOfUser()
 	  {
 			 $dbAction = new Db();
@@ -24,4 +29,6 @@
 				  echo "Your email has been verified. You can now login.";
 			}
 	  }
+	  
+//	  if(isset($))
 

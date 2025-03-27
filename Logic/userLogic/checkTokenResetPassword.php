@@ -13,11 +13,10 @@
 				  "reset_token", "=", $token
 			 )->andWhere("reset_token_expiry", ">", date('Y-m-d H:i:s'))->getRow();
 			 if ($checkUserData) {
-					$checkUserData = $_SESSION['checkUserData'];
+					$_SESSION['checkUserData'] = $checkUserData;
 					header('Location:../../newPassword.php');
-					exit();
 			 } else {
 					$_SESSION['error'] = 'Invalid or expired token.';
-					header("Location: ../../Auth.php");
+					header("Location: ../../authLogin.php");
 			 }
 	  }

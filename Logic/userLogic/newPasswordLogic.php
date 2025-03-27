@@ -13,22 +13,15 @@
 				  $filterPassword, PASSWORD_BCRYPT
 			 );
 			 // Update the password and clear the reset token
-			 echo "<pre>";
-			 var_dump($_SESSION['checkUserData']);
-			 echo "</pre>";
-			 die();
 			 $updatePassword = $dbAction->update(
 				  "users",
 				  ["password"           => $newPassword,
-					"reset_token"        => null,
-					"reset_token_expiry" => null]
-			 )->where("id", "=", $checkUserData['id'])->execution();
-//						  $_SESSION['success'] =
-			 echo 'Password reset successfully!';
-//						  header("Location: ../../Auth.php");
+					"reset_token"        => '',
+					"reset_token_expiry" => "2025-01-01 01:01:01"]
+			 )->where("id", "=", $_SESSION['checkUserData']['id'])->execution();
+			 $_SESSION['success'] = 'Password reset successfully!';
 	  } else {
-//			 $_SESSION['error']=
-			 echo "Invalid or expired response";
-//			 unset($_SESSION['checkUserData']);
-//			 header("Location: ../../Auth.php");
+			 $_SESSION['error'] = "Invalid or expired response";
+			 unset($_SESSION['checkUserData']);
 	  }
+	  header("Location: ../../authLogin.php");
