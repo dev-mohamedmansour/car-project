@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	  <meta charset="UTF-8"/>
 	  <meta name="viewport"
 			  content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 	  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
 	  <title>Material Design for Bootstrap</title>
-	  <link rel="preconnect"
-			  href="https://fonts.googleapis.com">
-	  <link rel="preconnect" href="https://fonts.gstatic.com"
-			  crossorigin>
+	  <link rel="preconnect" href="https://fonts.googleapis.com">
+	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	  <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap"
 			  rel="stylesheet">
 	  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap"
@@ -22,10 +21,10 @@
 			  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	  <link rel="stylesheet" href="css/all.min.css">
 	  <link rel="stylesheet" href="css/mdb.min.css">
-	  <link rel="stylesheet"
-			  href="css/bootstrap.min.css">
+	  <link rel="stylesheet" href="css/bootstrap.min.css">
 	  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 <style>
     .background2 {
@@ -67,54 +66,83 @@
 	  <div class="container">
 			 <div class="row justify-content-center">
 					<div class="col-md-12 col-lg-6">
-						  <?php
-								 if (isset($_SESSION['error'])) {
-										echo '<div id="error-message" class="error-message">'
-											 . htmlspecialchars(
-												  $_SESSION['error']
-											 )
-											 . '</div>';
-										unset($_SESSION['error']);
-								 }
-						  ?>
-						  <div id="wrap" class="wrap">
+						  <div id="wrap" class="wrap"
+								 style="display: block;">
 								 <div class="login-wrap p-4 p-md-5">
-										<div id="login-form">
+										<div id="signup-form">
 											  <h3 class="mb-4 text-center">
-													 Reset
-													 Password</h3>
-											  <form method="post" action="Logic/userLogic/newPasswordLogic.php">
+													 Sign Up</h3>
+											  <form method="post"
+													  action="Logic/userLogic/AuthLogic.php"
+													  novalidate>
+													 <?php
+														 session_start();
+															if (!empty($_SESSION['error'])) {
+																  echo '<div id="error-message" class="error-message" style="display: block;">'
+																		. htmlspecialchars(
+																			 $_SESSION['error']
+																		)
+																		. '</div>';
+																  unset($_SESSION['error']); // Clear the error message after displaying
+															}
+													 ?>
+													 <div data-mdb-input-init
+															class="form-outline mb-4">
+															<input class="form-control"
+																	 type="text"
+																	 name="fullName"
+																	 id="Username2"
+																	 required>
+															<label class="form-label"
+																	 for="username2">Full
+																  Name</label>
+													 </div>
+													 <div data-mdb-input-init
+															class="form-outline mb-4">
+															<input type="email"
+																	 class="form-control"
+																	 name="registerEmail"
+																	 id="Email2"
+																	 required>
+															<label class="form-label"
+																	 for="Email2">Email</label>
+													 </div>
+													 <div data-mdb-input-init
+															class="form-outline mb-4">
+															<input type="text"
+																	 class="form-control"
+																	 name="phone"
+																	 id="phone"
+																	 maxlength="11"
+																	 required>
+															<label class="form-label"
+																	 for="phone">Phone</label>
+													 </div>
 													 <div data-mdb-input-init
 															class="form-outline mb-4">
 															<input type="password"
-																	 id="Password"
-																	 name="newPassword"
 																	 class="form-control"
+																	 name="registerPassword"
+																	 id="Password2"
+																	 maxlength="30"
 																	 required/>
 															<label class="form-label"
-																	 for="Password">New
-																  Password</label>
+																	 for="Password2">Password</label>
 													 </div>
 													 <div class="form-group">
 															<button
 																 type="submit"
-																 name="resetPassword"
-																 value="reset-password"
+																 value="sign-upData"
+																 name="sign-upForm"
 																 class="submit form-control btn px-3">
-																  Reset
-																  Password
+																  Sign Up
 															</button>
 													 </div>
-													 <div class="form-container">
-															<p class="text-center">
-																  Remember
-																  Password?
-																  <a
-																		href="authLogin.php"
-																		class="sign-link">Sign
-																		 In</a>
-															</p>
-													 </div>
+													 <p class="text-center">
+															Already a member?
+															<a href="authLogin.php"
+																class="sign-link">SignIn</a>
+													 </p>
 											  </form>
 										</div>
 								 </div>
@@ -123,12 +151,11 @@
 			 </div>
 	  </div>
 </section>
+
 <!-- Custom scripts -->
-<script src="js/mdb.umd.min.js"
-		  type="text/javascript"></script>
-<script src="js/script.js"
-		  type="text/javascript"></script>
-<script src="js/bootstrap.bundle.min.js"
-		  type="text/javascript"></script>
+<script src="js/mdb.umd.min.js" type="text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
+<script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
 </body>
+
 </html>

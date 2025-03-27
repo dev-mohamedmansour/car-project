@@ -2,20 +2,24 @@
 <html lang="en">
 <head>
 	  <?php
-				require __DIR__ . '/vendor/autoload.php';
-				session_start();
+			 require __DIR__ . '/vendor/autoload.php';
+			 session_start();
 			 // if not user redirect to login page
-			 			 if (!isset($_SESSION['userId'])) {
-			 					header('location:Auth.php');
-			 			 }
-			 			 if (!empty($_SESSION['success'])
-			 			 ) {
-			 					echo '<div id="error-message" class="error-message">'
-			 						 . htmlspecialchars($_SESSION['success'])
-			 						 . '</div>';
-			 					unset($_SESSION['success']); // Clear the error message after displaying
-			 			 }
- 
+			 if (!isset($_SESSION['userId'])) {
+					header('location:authLogin.php');
+			 }
+			 //						  echo '<pre>'; // Debugging purposes: print out session variables for review. You can remove this line before deploying the site.  // Example: var_dump($_SESSION); die();
+			 //						  var_dump($_SESSION);
+			 //						  echo "</pre>";
+			 //						  die();
+			 if (!empty($_SESSION['success'])
+			 ) {
+					echo '<div id="error-message" class="success-message" style="display: block">'
+						 . htmlspecialchars($_SESSION['success'])
+						 . '</div>';
+					unset($_SESSION['success']); // Clear the error message after displaying
+			 }
+	  
 	  ?>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,22 +140,25 @@
 		    <div class="row mt-4 justify-content-center">
 				 <div class="col-md-3 col-6 wow fadeInUp"
 					 data-wow-delay="1.6s">
-					   <a class="service-box" href="#">🧼 Car <br> Wash</a>
+					   <a class="service-box" href="#"
+						 data-service="Car Wash">🧼 Car <br> Wash</a>
 				 </div>
 				 <div class="col-md-3 col-6 wow fadeInUp"
 					 data-wow-delay="1.9s">
-					   <a class="service-box" href="#">🔧 Mechanical <br>
-							Repairs</a>
+					   <a class="service-box" href="#"
+						 data-service="Mechanical Repairs">🔧 Mechanical
+							<br> Repairs</a>
 				 </div>
 				 <div class="col-md-3 col-6 mt-3 mt-md-0 wow fadeInUp"
 					 data-wow-delay="2.2s">
-					   <a class="service-box" href="#">⚡ Electrical <br>
-							Repairs</a>
+					   <a class="service-box" href="#"
+						 data-service="Electrical Repairs">⚡ Electrical
+							<br> Repairs</a>
 				 </div>
 				 <div class="col-md-3 col-6 mt-3 mt-md-0 wow fadeInUp"
 					 data-wow-delay="2.4s">
-					   <a class="service-box" href="#">🛠️ Tires <br>
-							Betters</a>
+					   <a class="service-box" href="#"
+						 data-service="Tires Better">🛠️ Tires <br> Betters</a>
 				 </div>
 		    </div>
 	  </div>
@@ -161,28 +168,9 @@
 <section id="form" class="container Form">
 	  <h4 class="text-center mb-4 fw-bold">Book Your Service Appointment with
 		    Ease!</h4>
-	  <form method="post" onsubmit="return formValidate3();" novalidate>
+	  <form id="serviceForm" method="post"
+		   action="Logic/userLogic/homeLogic.php" novalidate>
 		    <div id="error"></div>
-<!--		    <div class="row mb-4">-->
-<!--				 <div class="col">-->
-<!--					   <div data-mdb-input-init class="form-outline">-->
-<!--							<input class="form-control" type="text"-->
-<!--								  id="firstName" name="firstName"-->
-<!--								  required maxlength="20">-->
-<!--							<label class="form-label" for="firstName">First-->
-<!--								  Name</label>-->
-<!--					   </div>-->
-<!--				 </div>-->
-<!--				 <div class="col">-->
-<!--					   <div data-mdb-input-init class="form-outline">-->
-<!--							<input class="form-control" type="text"-->
-<!--								  id="lastName" name="lastName" required-->
-<!--								  maxlength="40">-->
-<!--							<label class="form-label" for="lastName">Last-->
-<!--								  Name</label>-->
-<!--					   </div>-->
-<!--				 </div>-->
-<!--		    </div>-->
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input type="text" id="name" class="form-control"
 					   name="bookName"
@@ -205,8 +193,6 @@
 							<select class="form-control form-select"
 								   name="carMake" id="login_make"
 								   form="add_car_mobile">
-<!--								  <option value="">-->
-<!--								  </option>-->
 							</select>
 					   </div>
 				 </div>
@@ -218,18 +204,18 @@
 								  class="form-control form-select field-validate"
 								  name="carModel" id="login_model"
 								  form="add_car_mobile" disabled>
-<!--								  <option value="">Select model of car</option>-->
 							</select>
 					   </div>
 				 </div>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
-				 <input disabled class="form-control service" type="text"
-					   id="f2-username2" name="serviceName">
+				 <input class="form-control service" type="text"
+					   id="serviceName" name="serviceName" required readonly>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input class="form-control" type="tel" id="phone"
-					   name="bookPhone"  required maxlength="11" minlength="11"/>
+					   name="bookPhone" required maxlength="11"
+					   minlength="11"/>
 				 <label class="form-label" for="phone">Phone Number</label>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
@@ -242,10 +228,11 @@
 					 placeholder="Additional Notes (optional)"
 					 id="f2-notes"
 					 rows="3"></textarea>
-				 <label class="form-label" for="f2-notes">Additional Notes</label>
+				 <label class="form-label" for="f2-notes">Additional
+					   Notes</label>
 		    </div>
 		    <button class="submit btn btn-block mb-4" name="submitBook"
-				  value="submitBook" type="submit">Submit Book
+				  value="submitBookData" type="submit">Submit Book
 		    </button>
 	  </form>
 </section>

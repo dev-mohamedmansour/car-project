@@ -73,7 +73,7 @@
                 <button class="nav-link login-btn mt-lg-0 ms-auto" id="nav-login-tab" data-bs-toggle="tab"
                     data-bs-target="#nav-login" type="button" role="tab" aria-controls="nav-login"
                     aria-selected="false">
-                    <a href="Auth.php">
+                    <a href="authLogin.php">
                         <i class="fas fa-user-lock"></i> Login
                     </a>
                 </button>
