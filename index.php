@@ -70,7 +70,7 @@
 					    data-bs-toggle="tab" data-bs-target="#nav-inquiry"
 					    type="button" role="tab"
 					    aria-controls="nav-inquiry" aria-selected="false">
-					   <a href="#">
+					   <a href="orders.php">
 							<i class="fas fa-search"></i> Check Booking
 					   </a>
 				 </button>
@@ -288,6 +288,7 @@
 <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
 <script src="js/wow.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
+
 <!--<script>-->
 <!--    new WOW().init();-->
 <!--</script>-->

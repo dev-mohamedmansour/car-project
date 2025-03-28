@@ -154,7 +154,7 @@
 						  exit();
 					}
 			 }
-			 
+			 // Check data time
 			 $orderDateTime = $_POST['orderTime'];
 			 if (!$orderDateTime) {
 					$_SESSION['error'] = "Please select a date and time";
@@ -211,7 +211,7 @@
 			 }
 			 
 			 $filterNameOrder = strip_tags($_POST['orderName']);
-			 $nameOrder = mysqli_real_escape_string(
+			 $orderName = mysqli_real_escape_string(
 				  $dbAction->connection, $filterNameOrder
 			 );
 			 
@@ -219,36 +219,109 @@
 			 $serviceName = mysqli_real_escape_string(
 				  $dbAction->connection, $filterServiceName
 			 );
-			 
+			 $filterCarMake = strip_tags($_POST['carMake']);
+			 $carMake = mysqli_real_escape_string(
+				  $dbAction->connection, $filterCarMake
+			 );
+			 $filterCarModel = strip_tags($_POST['carModel']);
+			 $carModel = mysqli_real_escape_string(
+				  $dbAction->connection, $filterCarModel
+			 );
+			 $filterOrderNotes = strip_tags($_POST['orderNotes']);
+			 $orderNotes = mysqli_real_escape_string(
+				  $dbAction->connection, $filterOrderNotes
+			 );
 			 $filterOrderPhone = strip_tags($_POST['orderPhone']);
 			 $orderPhone = mysqli_real_escape_string(
 				  $dbAction->connection, $filterOrderPhone
 			 );
+			 $orderDate = $selectedDate->format(
+				  'Y-m-d H:i:s'
+			 ); // MySQL DATETIME format
 			 
-			 $filterPassword = strip_tags($_POST['registerPassword']);
-			 $password = password_hash(
-				  $filterPassword, PASSWORD_DEFAULT
-			 );
+			 /**
+			  * @throws Exception
+			  */
+			 function generateUniqueOrderNumber($dbAction): string
+			 {
+					$maxAttempts = 10;
+					$attempts = 0;
+					do {
+						  // Generate random 6-digit number (pad with leading zeros)
+						  $orderNumber = str_pad(
+								mt_rand(0, 99999999), 8, '0', STR_PAD_LEFT
+						  );
+						  
+						  // Check if number exists
+						  $exists = $dbAction->select('orderCode', 'orders')
+								->where('orderCode', '=', $orderNumber)
+								->getRow();
+						  
+						  if (!$exists) {
+								 return $orderNumber;
+						  }
+						  
+						  $attempts++;
+					} while ($attempts < $maxAttempts);
+//					throw new Exception(
+//						 'Failed to generate unique order number after '
+//						 . $maxAttempts . ' attempts'
+//					);
+					$_SESSION['error']
+						 = "Failed to generate unique order number after "
+						 . $maxAttempts . "attempts";
+					header('Location:../../index.php');
+					exit();
+			 }
 			 
-			 // Check if customer has made an order before today
-			 $today = date('Y-m-d');
-			 $previousOrder = $dbAction->select("*", "orders")
-				  ->where("customerEmail", "=", $userDetails['email'])
-				  ->andWhere("orderDate", ">=", $today)
-				  ->getRow();
+			 // Usage in your order processing code
+			 try {
+					
+					$orderNumber = generateUniqueOrderNumber($dbAction);
+					$orderData = [
+						 'orderName'   => $orderName,
+						 'orderCode'   => $orderNumber,
+						 'userId'      => $userDetails['id'],
+						 'serviceName' => $serviceName,
+						 'orderPhone'  => $orderPhone,
+						 'orderTime'   => $orderDate,
+						 'orderNotes'  => $orderNotes,
+						 'carMake'     => $carMake,
+						 'carModel'    => $carModel,
+					];
+					
+					$orderDetails = $dbAction->insert("orders", $orderData)
+						 ->execution();
+					if ($orderDetails) {
+						  $_SESSION['success']
+								= "Your order has been placed successfully. And the Code of Order is : $orderNumber";
+						  header('Location:../../orders.php');
+					}
+					$_SESSION['error']
+						 = "Failed to place your order. Please try again later.";
+					header('Location:../../index.php');
+					exit();
+					
+			 } catch (Exception $e) {
+					error_log($e->getMessage());
+					$_SESSION['error']
+						 = "Order processing failed. Please try again.";
+					header('Location:../../index.php');
+					exit();
+			 }
 
 //			 $createOrder = $dbAction->insert(
 //				  "orders",
 //				  ["orderName" =>]
 //			 )
-			 
-			 echo '<pre>';
-			 var_dump([
-				  'user'      => $userDetails,
-				  'post_data' => $_POST
-			 ]);
-			 echo '</pre>';
-			 exit();
+
+//			 echo '<pre>';
+//			 var_dump([
+//				  'user'      => $userDetails,
+//				  'post_data' => $_POST
+//			 ]);
+//			 echo '</pre>';
+//			 exit();
 			 
 			 // Process the order here
 			 // $orderId = processOrder($userDetails, $_POST);
