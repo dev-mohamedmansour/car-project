@@ -95,7 +95,6 @@
 			 // Send verification email
 			 try {
 					// Configure mail server
-//					serverSettings($mail, $unverifiedUser['email']);
 					$mail->isSMTP();
 					$mail->Host = 'smtp.gmail.com'; // Your SMTP server
 					$mail->SMTPAuth = true;
@@ -114,11 +113,8 @@
 					$mail->Subject = 'Verify Your Email Address';
 					$verificationUrl = "https://car-house.test/verify.php?token="
 						 . urlencode($verificationToken);
-					$mail->Body = sprintf(
-						 "Please verify your email by clicking this link: <a href='%s'>Verify Email</a><br><br>
-            This link will expire in 24 hours.",
-						 $verificationUrl
-					);
+					$mail->Body = "Please verify your email by clicking this link: <a href='{$verificationUrl}'>Verify Email</a><br><br>
+            This link will expire in 24 hours.";
 					$mail->AltBody
 						 = "Please verify your email by visiting this URL: "
 						 . $verificationUrl;
@@ -144,9 +140,30 @@
 			 $userDetails = getDetailsOfUser();
 			 
 			 if (!$userDetails) {
-					header('Location:index.php');
+					header('Location:../../index.php');
 					exit();
 			 }
+			 // Validate input
+//			 $requiredFields = ['carId', 'carModel', 'carYear', 'carPrice', 'customerName', 'customerEmail', 'customerPhone'];
+//          foreach ($requiredFields as $field) {
+//               if (empty($_POST[$field])) {
+//                   $_SESSION['error'] = "Please fill out all required fields.";
+//                   header('Location: ../../order.php');
+//                   exit();
+//               }
+//          }
+			 
+			 // Check if customer has made an order before today
+			 $today = date('Y-m-d');
+			 $previousOrder = $dbAction->select("*", "orders")
+				  ->where("customerEmail", "=", $userDetails['email'])
+				  ->andWhere("orderDate", ">=", $today)
+				  ->getRow();
+			 
+			 $createOrder = $dbAction->insert(
+				  "orders",
+				  ["orderName" =>]
+			 )
 			 
 			 echo '<pre>';
 			 var_dump([
