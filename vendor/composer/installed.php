@@ -62,9 +62,9 @@
             ),
         ),
         'symfony/console' => array(
-            'pretty_version' => 'v6.4.17',
-            'version' => '6.4.17.0',
-            'reference' => '799445db3f15768ecc382ac5699e6da0520a0a04',
+            'pretty_version' => 'v6.4.20',
+            'version' => '6.4.20.0',
+            'reference' => '2e4af9c952617cc3f9559ff706aee420a8464c36',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/console',
             'aliases' => array(),
