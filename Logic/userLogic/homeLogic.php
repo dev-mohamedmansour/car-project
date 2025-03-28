@@ -293,15 +293,54 @@
 					$orderDetails = $dbAction->insert("orders", $orderData)
 						 ->execution();
 					if ($orderDetails) {
+						  // Send reset email
+						  $mail = new PHPMailer(true);
+						  try {
+								 // Server settings
+								 $mail->isSMTP();
+								 $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+								 $mail->SMTPAuth = true;
+								 $mail->Username
+									  = 'carhouse001.bn@gmail.com'; // SMTP username
+								 $mail->Password
+									  = 'gwdo dyis wmov sqau'; // SMTP password
+								 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+								 $mail->Port = 587;
+								 // Recipients
+								 $mail->setFrom(
+									  'carhouse001.bn@gmail.com', 'Car House'
+								 );
+								 $mail->addAddress(
+									  $userDetails['email']
+								 ); // User's email
+								 // Content
+								 $mail->isHTML(true);
+								 $mail->Subject = 'Order Successful';
+								 $mail->Body
+									  = "The core has been reserved for the day : "
+									  . $orderDate
+									  . " <br> and we are waiting for you and happy to serve you,"
+									  . $orderName;
+								 $mail->send();
+								 $_SESSION['success']
+									  = 'Order Successful And We Send Email for You!';
+								 header('Location:../../orders.php');
+								 exit();
+						  } catch (Exception $e) {
+								 $_SESSION['error']
+									  = "Email could not be sent. Error: {$mail->ErrorInfo}";
+								 header('Location:../../index.php');
+						  }
 						  $_SESSION['success']
-								= "Your order has been placed successfully. And the Code of Order is : $orderNumber";
+								= "Your order has been placed successfully. And the Code of Order is : $orderNumber"
+								. "<br> And We Send Email for You," . $orderName;
 						  header('Location:../../orders.php');
+						  exit();
 					}
 					$_SESSION['error']
 						 = "Failed to place your order. Please try again later.";
 					header('Location:../../index.php');
 					exit();
-					
 			 } catch (Exception $e) {
 					error_log($e->getMessage());
 					$_SESSION['error']
@@ -309,24 +348,6 @@
 					header('Location:../../index.php');
 					exit();
 			 }
-
-//			 $createOrder = $dbAction->insert(
-//				  "orders",
-//				  ["orderName" =>]
-//			 )
-
-//			 echo '<pre>';
-//			 var_dump([
-//				  'user'      => $userDetails,
-//				  'post_data' => $_POST
-//			 ]);
-//			 echo '</pre>';
-//			 exit();
-			 
-			 // Process the order here
-			 // $orderId = processOrder($userDetails, $_POST);
-			 // redirectToOrderConfirmation($orderId);
-			 
 			 
 	  }
 
