@@ -130,7 +130,20 @@
 						  // Send verification email
 						  try {
 								 // Server settings
-								 serverSettings($mail, $email);
+//								 serverSettings($mail, $email);
+								 $mail->isSMTP();
+								 $mail->Host = 'smtp.gmail.com'; // Your SMTP server
+								 $mail->SMTPAuth = true;
+								 $mail->Username
+									  = 'carhouse001.bn@gmail.com'; // SMTP username
+								 $mail->Password = 'gwdo dyis wmov sqau'; // SMTP password
+								 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+								 $mail->Port = 587;
+								 // Recipients
+								 $mail->setFrom('carhouse001.bn@gmail.com', 'Car House');
+								 $mail->addAddress($email); // User's email
+								 // Content
+								 $mail->isHTML(true);
 								 $mail->Subject = 'Email Verification';
 								 $mail->Body
 									  = "Please click the link to verify your email: <a href='https://car-house.test/verify.php?token=$verificationToken'>Verify Email</a>";

@@ -8,18 +8,6 @@
 			 if (!isset($_SESSION['userId'])) {
 					header('location:authLogin.php');
 			 }
-			 //						  echo '<pre>'; // Debugging purposes: print out session variables for review. You can remove this line before deploying the site.  // Example: var_dump($_SESSION); die();
-			 //						  var_dump($_SESSION);
-			 //						  echo "</pre>";
-			 //						  die();
-			 if (!empty($_SESSION['success'])
-			 ) {
-					echo '<div id="error-message" class="success-message" style="display: block">'
-						 . htmlspecialchars($_SESSION['success'])
-						 . '</div>';
-					unset($_SESSION['success']); // Clear the error message after displaying
-			 }
-	  
 	  ?>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -122,8 +110,43 @@
 		    </div>
 	  </div>
 </nav>
+<style>
+    .error-message {
+        color: red;
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #ffe6e6;
+        border: 1px solid #ff9999;
+        border-radius: 5px;
+    }
 
-
+    .success-message {
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #20ad04;
+        border: 1px solid #3014db;
+        border-radius: 5px
+    }
+</style>
+<?php
+	  if (!empty($_SESSION['success'])
+	  ) {
+			 echo '<div id="error-message" class="success-message" style="display: block">'
+				  . htmlspecialchars($_SESSION['success'])
+				  . '</div>';
+			 unset($_SESSION['success']); // Clear the error message after displaying
+	  } elseif (!empty($_SESSION['error'])) {
+			 echo '<div id="error-message" class="error-message" style="display: block;">'
+				  . htmlspecialchars(
+						$_SESSION['error']
+				  )
+				  . '</div>';
+			 unset($_SESSION['error']); // Clear the error message after displaying
+	  }
+?>
 <section class="hero">
 	  <div class="background-opacity"></div>
 	  <div class="background"></div>
@@ -173,18 +196,18 @@
 		    <div id="error"></div>
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input type="text" id="name" class="form-control"
-					   name="bookName"
+					   name="orderName"
 					   value="<?php echo $_SESSION['userName'] ?>"
 					   required/>
 				 <label class="form-label" for="name">Full Name</label>
 		    </div>
-		    <div data-mdb-input-init class="form-outline mb-4">
-				 <input type="email" id="email" class="form-control"
-					   name="bookEmail"
-					   value="<?php echo $_SESSION['userEmail'] ?>"
-					   required/>
-				 <label class="form-label" for="email">Email Address</label>
-		    </div>
+<!--		    <div data-mdb-input-init class="form-outline mb-4">-->
+<!--				 <input type="email" id="email" class="form-control"-->
+<!--					   name="orderEmail"-->
+<!--					   value="--><?php //echo $_SESSION['userEmail'] ?><!--"-->
+<!--					   required hidden="hidden"/>-->
+<!--				 <label class="form-label" hidden="hidden" for="email">Email Address</label>-->
+<!--		    </div>-->
 		    <div class="row mb-4">
 				 <!-- Corrected Car Make Select -->
 				 <div class="col">
@@ -240,26 +263,26 @@
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input class="form-control" type="tel" id="phone"
-					   name="bookPhone" required maxlength="11"
+					   name="orderPhone" required maxlength="11"
 					   value="<?php echo $_SESSION['userPhone'] ?>"
 					   minlength="11"/>
 				 <label class="form-label" for="phone">Phone Number</label>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input type="datetime-local" id="f2-datetime"
-					   class="form-control" required name="bookTime"/>
+					   class="form-control" required name="orderTime"/>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
                 <textarea class="form-control"
-					 name="bookNotes" maxlength="500"
+					 name="orderNotes" maxlength="500"
 					 placeholder="Additional Notes (optional)"
 					 id="f2-notes"
 					 rows="3"></textarea>
 				 <label class="form-label" for="f2-notes">Additional
 					   Notes</label>
 		    </div>
-		    <button class="submit btn btn-block mb-4" name="submitBook"
-				  value="submitBookData" type="submit">Submit Book
+		    <button class="submit btn btn-block mb-4" name="submitOrder"
+				  value="submitOrderData" type="submit">Submit Order
 		    </button>
 	  </form>
 </section>
