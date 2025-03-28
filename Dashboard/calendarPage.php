@@ -55,21 +55,21 @@
 
 				<ul class="menu-links">
 					<li class="nav-link">
-						<a href="index.php">
+						  <a href="index.php">
 							<i class='bx bx-home-alt icon'></i>
 							<span class="text nav-text">Dashboard</span>
 						</a>
 					</li>
 
 					<li class="nav-link">
-						<a href="usersPage.php">
+						  <a href="usersPage.php">
 							<i class='bx bx-user icon'></i> <!-- أيقونة المستخدمين -->
 							<span class="text nav-text">Users</span>
 						</a>
 					</li>
 
 					<li class="nav-link">
-                        <a href="appointmentsPage.php">
+						  <a href="appointmentsPage.php">
                             <i class='bx bx-calendar-check icon'></i> <!-- أيقونة الحجوزات -->
                             <span class="text nav-text">Appointments</span>
                         </a>
@@ -124,7 +124,7 @@
 								<nav aria-label="breadcrumb" role="navigation">
 									<ol class="breadcrumb">
 										<li class="breadcrumb-item">
-											<a href="index.php">Home</a>
+											  <a href="index.php">Home</a>
 										</li>
 										<li class="breadcrumb-item active" aria-current="page">
 											Calendar

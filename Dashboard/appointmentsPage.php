@@ -51,13 +51,13 @@
                 </li>
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="index.php">
+					  <a href="index.php">
                             <i class='bx bx-home-alt icon'></i>
                             <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="usersPage.php">
+					  <a href="usersPage.php">
                             <i class='bx bx-user icon'></i> <!-- أيقونة المستخدمين -->
                             <span class="text nav-text">Users</span>
                         </a>
@@ -69,7 +69,7 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="calendarPage.php">
+					  <a href="calendarPage.php">
                             <i class='bx bx-calendar icon'></i> <!-- أيقونة التقويم -->
                             <span class="text nav-text">Calendar</span>
                         </a>
@@ -111,7 +111,9 @@
                                 </div>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+								   <li class="breadcrumb-item"><a
+											  href="index.php">Dashboard</a>
+								   </li>
                                         <li class="breadcrumb-item active" aria-current="page">Customer Appointments
                                         </li>
                                     </ol>

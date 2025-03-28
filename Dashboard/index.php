@@ -62,21 +62,21 @@
 					</li>
                     
                     <li class="nav-link">
-                        <a href="usersPage.php">
+					  <a href="usersPage.php">
                             <i class='bx bx-user icon'></i> <!-- أيقونة المستخدمين -->
                             <span class="text nav-text">Users</span>
                         </a>
                     </li>
                     
                     <li class="nav-link">
-                        <a href="appointmentsPage.php">
+					  <a href="appointmentsPage.php">
                             <i class='bx bx-calendar-check icon'></i> <!-- أيقونة الحجوزات -->
                             <span class="text nav-text">Appointments</span>
                         </a>
                     </li>
                     
                     <li class="nav-link">
-                        <a href="calendarPage.php">
+					  <a href="calendarPage.php">
                             <i class='bx bx-calendar icon'></i> <!-- أيقونة التقويم -->
                             <span class="text nav-text">Calendar</span>
                         </a>
@@ -137,7 +137,8 @@
 										<p class="card-text">
 											View and manage customer data efficiently, keeping everything organized and accessible.
 										</p>
-										  <a href="usersPage.php" class="btn btn-primary btn-block">
+										  <a href="usersPage.php"
+											class="btn btn-primary btn-block">
 											View Customers <i class='bx bx-right-arrow-alt'></i>
 										</a>
 									</div>
