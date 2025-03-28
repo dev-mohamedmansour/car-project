@@ -201,13 +201,14 @@
 					   required/>
 				 <label class="form-label" for="name">Full Name</label>
 		    </div>
-<!--		    <div data-mdb-input-init class="form-outline mb-4">-->
-<!--				 <input type="email" id="email" class="form-control"-->
-<!--					   name="orderEmail"-->
-<!--					   value="--><?php //echo $_SESSION['userEmail'] ?><!--"-->
-<!--					   required hidden="hidden"/>-->
-<!--				 <label class="form-label" hidden="hidden" for="email">Email Address</label>-->
-<!--		    </div>-->
+		    <!--		    <div data-mdb-input-init class="form-outline mb-4">-->
+		    <!--				 <input type="email" id="email" class="form-control"-->
+		    <!--					   name="orderEmail"-->
+		    <!--					   value="-->
+				<?php //echo $_SESSION['userEmail'] ?><!--"-->
+		    <!--					   required hidden="hidden"/>-->
+		    <!--				 <label class="form-label" hidden="hidden" for="email">Email Address</label>-->
+		    <!--		    </div>-->
 		    <div class="row mb-4">
 				 <!-- Corrected Car Make Select -->
 				 <div class="col">

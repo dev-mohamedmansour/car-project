@@ -136,11 +136,14 @@
 								 $mail->SMTPAuth = true;
 								 $mail->Username
 									  = 'carhouse001.bn@gmail.com'; // SMTP username
-								 $mail->Password = 'gwdo dyis wmov sqau'; // SMTP password
+								 $mail->Password
+									  = 'gwdo dyis wmov sqau'; // SMTP password
 								 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 								 $mail->Port = 587;
 								 // Recipients
-								 $mail->setFrom('carhouse001.bn@gmail.com', 'Car House');
+								 $mail->setFrom(
+									  'carhouse001.bn@gmail.com', 'Car House'
+								 );
 								 $mail->addAddress($email); // User's email
 								 // Content
 								 $mail->isHTML(true);
