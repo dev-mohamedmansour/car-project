@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	  <?php
+			 session_start(); ?>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  <title>Car House | Orders</title>
@@ -124,7 +126,6 @@
     }
 </style>
 <?php
-	  session_start();
 	  if (!empty($_SESSION['success'])
 	  ) {
 			 echo '<div id="error-message" class="success-message" style="display: block">'
