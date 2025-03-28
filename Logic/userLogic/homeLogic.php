@@ -144,14 +144,34 @@
 					exit();
 			 }
 			 // Validate input
-//			 $requiredFields = ['carId', 'carModel', 'carYear', 'carPrice', 'customerName', 'customerEmail', 'customerPhone'];
-//          foreach ($requiredFields as $field) {
-//               if (empty($_POST[$field])) {
-//                   $_SESSION['error'] = "Please fill out all required fields.";
-//                   header('Location: ../../order.php');
-//                   exit();
-//               }
-//          }
+			 $requiredFields = ['orderName', 'serviceName', 'orderPhone',
+									  'orderTime'];
+			 foreach ($requiredFields as $field) {
+					if (empty($_POST[$field])) {
+						  $_SESSION['error'] = "Please fill out all required fields.";
+						  header('Location: ../../index.php');
+						  exit();
+					}
+			 }
+			 
+			 $filterEmail = strip_tags($_POST['registerEmail']);
+			 $email = mysqli_real_escape_string(
+				  $dbAction->connection, $filterEmail
+			 );
+			 
+			 // Proceed with sign-up if email does not exist
+			 $filterName = strip_tags($_POST['fullName']);
+			 $name = mysqli_real_escape_string($dbAction->connection, $filterName);
+			 
+			 $filterPhone = strip_tags($_POST['phone']);
+			 $phone = mysqli_real_escape_string(
+				  $dbAction->connection, $filterPhone
+			 );
+			 
+			 $filterPassword = strip_tags($_POST['registerPassword']);
+			 $password = password_hash(
+				  $filterPassword, PASSWORD_DEFAULT
+			 );
 			 
 			 // Check if customer has made an order before today
 			 $today = date('Y-m-d');
@@ -159,11 +179,11 @@
 				  ->where("customerEmail", "=", $userDetails['email'])
 				  ->andWhere("orderDate", ">=", $today)
 				  ->getRow();
-			 
-			 $createOrder = $dbAction->insert(
-				  "orders",
-				  ["orderName" =>]
-			 )
+
+//			 $createOrder = $dbAction->insert(
+//				  "orders",
+//				  ["orderName" =>]
+//			 )
 			 
 			 echo '<pre>';
 			 var_dump([
