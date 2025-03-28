@@ -263,7 +263,11 @@
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input type="datetime-local" id="f2-datetime"
-					   class="form-control" required name="orderTime"/>
+					   min="<?= date('Y-m-d\TH:i') ?>"
+					   max="<?= date(
+										  'Y-m-d\TH:i', strtotime('+13 days 23:59')
+									 ) ?>"
+					   class="form-control" name="orderTime" required/>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
                 <textarea class="form-control"

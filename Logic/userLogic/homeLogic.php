@@ -6,6 +6,7 @@
 	  use Random\RandomException;
 	  
 	  session_start();
+	  $dbAction = new Db();
 	  
 	  function getDetailsOfUser(): array
 	  {
@@ -154,18 +155,74 @@
 					}
 			 }
 			 
-			 $filterEmail = strip_tags($_POST['registerEmail']);
-			 $email = mysqli_real_escape_string(
-				  $dbAction->connection, $filterEmail
+			 $orderDateTime = $_POST['orderTime'];
+			 if (!$orderDateTime) {
+					$_SESSION['error'] = "Please select a date and time";
+					header('Location:../../index.php');
+					exit();
+			 }
+			 try {
+					$now = new DateTime();
+					$cutoffDate = new DateTime(
+						 '+13 days 23:59:59'
+					); // Today + 13 days = 2 weeks
+					$selectedDate = new DateTime($orderDateTime);
+					
+					// Round down to minutes (remove seconds)
+					$selectedDate->setTime(
+						 $selectedDate->format('H'), $selectedDate->format('i'), 0
+					);
+					
+					if ($selectedDate < $now) {
+						  $_SESSION['error']
+								= "The selected date/time cannot be in the past. Current time is "
+								. $now->format('Y-m-d H:i');
+						  header('Location:../../index.php');
+						  exit();
+					}
+					
+					if ($selectedDate > $cutoffDate) {
+						  $_SESSION['error'] = "We only accept orders up to "
+								. $cutoffDate->format('Y-m-d')
+								. " (2 weeks in advance)";
+						  header('Location:../../index.php');
+						  exit();
+					}
+					// Date is valid (within 2 weeks)
+			 } catch (Exception $e) {
+					error_log(
+						 "Invalid date format: " . $orderDateTime . " - "
+						 . $e->getMessage()
+					);
+					$_SESSION['error']
+						 = "Invalid date/time format. Please use the date picker.";
+					header('Location:../../index.php');
+					exit();
+			 }
+			 
+			 if (($_POST['serviceName'] != "Mechanical Repairs")
+				  && ($_POST['serviceName'] != "Car Wash")
+				  && ($_POST['serviceName'] != "Electrical Repairs")
+				  && ($_POST['serviceName'] != "Tires Betters")
+			 ) {
+					$_SESSION['error'] = "Please Do not change the service name .";
+					header('Location: ../../index.php');
+					exit();
+			 }
+			 
+			 $filterNameOrder = strip_tags($_POST['orderName']);
+			 $nameOrder = mysqli_real_escape_string(
+				  $dbAction->connection, $filterNameOrder
 			 );
 			 
-			 // Proceed with sign-up if email does not exist
-			 $filterName = strip_tags($_POST['fullName']);
-			 $name = mysqli_real_escape_string($dbAction->connection, $filterName);
+			 $filterServiceName = strip_tags($_POST['serviceName']);
+			 $serviceName = mysqli_real_escape_string(
+				  $dbAction->connection, $filterServiceName
+			 );
 			 
-			 $filterPhone = strip_tags($_POST['phone']);
-			 $phone = mysqli_real_escape_string(
-				  $dbAction->connection, $filterPhone
+			 $filterOrderPhone = strip_tags($_POST['orderPhone']);
+			 $orderPhone = mysqli_real_escape_string(
+				  $dbAction->connection, $filterOrderPhone
 			 );
 			 
 			 $filterPassword = strip_tags($_POST['registerPassword']);
