@@ -69,7 +69,7 @@
 					</li>
 
 					<li class="nav-link">
-						  <a href="appointmentsPage.php">
+						  <a href="appointmentPage.php">
                             <i class='bx bx-calendar-check icon'></i> <!-- أيقونة الحجوزات -->
                             <span class="text nav-text">Appointments</span>
                         </a>
