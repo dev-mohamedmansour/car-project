@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Dashboard | Home</title>
+	  <title>Dashboard | Home</title>
 	<link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'>
 	<link rel='stylesheet'
 		href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap'>
@@ -37,7 +37,7 @@
 				</span>
 
 				<div class="text logo-text">
-					<span class="name"><?php  ?></span>
+					  <span class="name"><?php ?></span>
 					<span class="profession">Development</span>
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 
 				<ul class="menu-links">
 					<li class="nav-link Active">
-						<a href="index.php">
+						  <a href="index.php">
 							<i class='bx bx-home-alt icon'></i>
 							<span class="text nav-text">Dashboard</span>
 						</a>
