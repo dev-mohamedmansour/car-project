@@ -196,7 +196,7 @@
 						  $_SESSION['adminName'] = $selectUser['name'];
 						  $_SESSION['adminEmail'] = $selectUser['email'];
 						  $_SESSION['adminId'] = $selectUser['id'];
-						  header('Location:../../index.php');
+						  header('Location:../../dashboard/index.php');
 					} else {
 						  $_SESSION['error'] = "Email or password is not exist!";
 						  header('Location:../../authLogin.php');

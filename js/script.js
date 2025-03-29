@@ -3,7 +3,7 @@ let form = document.querySelector(".Form");
 let serviceInput = document.querySelector(".service");
 
 for (let i = 0; i < btnClick.length; i++) {
-    btnClick[i].addEventListener("click", function(e) {
+    btnClick[i].addEventListener("click", function (e) {
         e.preventDefault(); // Prevent default anchor behavior
 
         // Show the form
@@ -18,114 +18,55 @@ for (let i = 0; i < btnClick.length; i++) {
         serviceInput.value = serviceText;
 
         // Scroll to form if needed
-        document.querySelector("#form").scrollIntoView({ behavior: 'smooth' });
+        document.querySelector("#form").scrollIntoView({behavior: 'smooth'});
     });
 }
 
-function formValidate3() {
-    var firstName = document.getElementById("firstName").value;
-    var lastName = document.getElementById("lastName").value;
-    var phone = document.getElementById("phone").value;
-    var email = document.getElementById("email").value;
-    var error = document.getElementById("error");
-    var text = "";
-    error.classList.add("error-message");
-    error.style.display = "block";
+/*dashboard */
 
-    if (firstName.length < 3) {
-        text = "Please Enter a Valid First Name";
-        error.innerHTML = text;
-        return false;
-    }
+// التبديل بين الفتح والإغلاق عند الضغط على أيقونة القائمة الجانبية
+const body = document.querySelector("body"),
+    sidebar = body.querySelector("nav"),
+    toggle = body.querySelector(".toggle"),
+    modeSwitch = body.querySelector(".toggle-switch"),
+    modeText = body.querySelector(".mode-text"),
+    mobileToggle = body.querySelector(".mobile-toggle"),
+    sidebarOverlay = document.createElement("div"); // إنشاء عنصر الخلفية الداكنة
 
-    if (lastName.length < 3) {
-        text = "Please Enter a Valid Last Name";
-        error.innerHTML = text;
-        return false;
-    }
+// إضافة الخلفية الداكنة إلى الـ body
+sidebarOverlay.classList.add("sidebar-overlay");
+body.appendChild(sidebarOverlay);
 
-    let egyptPhoneRegex = /^(010|011|012|015)[0-9]{8}$/;
-    if (!egyptPhoneRegex.test(phone)) {
-        text = "Please Enter a Valid Phone Number";
-        error.innerHTML = text;
-        return false;
-    }
-
-    let emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail|yahoo|hotmail|outlook|icloud|protonmail)+(\.com)$/;
-    if (!emailRegex.test(email)) {
-        text = "Please Enter a Valid Email";
-        error.innerHTML = text;
-        return false;
-    }
-    alert("Form submitted successfully");
-    return true;
+// التبديل بين الفتح والإغلاق عند الضغط على أيقونة القائمة الجانبية
+if (toggle) {
+    toggle.addEventListener("click", () => {
+        if (window.innerWidth <= 767) {
+            sidebar.classList.toggle("show"); // استخدام كلاس خاص للشاشات الصغيرة
+            sidebarOverlay.style.display = sidebar.classList.contains("show") ? "block" : "none";
+        } else {
+            sidebar.classList.toggle("close");
+        }
+    });
 }
 
-{
-// Form
-
-// function loginValidate() {
-//     var Email = document.getElementById("Email").value;
-//     var Password = document.getElementById("Password").value;
-//     var error = document.getElementById("error");
-//     var text = "";
-//     error.classList.add("error-message");
-//     error.style.display = "block";
-//
-//     let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-//     if (!emailRegex.test(Email)) {
-//         text = "Please Enter a Valid Email";
-//         error.innerHTML = text;
-//         return false;
-//     }
-
-// let passwordRegex = /^[A-Z]+[a-zA-Z0-9._%+-]{8,}$/
-// if (!passwordRegex.test(Password)) {
-//   text = "Please Enter a Valid Password";
-//   error.innerHTML = text;
-//   return false;
-// }
-// alert("Form submitted successfully");
-// return true;
-
-// Validate registration form
-
-function registerValidate2() {
-    var Username2 = document.getElementById("Username2").value;
-    var Email2 = document.getElementById("Email2").value;
-    var Password2 = document.getElementById("Password2").value;
-    var error2 = document.getElementById("error2");
-    var text = "";
-
-    error2.classList.add("error-message");
-    error2.style.display = "block";
-
-    // ✅ التحقق من اسم المستخدم
-    if (Username2.length === 3) {
-        text = "Please Enter a Valid Username (at least 5 characters)";
-        error2.innerHTML = text;
-        return false;
-    }
-
-    // ✅ التحقق من البريد الإلكتروني
-    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(Email2)) {
-        text = "Please Enter a Valid Email";
-        error2.innerHTML = text;
-        return false;
-    }
-
-    // ✅ التحقق من كلمة المرور
-    let passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(Password2)) {
-      text = "Password must be at least 8 characters, contain a capital letter, a number, and a special character.";
-      error2.innerHTML = text;
-      return false;
-    }
-
-    // ✅ إخفاء الخطأ عند نجاح التحقق
-    error2.style.display = "none";
-    alert("Form submitted successfully");
-    return true;
+// التأكد من أن mobileToggle موجود قبل استخدامه
+if (mobileToggle) {
+    mobileToggle.addEventListener("click", () => {
+        sidebar.classList.add("show");
+        sidebarOverlay.style.display = "block";
+    });
 }
+
+// عند الضغط خارج القائمة أو على الـ Overlay، يتم إغلاقها
+sidebarOverlay.addEventListener("click", () => {
+    sidebar.classList.remove("show");
+    sidebarOverlay.style.display = "none";
+});
+
+// تبديل الوضع الداكن
+if (modeSwitch) {
+    modeSwitch.addEventListener("click", () => {
+        body.classList.toggle("dark");
+        modeText.innerText = body.classList.contains("dark") ? "Light mode" : "Dark mode";
+    });
 }
