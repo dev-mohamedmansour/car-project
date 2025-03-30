@@ -1,7 +1,7 @@
 $(".colorpicker").asColorPicker();
 $(".complex-colorpicker").asColorPicker({
-	mode: 'complex'
+    mode: 'complex'
 });
 $(".gradient-colorpicker").asColorPicker({
-	mode: 'gradient'
+    mode: 'gradient'
 });
