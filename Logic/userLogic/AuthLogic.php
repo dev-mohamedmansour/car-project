@@ -44,7 +44,9 @@
 	  }
 	  
 	  // Sign Up logic
-	  if (isset($_POST['sign-upForm'])&& $_POST['sign-upForm']==='sign-upData') {
+	  if (isset($_POST['sign-upForm'])
+			&& $_POST['sign-upForm'] === 'sign-upData'
+	  ) {
 			 // Check if all fields are filled
 			 if (empty($_POST['fullName']) || empty($_POST['registerEmail'])
 				  || empty($_POST['phone'])

@@ -1,6 +1,8 @@
 <?php
 	  require __DIR__ . '/vendor/autoload.php';
+	  
 	  use CarHouse\Models\Db;
+	  
 	  session_start();
 	  $dbAction = new Db();
 	  if (isset($_GET['token'])) {
@@ -12,7 +14,8 @@
 			 if ($getUser) {
 					// Mark the user as verified
 					$updateUserData = $dbAction->update(
-						 "users", ["verification_token" => "NULL()", "verify_email" => 1]
+						 "users",
+						 ["verification_token" => "NULL()", "verify_email" => 1]
 					)->where("id", "=", $getUser['id'])->execution();
 					
 					$_SESSION['success'] = 'Email verified successfully!';
