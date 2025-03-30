@@ -2,10 +2,24 @@
 <html lang="en">
 <head>
 	  <?php
+			 require __DIR__ . '/../vendor/autoload.php';
 			 session_start();
 			 // if not user redirect to login page
 			 if (!isset($_SESSION['adminId'])) {
-					header('location:authLogin.php');
+					header('Location:../authLogin.php');
+			 }
+			 // Process any messages before HTML starts
+			 $successMessage = '';
+			 $errorMessage = '';
+			 
+			 if (!empty($_SESSION['success'])) {
+					$successMessage = htmlspecialchars($_SESSION['success']);
+					unset($_SESSION['success']);
+			 }
+			 
+			 if (!empty($_SESSION['error'])) {
+					$errorMessage = htmlspecialchars($_SESSION['error']);
+					unset($_SESSION['error']);
 			 }
 	  ?>
 	  <meta charset="UTF-8">
@@ -129,6 +143,53 @@
 
 </nav>
 <div class="sidebar-overlay"></div>
+<style>
+    .message-container {
+        margin: 15px 0;
+    }
+
+    .success-message {
+        background: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+
+    .error-message {
+        background: #F44336;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+
+    /*.error-message {*/
+    /*    background-color: darkred;*/
+    /*    color: white;*/
+    /*    font-size: 17px;*/
+    /*    letter-spacing: 1px;*/
+    /*    padding: 12px 15px;*/
+    /*    font-weight: bold;*/
+    /*    margin-bottom: 15px;*/
+    /*    border-radius: 5px;*/
+    /*    text-align: center;*/
+    /*    display: none;*/
+    /*    transition: all 0.5s ease-in-out;*/
+    /*    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+    /*    border: 2px solid #7e4141;*/
+    /*}*/
+
+    /*.success-message {*/
+    /*    color: #ffffff;*/
+    /*    text-align: center;*/
+    /*    margin-bottom: 20px;*/
+    /*    padding: 10px;*/
+    /*    background-color: #20ad04;*/
+    /*    border: 1px solid #3014db;*/
+    /*    border-radius: 5px*/
+    /*}*/
+</style>
 
 <section class="home">
 	  <div class="main-container p-4">
@@ -153,6 +214,16 @@
 									    </div>
 								  </div>
 							</div>
+					   </div>
+					   <!-- Message Display Section -->
+					   <div class="message-container">
+											<?php if (!empty($successMessage)): ?>
+								<div class="success-message"><?= $successMessage ?></div>
+											<?php endif; ?>
+											
+											<?php if (!empty($errorMessage)): ?>
+								<div class="error-message"><?= $errorMessage ?></div>
+											<?php endif; ?>
 					   </div>
 					   <div class="pd-20 card-box mb-30">
 							<div class="row clearfix">
