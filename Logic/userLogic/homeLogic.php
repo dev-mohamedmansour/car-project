@@ -7,7 +7,19 @@
 	  
 	  session_start();
 	  $dbAction = new Db();
-	  
+	  function printUserName($userName)
+	  {
+			 $nameParts = explode(" ", $userName);
+			 
+			 // Check if there are at least 2 parts
+			 if (count($nameParts) >= 2) {
+					$firstName = $nameParts[0];
+					$secondName = $nameParts[1];
+					echo $firstName . " " . $secondName;
+			 } else {
+					echo $userName; // Fallback if there's only one name
+			 }
+	  }
 	  function getDetailsOfUser(): array
 	  {
 			 $dbAction = new Db();
@@ -210,6 +222,21 @@
 					exit();
 			 }
 			 
+			 $orderDate = $selectedDate->format(
+				  'Y-m-d H:i:s'
+			 );
+			 
+			 $checkTimeIfExists = $dbAction->select("orderTime", "orders")->where(
+				  "orderTime", "=", $orderDate
+			 )->getAll();
+			 
+			 if ($checkTimeIfExists) {
+					$_SESSION['error']
+						 = "We're sorry, the time you selected has been booked. Please try another appointment or another day...";
+					header('Location: ../../index.php');
+					exit();
+			 }
+			 
 			 $filterNameOrder = strip_tags($_POST['orderName']);
 			 $orderName = mysqli_real_escape_string(
 				  $dbAction->connection, $filterNameOrder
@@ -219,6 +246,18 @@
 			 $serviceName = mysqli_real_escape_string(
 				  $dbAction->connection, $filterServiceName
 			 );
+			 
+			 $checkServiceNameIfExists = $dbAction->select("serviceName", "orders")
+				  ->where("serviceName", "=", $serviceName)->andWhere(
+						"orderTime", "=", $orderDate
+				  )->andWhere("userId", "=", $userDetails['id'])->getRow();
+			 if ($checkServiceNameIfExists) {
+					$_SESSION['error']
+						 = "We're sorry, the time you selected has been booked for you before .Or the service name selected has been booked for you before..";
+					header('Location: ../../index.php');
+					exit();
+			 }
+			 
 			 $filterCarMake = strip_tags($_POST['carMake']);
 			 $carMake = mysqli_real_escape_string(
 				  $dbAction->connection, $filterCarMake

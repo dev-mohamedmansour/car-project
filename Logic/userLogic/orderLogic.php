@@ -8,70 +8,56 @@
 			 session_start();
 	  }
 	  $dbAction = new DB;
+	  function printUserName($userName)
+	  {
+			 $nameParts = explode(" ", $userName);
+			 
+			 // Check if there are at least 2 parts
+			 if (count($nameParts) >= 2) {
+					$firstName = $nameParts[0];
+					$secondName = $nameParts[1];
+					echo $firstName . " " . $secondName;
+			 } else {
+					echo $userName; // Fallback if there's only one name
+			 }
+	  }
 	  
-	  function countClients(): void
+	  function countOrders($userId): void
 	  {
 			 $dbAction = new DB;
-			 $clients = $dbAction->select("COUNT(id)", "users")->getRow();
+			 $clients = $dbAction->select("COUNT(id)", "orders")->where(
+				  "userId", "=", $userId
+			 )->getRow();
 			 echo $clients['COUNT(id)'];
 			 
 	  }
 	  
-	  function countNewUsersThisMonth()
-	  {
-			 $db = new DB();
-			 
-			 // More precise way to get current month range
-			 $currentMonthStart = new DateTime('first day of this month');
-			 $currentMonthEnd = new DateTime('last day of this month');
-			 
-			 $newUsers = $db->select('COUNT(id) as newUsers', 'users')
-				  ->where(
-						'created_at', '>=',
-						$currentMonthStart->format('Y-m-d 00:00:00')
-				  )
-				  ->andWhere(
-						'created_at', '<=',
-						$currentMonthEnd->format('Y-m-d 23:59:59')
-				  )
-				  ->getRow();
-			 echo $newUsers['newUsers'];
-	  }
-	  
-	  function showClients(): void
+	  function showOrders($userId)
 	  {
 			 $dbAction = new DB;
-			 $users = $dbAction->select('*', 'users')->getAll();
-			 
-			 if (count($users) > 0) {
-					foreach ($users as $information) {
+			 $orders = $dbAction->select('*', 'orders')->getAll();
+//			 echo "<pre>";
+//			 var_dump($orders);
+//			 echo "</pre>";
+//			 die();
+			 if ($orders == "No results found") {
+					echo '<tr>';
+					echo '<h5 style="color: #dc3545"><strong>No orders found,</strong>
+				   Please try again later Or book a New ServiceNow!!</h5>
+				   <a class="btn" style="color: #6610f2" href="index.php">HOME</a><br>';
+					echo '</tr>';
+			 } elseif (count($orders) > 0) {
+					foreach ($orders as $information) {
 						  echo '<tr>';
-						  $displayKeys = ['id', 'name', 'email', 'phone', 'role',
-												'verify_email', 'email_confirmation_time'];
-						  
+						  $displayKeys = ['orderName', 'serviceName', 'orderCode',
+												'carMake', 'carModel',
+												'orderPhone', 'orderTime', 'orderStuts',
+												'orderDateActive'];
 						  foreach ($displayKeys as $key) {
 								 if (isset($information[$key])) {
-										if ($key == "name") {
-											  echo '<td class="table-plus">'
-													. htmlspecialchars($information[$key])
-													. '</td>';
-										} elseif ($key == "verify_email") {
-											  if ($information[$key] == "0") {
-													 echo '<td>'
-														  . htmlspecialchars(
-																"NO VERIFICATION"
-														  )
-														  . '</td>';
-											  } else {
-													 echo '<td>' . htmlspecialchars(
-																"YES VERIFICATION"
-														  ) . '</td>';
-											  }
-										} else {
-											  echo '<td>' . htmlspecialchars(
-														 $information[$key]
-													) . '</td>';
-										}
+										echo '<td class="table-plus">'
+											 . htmlspecialchars($information[$key])
+											 . '</td>';
 								 }
 						  }
 						  

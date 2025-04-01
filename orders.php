@@ -1,8 +1,14 @@
+<?php
+	  require 'Logic/userLogic/orderLogic.php';
+	  // if not user redirect to login page
+	  if (!isset($_SESSION['userId'])) {
+			 header('location:authLogin.php');
+			 exit();
+	  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	  <?php
-			 session_start(); ?>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  <title>Car House | Orders</title>
@@ -27,6 +33,14 @@
 	  <link rel="stylesheet" href="css/animate.min.css">
 	  <link rel="stylesheet" href="css/bootstrap.min.css">
 	  <link rel="stylesheet" href="css/style.css">
+	  <link rel="stylesheet" href="css/dataTables.bootstrap4.min.css">
+	  <link rel="stylesheet" href="css/style-Dashboard.css">
+	  <link rel="stylesheet" type="text/css"
+		   href="vendors/styles/core.css"/>
+	  <link rel="stylesheet" type="text/css"
+		   href="vendors/styles/icon-font.min.css"/>
+	  <link rel="stylesheet" type="text/css"
+		   href="css/responsive.bootstrap4.min.css"/>
 
 	  <!-- Bootstrap 5 JavaScript -->
 
@@ -141,24 +155,84 @@
 			 unset($_SESSION['error']); // Clear the error message after displaying
 	  }
 ?>
-<section class="hero">
+<section class="hero" style="flex-wrap: wrap;">
 	  <div class="background-opacity"></div>
 	  <div class="background"></div>
 	  <div class="container text-center hero-content">
-		    <h1 class="wow fadeInDown" data-wow-delay="0.1s">Welcome to <span
+		    <h1 class="wow fadeInDown" data-wow-delay="0.1s">Welcome <span
 					   class="highlight me-3 wow fadeInDown"
-					   data-wow-delay="0.5s">Car</span><span
-					   class="highlight wow fadeInDown"
-					   data-wow-delay="1s">House</span></h1>
-		    <p class="lead wow fadeInUp" data-wow-delay="1.3s">
-				 From washing to mechanical and electrical repairs –
-				 Everything your car needs in one place.
-		    </p>
+					   data-wow-delay="0.5s"><?php printUserName(
+									 $_SESSION["userName"]
+								); ?></span></h1>
 	  </div>
+	  <section class="container" style="z-index: 2">
+		    <!-- Export Datatable start -->
+		    <!--		    <section class="home">-->
+		    <div class="card-box mb-30 pb-5">
+				 <div class="pd-20">
+					   <h4 class="text-purple h4">Data Table
+							with Export Buttons</h4>
+				 </div>
+				 <div class="pb-20">
+					   <table class="table hover multiple-select-row data-table-export nowrap">
+							<thead>
+							<tr>
+								  <th>Name</th>
+								  <th class="table-plus">
+									    Service Type
+								  </th>
+								  <th>Order Code</th>
+								  <th>
+									    Car Make
+								  </th>
+								  <th>
+									    Car Model
+								  </th>
+								  <th>Order Phone
+								  </th>
+								  <th>Time Booking
+								  </th>
+								  <th>Order Status
+								  </th>
+								  <th>Order Date
+								  </th>
+								  <th class="datatable-nosort">
+									    Action
+								  </th>
+							</tr>
+							</thead>
+							<tbody>
+											  <?php
+													 showOrders($_SESSION['userId']);
+											  ?>
+							<!-- Export Datatable End -->
+							</tbody>
+					   </table>
+				 </div>
+		    </div>
+	  </section>
 </section>
 <script src="js/mdb.umd.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
 <script src="js/wow.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
+<script src="vendors/scripts/core.js"></script>
+<script src="vendors/scripts/script.min.js"></script>
+<script src="vendors/scripts/process.js"></script>
+<script src="vendors/scripts/layout-settings.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.bootstrap4.min.js"></script>
+<script src="js/dataTables.responsive.min.js"></script>
+<script src="js/responsive.bootstrap4.min.js"></script>
+<!-- buttons for Export datatable -->
+<script src="js/dataTables.buttons.min.js"></script>
+<script src="js/buttons.bootstrap4.min.js"></script>
+<script src="js/buttons.print.min.js"></script>
+<script src="js/buttons.html5.min.js"></script>
+<script src="js/buttons.flash.min.js"></script>
+<script src="js/pdfmake.min.js"></script>
+<script src="js/vfs_fonts.js"></script>
+<!-- Datatable Setting js -->
+<script src="vendors/scripts/datatable-setting.js"></script>
 </body>
 </html>

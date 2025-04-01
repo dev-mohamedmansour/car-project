@@ -227,27 +227,6 @@
 							</select>
 					   </div>
 				 </div>
-				 <!--				 <div class="col">-->
-				 <!--					   <div data-mdb-input-init class="form-outline">-->
-				 <!--							<input disabled class="form-control d-none"-->
-				 <!--								  type="text" id="f2-username2">-->
-				 <!--							<select class="form-control form-select"-->
-				 <!--								   name="carMake" id="login_make"-->
-				 <!--								   form="add_car_mobile">-->
-				 <!--							</select>-->
-				 <!--					   </div>-->
-				 <!--				 </div>-->
-				 <!--				 <div class="col">-->
-				 <!--					   <div data-mdb-input-init class="form-outline">-->
-				 <!--							<input disabled class="form-control d-none"-->
-				 <!--								  type="text" id="f2-username2">-->
-				 <!--							<select-->
-				 <!--								  class="form-control form-select field-validate"-->
-				 <!--								  name="carModel" id="login_model"-->
-				 <!--								  form="add_car_mobile" disabled>-->
-				 <!--							</select>-->
-				 <!--					   </div>-->
-				 <!--				 </div>-->
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
 				 <input class="form-control service" type="text"

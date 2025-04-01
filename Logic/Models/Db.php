@@ -120,13 +120,16 @@
 					return $this;
 			 }
 			 
-			 public function getAll(): array
+			 public function getAll()
 			 {
 					$this->runQuery();
 					while ($rows = mysqli_fetch_assoc($this->query)) {
 						  $response[] = $rows;
 					}
-					/** @var $response */
+					/** @var mixed $response */
+					if (empty($response)) {
+						  return "No results found";
+					}
 					return $response;
 			 }
 			 
