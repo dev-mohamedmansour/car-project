@@ -28,7 +28,6 @@
 		   href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'>
 	  <link rel='stylesheet'
 		   href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap'>
-	  <!--	  	  <link rel="stylesheet" href="../css/darkDashboard.css">-->
 	  <!-- Mobile Specific Metas -->
 	  <meta name="viewport"
 		   content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -163,32 +162,6 @@
         border-radius: 4px;
         margin-bottom: 15px;
     }
-
-    /*.error-message {*/
-    /*    background-color: darkred;*/
-    /*    color: white;*/
-    /*    font-size: 17px;*/
-    /*    letter-spacing: 1px;*/
-    /*    padding: 12px 15px;*/
-    /*    font-weight: bold;*/
-    /*    margin-bottom: 15px;*/
-    /*    border-radius: 5px;*/
-    /*    text-align: center;*/
-    /*    display: none;*/
-    /*    transition: all 0.5s ease-in-out;*/
-    /*    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
-    /*    border: 2px solid #7e4141;*/
-    /*}*/
-
-    /*.success-message {*/
-    /*    color: #ffffff;*/
-    /*    text-align: center;*/
-    /*    margin-bottom: 20px;*/
-    /*    padding: 10px;*/
-    /*    background-color: #20ad04;*/
-    /*    border: 1px solid #3014db;*/
-    /*    border-radius: 5px*/
-    /*}*/
 </style>
 
 <section class="home">

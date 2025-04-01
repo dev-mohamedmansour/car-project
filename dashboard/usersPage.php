@@ -215,7 +215,8 @@
 														<i class='bx bx-group'></i>
 														<div>
 															  <h5 class="m-0">
-																    1,250</h5>
+																											 <?php countClients(
+																											 ); ?></h5>
 															  <small>Total
 																    Customers</small>
 														</div>
@@ -227,7 +228,8 @@
 														<i class='bx bx-user-plus'></i>
 														<div>
 															  <h5 class="m-0">
-																    78</h5>
+																											 <?php countNewUsersThisMonth(
+																											 ); ?></h5>
 															  <small>New
 																    This
 																    Month</small>
