@@ -185,6 +185,23 @@
 						 $selectedDate->format('H'), $selectedDate->format('i'), 0
 					);
 					
+					// Check if selected time is within working hours (10 AM to 2 AM)
+					$hour = (int)$selectedDate->format('H');
+					$isWeekend = in_array($selectedDate->format('N'), [6, 7]
+					); // 6 = Saturday, 7 = Sunday
+					
+					// Regular working hours: 10 AM (10) to 2 AM (2) next day
+					$isWithinHours = ($hour >= 10 && $hour <= 23)
+						 || ($hour >= 0
+							  && $hour < 2);
+					
+					if (!$isWithinHours) {
+						  $_SESSION['error']
+								= "We only accept orders between 10 AM and 2 AM";
+						  header('Location:../../index.php');
+						  exit();
+					}
+					
 					if ($selectedDate < $now) {
 						  $_SESSION['error']
 								= "The selected date/time cannot be in the past. Current time is "
@@ -200,7 +217,7 @@
 						  header('Location:../../index.php');
 						  exit();
 					}
-					// Date is valid (within 2 weeks)
+					// Date is valid (within 2 weeks and working hours)
 			 } catch (Exception $e) {
 					error_log(
 						 "Invalid date format: " . $orderDateTime . " - "
@@ -302,10 +319,6 @@
 						  
 						  $attempts++;
 					} while ($attempts < $maxAttempts);
-//					throw new Exception(
-//						 'Failed to generate unique order number after '
-//						 . $maxAttempts . ' attempts'
-//					);
 					$_SESSION['error']
 						 = "Failed to generate unique order number after "
 						 . $maxAttempts . "attempts";
@@ -356,9 +369,9 @@
 								 $mail->isHTML(true);
 								 $mail->Subject = 'Order Successful';
 								 $mail->Body
-									  = "The core has been reserved for the day : "
+									  = "The Order has been reserved for the day : "
 									  . $orderDate
-									  . " <br> and we are waiting for you and happy to serve you,"
+									  . " <br> waiting a Second email from admin to confirm your order and we are happy to serve you,"
 									  . $orderName;
 								 $mail->send();
 								 $_SESSION['success']

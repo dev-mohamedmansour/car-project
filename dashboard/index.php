@@ -90,7 +90,7 @@
 					   </li>
 
 					   <li class="nav-link">
-							<a href="usersPage.php">
+							<a href="usersMangerPage.php">
 								  <i class='bx bx-user icon'></i>
 								  <!-- أيقونة المستخدمين -->
 								  <span class="text nav-text">Users</span>
@@ -221,7 +221,7 @@
 														and
 														accessible.
 												   </p>
-												   <a href="usersPage.php"
+												   <a href="usersMangerPage.php"
 													 class="btn btn-primary btn-block">
 														View
 														Customers
@@ -251,7 +251,7 @@
 														deadlines
 														with ease.
 												   </p>
-												   <a href="usersPage.php"
+												   <a href="usersMangerPage.php"
 													 class="btn btn-primary btn-block">
 														View
 														Calendar
@@ -282,7 +282,7 @@
 														deadlines
 														with ease.
 												   </p>
-												   <a href="usersPage.php"
+												   <a href="usersMangerPage.php"
 													 class="btn btn-primary btn-block">
 														View
 														Calendar

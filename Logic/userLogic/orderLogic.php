@@ -3,7 +3,7 @@
 	  use CarHouse\Models\Db;
 	  
 	  require_once __DIR__ . "/../../vendor/autoload.php";
-// Start session if not already started
+// Start session if isn't already started
 	  if (session_status() === PHP_SESSION_NONE) {
 			 session_start();
 	  }
@@ -32,14 +32,12 @@
 			 
 	  }
 	  
-	  function showOrders($userId)
+	  function showOrders($userId): void
 	  {
 			 $dbAction = new DB;
-			 $orders = $dbAction->select('*', 'orders')->getAll();
-//			 echo "<pre>";
-//			 var_dump($orders);
-//			 echo "</pre>";
-//			 die();
+			 $orders = $dbAction->select('*', 'orders')->where(
+				  "userId", "=", $userId
+			 )->getAll();
 			 if ($orders == "No results found") {
 					echo '<tr>';
 					echo '<h5 style="color: #dc3545"><strong>No orders found,</strong>
@@ -49,15 +47,20 @@
 			 } elseif (count($orders) > 0) {
 					foreach ($orders as $information) {
 						  echo '<tr>';
-						  $displayKeys = ['orderName', 'serviceName', 'orderCode',
+						  $displayKeys = ['id', 'orderName', 'serviceName',
+												'orderCode',
 												'carMake', 'carModel',
 												'orderPhone', 'orderTime', 'orderStuts',
 												'orderDateActive'];
 						  foreach ($displayKeys as $key) {
 								 if (isset($information[$key])) {
-										echo '<td class="table-plus">'
-											 . htmlspecialchars($information[$key])
-											 . '</td>';
+										if ($key == "id") {
+											  continue;
+										} else {
+											  echo '<td class="table-plus">'
+													. htmlspecialchars($information[$key])
+													. '</td>';
+										}
 								 }
 						  }
 						  
@@ -67,9 +70,7 @@
                             <i class="dw dw-more"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                            <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                            <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                            <a class="dropdown-item" href="usersPage.php?delete='
+                            <a class="dropdown-item" href="orders.php?delete='
 								. (int)$information['id'] . '"><i class="dw dw-delete-3"></i> Delete</a>
                         </div>
                     </div>
@@ -79,63 +80,16 @@
 			 }
 	  }
 	  
-	  if (isset($_GET['edit'])) {
-			 $userId = (int)$_GET['edit'];
-			 $admin = $dbAction->select("role", "users")->where("id", "=", $userId)
-				  ->andWhere("role", "=", "admin")
-				  ->getRow();
-			 if ($admin) {
-					$_SESSION['error']
-						 = "Admin can not Edit, Please contact your administrator.";
-					header('Location:index.php');
-					exit();
-			 }
-			 $checkUser = $dbAction->select('id', 'users')->where(
-				  'id', "=", $userId
-			 )->getRow();
-			 if ($checkUser) {
-					$editUser = $dbAction->select('*', 'users')->where(
-						 "id", "=", $userId
-					)->getRow();
-					
-					
-			 } else {
-					$_SESSION['error']
-						 = "User Not Found, Please do not input any number.";
-					exit();
-			 }
-			 
-	  }
-	  
 	  if (isset($_GET['delete'])) {
-			 $userId = (int)$_GET['delete'];
-			 $admin = $dbAction->select("role", "users")->where("id", "=", $userId)
-				  ->andWhere("role", "=", "admin")
-				  ->getRow();
-			 if ($admin) {
-					$_SESSION['error']
-						 = "Admin can not deleted, Please contact your administrator.";
-					header('Location:index.php');
-					exit();
-			 }
-			 $checkUser = $dbAction->select('id', 'users')->where(
-				  'id', "=", $userId
-			 )->getRow();
-			 if ($checkUser) {
-					$deleteUser = $dbAction->delete('users')
-						 ->where('id', '=', $userId)
-						 ->andWhere("role", "=", "user")
+			 $orderId = (int)$_GET['delete'];
+			 $deleteOrder = $dbAction->delete('orders')
+				  ->where('id', '=', $orderId)
 						 ->execution();
-					
-					if ($deleteUser == "something error") {
+			 
+			 if ($deleteOrder == "something error") {
 						  $_SESSION['error'] = "Something Went Wrong";
 					} else {
-						  $_SESSION['success'] = "Client Deleted Successfully";
+					$_SESSION['success'] = "Order Deleted Successfully";
 					}
-					exit();
-			 } else {
-					$_SESSION['error']
-						 = "User Not Found, Please do not input any number.";
-					exit();
-			 }
+			 
 	  }

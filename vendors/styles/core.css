@@ -4125,7 +4125,7 @@ body.dark {
     position: relative;
     display: -ms-inline-flexbox;
     display: -webkit-inline-box;
-    display: inline-flex;
+    display: flex;
     vertical-align: middle
 }
 

@@ -71,7 +71,7 @@
 					   </li>
 
 					   <li class="nav-link">
-							<a href="usersPage.php">
+							<a href="usersMangerPage.php">
 								  <i class='bx bx-user icon'></i>
 								  <!-- أيقونة المستخدمين -->
 								  <span class="text nav-text">Users</span>
