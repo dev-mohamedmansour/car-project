@@ -131,8 +131,6 @@
 						  header('Location:../../index.php');
 						  // Send verification email
 						  try {
-								 // Server settings
-//								 serverSettings($mail, $email);
 								 $mail->isSMTP();
 								 $mail->Host = 'smtp.gmail.com'; // Your SMTP server
 								 $mail->SMTPAuth = true;
@@ -151,7 +149,7 @@
 								 $mail->isHTML(true);
 								 $mail->Subject = 'Email Verification';
 								 $mail->Body
-									  = "Please click the link to verify your email: <a href='https://car-house.test/verify.php?token=$verificationToken'>Verify Email</a>";
+									  = "Please click the link to verify your email: <a href='https://carhouse.ct.ws/verify.php?token=$verificationToken'>Verify Email</a>";
 								 $mail->send();
 								 $_SESSION['success'] = 'Verification email sent!';
 						  } catch (Exception $e) {
@@ -173,6 +171,7 @@
 			 if (empty($_POST['signInEmail']) || empty($_POST['signInPassword'])) {
 					$_SESSION['error'] = "Please fill all the fields.";
 					header('Location:../../authLogin.php');
+					exit();
 			 }
 			 $filterEmail = strip_tags($_POST['signInEmail']);
 			 $email = mysqli_real_escape_string(
@@ -188,14 +187,17 @@
 						$password, $selectUser['password']
 				  )
 			 ) {
-					if ($selectUser['role'] == 'user') {
+					if ($selectUser['role'] == 'user'
+						 && $selectUser['is_admin'] == 0
+					) {
 						  $_SESSION['userName'] = $selectUser['name'];
 						  $_SESSION['userEmail'] = $selectUser['email'];
 						  $_SESSION['userPhone'] = $selectUser['phone'];
 						  $_SESSION['userId'] = $selectUser['id'];
 						  header('Location:../../index.php');
-					} elseif ($selectUser['role'] == 'admin') {
+					} elseif ($selectUser['is_admin'] == 1) {
 						  $_SESSION['adminName'] = $selectUser['name'];
+						  $_SESSION['adminRole'] = $selectUser['role'];
 						  $_SESSION['adminEmail'] = $selectUser['email'];
 						  $_SESSION['adminId'] = $selectUser['id'];
 						  header('Location:../../dashboard/index.php');

@@ -98,7 +98,7 @@
 					   </li>
 
 					   <li class="nav-link">
-							<a href="appointmentPage.php">
+							<a href="orderMangerPage.php">
 								  <i class='bx bx-calendar-check icon'></i>
 								  <!-- أيقونة الحجوزات -->
 								  <span class="text nav-text">Appointments</span>
@@ -108,6 +108,13 @@
 					   <li class="nav-link">
 							<a href="calendarPage.php">
 								  <i class='bx bx-calendar icon'></i>
+								  <!-- أيقونة التقويم -->
+								  <span class="text nav-text">Calendar</span>
+							</a>
+					   </li>
+					   <li class="nav-link">
+							<a href="editData/addSubAdmin.php">
+								  <i class='bx bx-user-plus icon'></i>
 								  <!-- أيقونة التقويم -->
 								  <span class="text nav-text">Calendar</span>
 							</a>
@@ -233,6 +240,36 @@
 								  <div class="col-sm-12 col-md-12 col-lg-4 mb-30">
 									    <div class="card card-box customer-card">
 											 <img class="card-img-top"
+												 src="../images/users-img.jpg"
+												 alt="Card image cap"/>
+											 <div class="card-body text-center">
+												   <h5 class="card-title weight-500">
+														Customer
+														Datatable</h5>
+												   <p class="card-text">
+														View and
+														manage
+														customer
+														data
+														efficiently,
+														keeping
+														everything
+														organized
+														and
+														accessible.
+												   </p>
+												   <a href="editData/addSubAdmin.php"
+													 class="btn btn-primary btn-block">
+														View
+														Customers
+														<i class='bx bx-right-arrow-alt'></i>
+												   </a>
+											 </div>
+									    </div>
+								  </div>
+								  <div class="col-sm-12 col-md-12 col-lg-4 mb-30">
+									    <div class="card card-box customer-card">
+											 <img class="card-img-top"
 												 src="../images/Schedule & Events.jpg"
 												 alt="Card image cap"/>
 											 <div class="card-body text-center">
@@ -251,7 +288,7 @@
 														deadlines
 														with ease.
 												   </p>
-												   <a href="usersMangerPage.php"
+												   <a href=""
 													 class="btn btn-primary btn-block">
 														View
 														Calendar

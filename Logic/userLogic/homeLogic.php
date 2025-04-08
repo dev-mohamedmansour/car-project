@@ -33,7 +33,7 @@
 			 
 			 $email = $_SESSION['userEmail'];
 			 
-			 // First try to get verified user
+			 // First try to get a verified user
 			 $userInformation = $dbAction->select("*", "users")
 				  ->where("email", "=", $email)
 				  ->andWhere("verify_email", "=", '1')
@@ -51,7 +51,7 @@
 			 if ($unverifiedUser) {
 					makeEmailVerify($unverifiedUser);
 					$_SESSION['error']
-						 = 'Please verify your email address. Check your inbox.';
+						 = 'Please verify your email address. Check your inbox in Gmail.';
 			 }
 			 
 			 // If no user found at all
@@ -185,7 +185,7 @@
 						 $selectedDate->format('H'), $selectedDate->format('i'), 0
 					);
 					
-					// Check if selected time is within working hours (10 AM to 2 AM)
+					// Check if the selected time is within working hours (10 AM to 2 AM)
 					$hour = (int)$selectedDate->format('H');
 					$isWeekend = in_array($selectedDate->format('N'), [6, 7]
 					); // 6 = Saturday, 7 = Sunday
@@ -245,9 +245,9 @@
 			 
 			 $checkTimeIfExists = $dbAction->select("orderTime", "orders")->where(
 				  "orderTime", "=", $orderDate
-			 )->getAll();
+			 )->andWhere("serviceName", "=", $_POST['serviceName'])->getAll();
 			 
-			 if ($checkTimeIfExists) {
+			 if ($checkTimeIfExists != "No results found") {
 					$_SESSION['error']
 						 = "We're sorry, the time you selected has been booked. Please try another appointment or another day...";
 					header('Location: ../../index.php');
@@ -308,7 +308,7 @@
 								mt_rand(0, 99999999), 8, '0', STR_PAD_LEFT
 						  );
 						  
-						  // Check if number exists
+						  // Check if the number exists
 						  $exists = $dbAction->select('orderCode', 'orders')
 								->where('orderCode', '=', $orderNumber)
 								->getRow();
@@ -345,7 +345,7 @@
 					$orderDetails = $dbAction->insert("orders", $orderData)
 						 ->execution();
 					if ($orderDetails) {
-						  // Send reset email
+//						   Send reset email
 						  $mail = new PHPMailer(true);
 						  try {
 								 // Server settings

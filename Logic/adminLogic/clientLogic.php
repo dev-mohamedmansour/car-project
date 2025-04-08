@@ -3,7 +3,7 @@
 	  use CarHouse\Models\Db;
 	  
 	  require_once __DIR__ . "/../../vendor/autoload.php";
-// Start session if not already started
+// Start session if isn't already started
 	  if (session_status() === PHP_SESSION_NONE) {
 			 session_start();
 	  }
@@ -74,7 +74,6 @@
 										}
 								 }
 						  }
-						  
 						  echo '<td>
                     <div class="dropdown">
                         <a class="btn btn-link font-24 p-0 line-height-1 no-arrow" href="#" role="button" data-toggle="dropdown">
@@ -102,7 +101,7 @@
 					$_SESSION['error']
 						 = "Admin can not Edit, Please contact your administrator.";
 					header('Location:index.php');
-					exit();
+
 			 }
 			 $checkUser = $dbAction->select('id', 'users')->where(
 				  'id', "=", $userId
@@ -116,7 +115,7 @@
 			 } else {
 					$_SESSION['error']
 						 = "User Not Found, Please do not input any number.";
-					exit();
+					
 			 }
 			 
 	  }
@@ -130,7 +129,6 @@
 					$_SESSION['error']
 						 = "Admin can not deleted, Please contact your administrator.";
 					header('Location:index.php');
-					exit();
 			 }
 			 $checkUser = $dbAction->select('id', 'users')->where(
 				  'id', "=", $userId
@@ -146,10 +144,8 @@
 					} else {
 						  $_SESSION['success'] = "Client Deleted Successfully";
 					}
-					exit();
 			 } else {
 					$_SESSION['error']
 						 = "User Not Found, Please do not input any number.";
-					exit();
 			 }
 	  }

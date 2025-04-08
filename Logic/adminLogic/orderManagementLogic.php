@@ -26,36 +26,138 @@
 	  function countOrdersForAdmin(): void
 	  {
 			 $dbAction = new DB;
-			 $countOrders = $dbAction->select("COUNT(id)", "orders")->getRow();
+			 $selectRole = $dbAction->select("role", "users")->where(
+				  "id", "=", $_SESSION['adminId']
+			 )->getRow();
+			 if ($selectRole['role'] == 'admin') {
+					$countOrders = $dbAction->select("COUNT(id)", "orders")->getRow(
+					);
+			 } else {
+					$countOrders = $dbAction->select("COUNT(id)", "orders")->where(
+						 "serviceName", "=", $selectRole['role']
+					)->getRow();
+			 }
+			 echo $countOrders['COUNT(id)'];
+	  }
+	  
+	  function countCompletedOrdersForAdmin(): void
+	  {
+			 $dbAction = new DB;
+			 $selectRole = $dbAction->select("role", "users")->where(
+				  "id", "=", $_SESSION['adminId']
+			 )->getRow();
+			 if ($selectRole['role'] == 'admin') {
+					$countOrders = $dbAction->select("COUNT(id)", "orders")->where(
+						 "orderStuts", "=", "completed"
+					)->getRow();
+			 } else {
+					$countOrders = $dbAction->select("COUNT(id)", "orders")->where(
+						 "serviceName", "=", $selectRole['role']
+					)->andWhere(
+						 "orderStuts", "=", "completed"
+					)->getRow();
+			 }
+			 echo $countOrders['COUNT(id)'];
+			 
+	  }
+	  
+	  function countPendingOrdersForAdmin(): void
+	  {
+			 $dbAction = new DB;
+			 
+			 $selectRole = $dbAction->select("role", "users")->where(
+				  "id", "=", $_SESSION['adminId']
+			 )->getRow();
+			 if ($selectRole['role'] == 'admin') {
+					$countOrders = $dbAction->select("COUNT(id)", "orders")->where(
+						 "orderStuts", "=", "pending"
+					)->getRow();
+			 } else {
+					$countOrders = $dbAction->select("COUNT(id)", "orders")->where(
+						 "serviceName", "=", $selectRole['role']
+					)->andWhere(
+						 "orderStuts", "=", "pending"
+					)->getRow();
+			 }
+			 echo $countOrders['COUNT(id)'];
+			 
+	  }
+	  
+	  function countFinishedOrdersForAdmin(): void
+	  {
+			 $dbAction = new DB;
+			 $selectRole = $dbAction->select("role", "users")->where(
+				  "id", "=", $_SESSION['adminId']
+			 )->getRow();
+			 if ($selectRole['role'] == 'admin') {
+					$countOrders = $dbAction->select("COUNT(id)", "orders")->where(
+						 "orderStuts", "=", "submit"
+					)->getRow();
+			 } else {
+					$countOrders = $dbAction->select("COUNT(id)", "orders")->where(
+						 "serviceName", "=", $selectRole['role']
+					)->andWhere(
+						 "orderStuts", "=", "submit"
+					)->getRow();
+			 }
 			 echo $countOrders['COUNT(id)'];
 			 
 	  }
 	  
 	  function countNewOrdersThisMonth()
 	  {
-			 $db = new DB();
+			 $dbAction = new DB();
 			 
 			 // More precise way to get the current month range
 			 $currentMonthStart = new DateTime('first day of this month');
 			 $currentMonthEnd = new DateTime('last day of this month');
 			 
-			 $newUsers = $db->select('COUNT(id) as newOrders', 'orders')
-				  ->where(
-						'orderDateActive', '>=',
-						$currentMonthStart->format('Y-m-d 00:00:00')
-				  )
-				  ->andWhere(
-						'orderDateActive', '<=',
-						$currentMonthEnd->format('Y-m-d 23:59:59')
-				  )
-				  ->getRow();
-			 echo $newUsers['newOrders'];
+			 $selectRole = $dbAction->select("role", "users")->where(
+				  "id", "=", $_SESSION['adminId']
+			 )->getRow();
+			 if ($selectRole['role'] == 'admin') {
+					$newUsers = $dbAction->select('COUNT(id) as newOrders', 'orders')
+						 ->where(
+							  'orderDateActive', '>=',
+							  $currentMonthStart->format('Y-m-d 00:00:00')
+						 )
+						 ->andWhere(
+							  'orderDateActive', '<=',
+							  $currentMonthEnd->format('Y-m-d 23:59:59')
+						 )
+						 ->getRow();
+			 } else {
+					$newUsers = $dbAction->select('COUNT(id) as newOrders', 'orders')
+						 ->where(
+							  "serviceName", "=", $selectRole['role']
+						 )
+						 ->andWhere(
+							  'orderDateActive', '>=',
+							  $currentMonthStart->format('Y-m-d 00:00:00')
+						 )
+						 ->andWhere(
+							  'orderDateActive', '<=',
+							  $currentMonthEnd->format('Y-m-d 23:59:59')
+						 )
+						 ->getRow();
+			 }
+			 echo $newUsers['COUNT(id)'];
 	  }
 	  
 	  function showOrdersForAdmin(): void
 	  {
 			 $dbAction = new DB;
-			 $orders = $dbAction->select('*', 'orders')->getAll();
+			 $selectRole = $dbAction->select("role", "users")->where(
+				  "id", "=", $_SESSION['adminId']
+			 )->getRow();
+			 if ($selectRole['role'] == 'admin') {
+					$orders = $dbAction->select('*', 'orders')->getAll();
+			 } else {
+					$orders = $dbAction->select('*', 'orders')->where(
+						 "serviceName", "=", $selectRole['role']
+					)->getAll();
+			 }
+			 
 			 if ($orders == "No results found") {
 					echo '<tr>';
 					echo '<h5 style="color: #dc3545"><strong>No orders found,</strong>

@@ -86,7 +86,7 @@
 					   </li>
 
 					   <li class="nav-link Active">
-							<a href="orderMangerPage.php.php">
+							<a href="orderMangerPage.php">
 								  <i class='bx bx-user icon'></i>
 								  <!-- أيقونة المستخدمين -->
 								  <span class="text nav-text">Orders</span>
@@ -101,7 +101,7 @@
 							</a>
 					   </li>
 					   <li class="nav-link">
-							<a href="usersMangerPage.php.php">
+							<a href="usersMangerPage.php">
 								  <i class='bx bx-calendar-check icon'></i>
 								  <!-- أيقونة الحجوزات -->
 								  <span class="text nav-text">Users</span>
@@ -164,63 +164,87 @@
 	  <div class="main-container p-4">
 		    <div class="pd-ltr-20 xs-pd-20-10">
 				 <div class="min-height-200px">
-					   <div class="page-header ">
+					   <div class="page-header">
 							<div class="row">
-								  <div class="col-md-5 col-sm-12">
+								  <div class="col-lg-5 col-12">
 									    <div class="title">
-											 <h4>Order
-												   Data Table</h4>
+											 <h4>Customer
+												   Appointments</h4>
 									    </div>
-									    <nav aria-label="breadcrumb"
-										    role="navigation">
+									    <nav aria-label="breadcrumb">
 											 <ol class="breadcrumb">
 												   <li class="breadcrumb-item">
-														<a href="index.php">Home</a>
+														<a
+															  href="index.php">Dashboard</a>
 												   </li>
 												   <li class="breadcrumb-item active"
 													  aria-current="page">
-														Order
-														DataTable
+														Customer
+														Appointments
 												   </li>
 											 </ol>
 									    </nav>
 								  </div>
-
-								  <div class="col-lg-7 col-12 mt-lg-0 mt-3">
+								  <!-- Stats & Features Section -->
+								  <div class="col-lg-7 col-12 mt-lg-0 mt-4">
 									    <div
-											 class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-3 justify-content-lg-end justify-content-center text-center">
+											 class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4 justify-content-lg-end justify-content-center text-center">
+											 <div class="col d-flex justify-content-center mb-lg-0 mb-3">
+												   <div class="stats-card d-flex align-items-center justify-content-center flex-column">
+														<i class='bx bx-time'></i>
+														<div>
+															  <h5 class="m-0">
+																											 <?php countFinishedOrdersForAdmin(
+																											 ); ?>
+																    ></h5>
+															  <small>Finished</small>
+														</div>
+												   </div>
+											 </div>
+
 											 <!-- Total Appointments -->
 											 <div class="col d-flex justify-content-center mb-lg-0 mb-3">
 												   <div class="stats-card d-flex align-items-center justify-content-center flex-column">
-														<i class='bx bx-group'></i>
+														<i class='bx bx-calendar-check'></i>
 														<div>
 															  <h5 class="m-0">
 																											 <?php countOrdersForAdmin(
-																											 ); ?></h5>
+																																													 ) ?></h5>
 															  <small>Total
-																    Orders</small>
+																    Appointments</small>
 														</div>
 												   </div>
 											 </div>
 											 <!-- Completed Services -->
 											 <div class="col d-flex justify-content-center mb-lg-0 mb-3">
 												   <div class="stats-card d-flex align-items-center justify-content-center flex-column">
-														<i class='bx bx-user-plus'></i>
+														<i class='bx bx-check-circle'></i>
 														<div>
 															  <h5 class="m-0">
-																											 <?php countNewOrdersThisMonth(
+																											 <?php countCompletedOrdersForAdmin(
 																											 ); ?></h5>
-															  <small>New
-																    This
-																    Month</small>
+															  <small>Completed</small>
 														</div>
 												   </div>
 											 </div>
-
+											 <!-- Pending Appointments -->
+											 <div class="col d-flex justify-content-center mb-lg-0 mb-3 mt-3">
+												   <div class="stats-card d-flex align-items-center justify-content-center flex-column">
+														<i class='bx bx-time'></i>
+														<div>
+															  <h5 class="m-0">
+																											 <?php countPendingOrdersForAdmin(
+																											 ); ?>
+																    ></h5>
+															  <small>Pending</small>
+														</div>
+												   </div>
+											 </div>
 									    </div>
 								  </div>
 							</div>
 					   </div>
+
 					   <!-- Message Display Section -->
 					   <div class="message-container">
 											<?php if (!empty($successMessage)): ?>
@@ -302,14 +326,7 @@
 <script src="../js/dataTables.bootstrap4.min.js"></script>
 <script src="../js/dataTables.responsive.min.js"></script>
 <script src="../js/responsive.bootstrap4.min.js"></script>
-<!-- buttons for Export datatable -->
-<script src="../js/dataTables.buttons.min.js"></script>
-<script src="../js/buttons.bootstrap4.min.js"></script>
-<script src="../js/buttons.print.min.js"></script>
-<script src="../js/buttons.html5.min.js"></script>
-<script src="../js/buttons.flash.min.js"></script>
-<script src="../js/pdfmake.min.js"></script>
-<script src="../js/vfs_fonts.js"></script>
+
 <!-- Datatable Setting js -->
 <script src="../vendors/scripts/datatable-setting.js"></script>
 <!-- Google Tag Manager (noscript) -->

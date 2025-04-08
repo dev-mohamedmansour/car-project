@@ -109,7 +109,7 @@
 					    data-bs-toggle="tab" data-bs-target="#nav-contact"
 					    type="button" role="tab"
 					    aria-controls="nav-contact" aria-selected="false">
-					   <a href="contact-us.php">
+					   <a href="../../contact-us.php">
 							<i class="fas fa-envelope"></i> Contact Us
 					   </a>
 				 </button>
@@ -119,7 +119,7 @@
 					    data-bs-target="#nav-logout" type="button"
 					    role="tab" aria-controls="nav-logout"
 					    aria-selected="false">
-					   <a href="logout.php">
+					   <a href="../../logout.php">
 							<i class="fas fa-user-lock"></i> Log out
 					   </a>
 				 </button>
@@ -212,10 +212,10 @@
 	  </form>
 </section>
 
-<script src="js/mdb.umd.min.js" type="text/javascript"></script>
-<script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
-<script src="js/wow.min.js" type="text/javascript"></script>
-<script src="js/script.js" type="text/javascript"></script>
+<script src="../../js/mdb.umd.min.js" type="text/javascript"></script>
+<script src="../../js/bootstrap.bundle.min.js" type="text/javascript"></script>
+<script src="../../js/wow.min.js" type="text/javascript"></script>
+<script src="../../js/script.js" type="text/javascript"></script>
 
 <!--<script>-->
 <!--    new WOW().init();-->
