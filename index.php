@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
 	  <?php
 			 require __DIR__ . '/vendor/autoload.php';
 			 session_start();
@@ -9,9 +6,13 @@
 					header('location:authLogin.php');
 			 }
 	  ?>
+	  <!DOCTYPE html>
+	  <html lang="en">
+	  <head>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  <title>Car House | Home</title>
+		    <link rel="icon" href="images/icons/index-icon.png">
 	  <link rel="preconnect" href="https://fonts.googleapis.com">
 	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	  <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap"
@@ -186,8 +187,6 @@
 		    </div>
 	  </div>
 </section>
-
-
 <section id="form" class="container Form">
 	  <h4 class="text-center mb-4 fw-bold">Book Your Service Appointment with
 		    Ease!</h4>

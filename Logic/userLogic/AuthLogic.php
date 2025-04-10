@@ -207,6 +207,7 @@
 						  header('Location:../../authLogin.php');
 					}
 			 } else {
-				
+					$_SESSION['error'] = "Email or password is not exist!";
+					header('Location:../../authLogin.php');
 			 }
 	  }

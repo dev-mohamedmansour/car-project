@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	  <meta charset="UTF-8"/>
 	  <meta name="viewport"
 		   content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 	  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-	  <title>Material Design for Bootstrap</title>
+	  <title>Car House | Sign Up</title>
+	  <link rel="icon" href="images/icons/index-icon.png">
 	  <link rel="preconnect" href="https://fonts.googleapis.com">
 	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	  <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap"
@@ -24,7 +24,6 @@
 	  <link rel="stylesheet" href="css/bootstrap.min.css">
 	  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 <style>
     .background2 {
