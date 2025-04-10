@@ -9,20 +9,6 @@
 			 session_start();
 	  }
 	  $dbAction = new DB;
-//	  function printUserName($userName)
-//	  {
-//			 $nameParts = explode(" ", $userName);
-//
-//			 // Check if there are at least 2 parts
-//			 if (count($nameParts) >= 2) {
-//					$firstName = $nameParts[0];
-//					$secondName = $nameParts[1];
-//					echo $firstName . " " . $secondName;
-//			 } else {
-//					echo $userName; // Fallback if there's only one name
-//			 }
-//	  }
-	  
 	  function countOrdersForAdmin(): void
 	  {
 			 $dbAction = new DB;

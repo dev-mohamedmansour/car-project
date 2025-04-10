@@ -149,6 +149,7 @@
 								 $mail->isHTML(true);
 								 $mail->Subject = 'Email Verification';
 								 $mail->Body
+									  // here edit the url of web in host */*/*
 									  = "Please click the link to verify your email: <a href='https://carhouse.ct.ws/verify.php?token=$verificationToken'>Verify Email</a>";
 								 $mail->send();
 								 $_SESSION['success'] = 'Verification email sent!';
