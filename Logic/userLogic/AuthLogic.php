@@ -188,14 +188,17 @@
 						$password, $selectUser['password']
 				  )
 			 ) {
-					if ($selectUser['role'] == 'user') {
+					if ($selectUser['role'] == 'user'
+						 && $selectUser['is_admin'] == 0
+					) {
 						  $_SESSION['userName'] = $selectUser['name'];
 						  $_SESSION['userEmail'] = $selectUser['email'];
 						  $_SESSION['userPhone'] = $selectUser['phone'];
 						  $_SESSION['userId'] = $selectUser['id'];
 						  header('Location:../../index.php');
-					} elseif ($selectUser['role'] == 'admin') {
+					} elseif ($selectUser['is_admin'] == 1) {
 						  $_SESSION['adminName'] = $selectUser['name'];
+						  $_SESSION['adminRole'] = $selectUser['role'];
 						  $_SESSION['adminEmail'] = $selectUser['email'];
 						  $_SESSION['adminId'] = $selectUser['id'];
 						  header('Location:../../dashboard/index.php');
@@ -203,5 +206,7 @@
 						  $_SESSION['error'] = "Email or password is not exist!";
 						  header('Location:../../authLogin.php');
 					}
+			 } else {
+				
 			 }
 	  }

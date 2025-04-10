@@ -4,7 +4,7 @@
 	  <?php
 			 require __DIR__ . '/vendor/autoload.php';
 			 session_start();
-			 // if not user redirect to login page
+				// if not, user redirects to login page
 			 if (!isset($_SESSION['userId'])) {
 					header('location:authLogin.php');
 			 }
