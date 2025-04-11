@@ -26,13 +26,13 @@
 <html lang="en">
 <head>
 	  <meta charset="UTF-8"/>
-	  <title>Orders</title>
+	  <title>Dashboard | Orders</title>
+	  <link rel="icon" href="../images/icons/index-icon.png">
 	  <link rel="stylesheet"
 		   href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"/>
 	  <link rel="stylesheet"
 		   href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"/>
-	  <!--	  <link rel="stylesheet" href="../css/darkDashboard.css"/>-->
-	  <!-- Mobile Specific Metas -->
+
 	  <meta name="viewport"
 		   content="width=device-width, initial-scale=1, maximum-scale=1"/>
 	  <!-- Google Font -->
@@ -60,12 +60,15 @@
 <nav class="sidebar close">
 	  <header>
 		    <div class="image-text">
-                <span class="image">
-                    <img src="/images/1726242011151.jpg" alt="image gallery"/>
-                </span>
+				
+				<span class="image">
+					<img src="../images/icons/index-icon.png"
+						alt="image gallery">
+				</span>
+
 				 <div class="text logo-text">
 					   <span class="name"><?php echo $_SESSION['adminName'] ?></span>
-					   <span class="profession">Development</span>
+					   <span class="profession"><?php ?></span>
 				 </div>
 		    </div>
 		    <i class="bx bx-chevron-right toggle"></i>
@@ -86,27 +89,27 @@
 					   </li>
 
 					   <li class="nav-link Active">
-							<a href="orderMangerPage.php">
+							<a href="usersMangerPage.php">
 								  <i class='bx bx-user icon'></i>
-								  <!-- أيقونة المستخدمين -->
 								  <span class="text nav-text">Orders</span>
 							</a>
 					   </li>
 
-					   <li class="nav-link">
-							<a href="appointmentPage.php">
+					   <li class="nav-link Active">
+							<a href="orderMangerPage.php">
 								  <i class='bx bx-calendar-check icon'></i>
 								  <!-- أيقونة الحجوزات -->
-								  <span class="text nav-text">Appointments</span>
+								  <span class="text nav-text">Orders</span>
 							</a>
 					   </li>
-					   <li class="nav-link">
-							<a href="usersMangerPage.php">
-								  <i class='bx bx-calendar-check icon'></i>
-								  <!-- أيقونة الحجوزات -->
-								  <span class="text nav-text">Users</span>
-							</a>
-					   </li>
+					   <!--					   <li class="nav-link">-->
+					   <!--							<a href="usersMangerPage.php">-->
+					   <!--								  <i class='bx bx-calendar-check icon'></i>-->
+					   <!--								   أيقونة الحجوزات -->
+					   -->
+					   <!--								  <span class="text nav-text">Users</span>-->
+					   <!--							</a>-->
+					   <!--					   </li>-->
 
 					   <li class="nav-link">
 							<a href="calendarPage.php">

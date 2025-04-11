@@ -1,7 +1,7 @@
 <?php
 	  //	  // This MUST be the very first thing in your file - before ANY output
 	  session_start();
-	  // if not user redirect to login page
+	  // if not, user redirects to login page
 	  if (!isset($_SESSION['adminId'])) {
 			 header('location:../authLogin.php');
 			 exit();
