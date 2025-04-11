@@ -57,11 +57,11 @@
 			 }
 			 
 			 $addAdmin = $dbAction->insert("users", [
+				  "name" => $name,
 				  "email"                   => $email,
 				  "password"                => $password,
 				  "role"                    => $role,
 				  "phone"                   => $phone,
-				  "name"                    => $name,
 				  "verify_email"            => 1,
 				  "email_confirmation_time" => "now()",
 				  "is_admin"                => 1

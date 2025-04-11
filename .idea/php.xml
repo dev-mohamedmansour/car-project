@@ -40,7 +40,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/string" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
   <component name="PhpStan">
     <PhpStan_settings>
       <phpstan_by_interpreter asDefaultInterpreter="true" interpreter_id="79408c37-cc11-4fed-9e32-1625a19e2672" timeout="60000" />

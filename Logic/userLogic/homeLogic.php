@@ -124,7 +124,7 @@
 					
 					// Content
 					$mail->Subject = 'Verify Your Email Address';
-					$verificationUrl = "https://car-house.test/verify.php?token="
+					$verificationUrl = "https://carhouse.ct.ws/verify.php?token="
 						 . urlencode($verificationToken);
 					$mail->Body = "Please verify your email by clicking this link: <a href='{$verificationUrl}'>Verify Email</a><br><br>
             This link will expire in 24 hours.";

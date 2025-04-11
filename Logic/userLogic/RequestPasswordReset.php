@@ -29,7 +29,7 @@
 					}
 					$expiry = date(
 						 'Y-m-d H:i:s', strtotime('+1 hour')
-					); // Token expires in 1 hour
+					); // Token expires in 1-hour
 					// Store the reset token in the database
 					$updateUserToken = $dbAction->update(
 						 "users",
@@ -56,7 +56,7 @@
 						  $mail->isHTML(true);
 						  $mail->Subject = 'Password Reset';
 						  $mail->Body
-								= "Click the link to reset your password: <a href='https://car-house.test/Logic/userLogic/checkTokenResetPassword.php?token=$resetToken'>Reset Password</a>";
+								= "Click the link to reset your password: <a href='https://carhouse.ct.ws/Logic/userLogic/checkTokenResetPassword.php?token=$resetToken'>Reset Password</a>";
 						  $mail->send();
 						  $_SESSION['success'] = 'Password reset email sent!';
 						  header('Location:../../successSendEmail.php');

@@ -44,7 +44,7 @@
                     <img src="../images/1726242011151.jpg" alt="image gallery">
                 </span>
 				 <div class="text logo-text">
-					   <span class="name">Ismail Mohamed</span>
+					   <span class="name"></span>
 					   <span class="profession">Development</span>
 				 </div>
 		    </div>
@@ -72,7 +72,7 @@
 							</a>
 					   </li>
 					   <li class="nav-link Active">
-							<a href="Appointments.html">
+							<a href="orderMangerPage.php">
 								  <i class='bx bx-calendar-check icon'></i>
 								  <!-- أيقونة الحجوزات -->
 								  <span class="text nav-text">Appointments</span>
@@ -89,7 +89,7 @@
 		    </div>
 		    <div class="bottom-content">
 				 <li class="">
-					   <a href="#">
+					   <a href="../logout.php">
 							<i class='bx bx-log-out icon'></i>
 							<span class="text nav-text">Logout</span>
 					   </a>
