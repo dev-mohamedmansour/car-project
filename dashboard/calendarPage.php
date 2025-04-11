@@ -1,14 +1,34 @@
+<?php
+	  require __DIR__ . '/../vendor/autoload.php';
+	  session_start();
+	  // if not, user redirects to login page
+	  if (!isset($_SESSION['adminId'])) {
+			 header('Location:../authLogin.php');
+	  }
+	  // Process any messages before HTML starts
+	  $successMessage = '';
+	  $errorMessage = '';
+	  
+	  if (!empty($_SESSION['success'])) {
+			 $successMessage = htmlspecialchars($_SESSION['success']);
+			 unset($_SESSION['success']);
+	  }
+	  
+	  if (!empty($_SESSION['error'])) {
+			 $errorMessage = htmlspecialchars($_SESSION['error']);
+			 unset($_SESSION['error']);
+	  }
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	  <meta charset="UTF-8">
-	  <title>Calendar</title>
+	  <title>Dashboard | Calendar</title>
+	  <link rel="icon" href="../images/icons/index-icon.png">
 	  <link rel='stylesheet'
 		   href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'>
 	  <link rel='stylesheet'
 		   href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap'>
-	  <link rel="stylesheet" href="../css/darkDashboard.css">
 	  <!-- Mobile Specific Metas -->
 	  <meta name="viewport"
 		   content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -32,7 +52,6 @@
 </head>
 
 <body>
-<!-- partial:index.partial.html -->
 <button class="mobile-toggle">
 	  <i class='bx bx-menu'></i>
 </button>
@@ -41,13 +60,13 @@
 	  <header>
 		    <div class="image-text">
 				<span class="image">
-					<img src="https://i.postimg.cc/jqgkqhSb/cast-11.jpg"
+					<img src="../images/icons/index-icon.png"
 						alt="image gallery">
 				</span>
 
 				 <div class="text logo-text">
-					   <span class="name">Ismail Mohamed</span>
-					   <span class="profession">Development</span>
+					   <span class="name"><?php echo $_SESSION['adminName'] ?></span>
+					   <span class="profession"><?php echo $_SESSION['adminRole'] ?>></span>
 				 </div>
 		    </div>
 
@@ -56,7 +75,6 @@
 
 	  <div class="menu-bar">
 		    <div class="menu">
-
 				 <li class="search-box">
 					   <i class='bx bx-search icon'></i>
 					   <input type="text" placeholder="Search...">
@@ -66,40 +84,42 @@
 					   <li class="nav-link">
 							<a href="index.php">
 								  <i class='bx bx-home-alt icon'></i>
-								  <span class="text nav-text">Dashboard</span>
+								  <span class="text nav-text">Home</span>
 							</a>
 					   </li>
 
 					   <li class="nav-link">
 							<a href="usersMangerPage.php">
 								  <i class='bx bx-user icon'></i>
-								  <!-- أيقونة المستخدمين -->
 								  <span class="text nav-text">Users</span>
 							</a>
 					   </li>
 
 					   <li class="nav-link">
-							<a href="appointmentPage.php">
+							<a href="orderMangerPage.php">
 								  <i class='bx bx-calendar-check icon'></i>
-								  <!-- أيقونة الحجوزات -->
-								  <span class="text nav-text">Appointments</span>
+								  <span class="text nav-text">Orders</span>
 							</a>
 					   </li>
 
 					   <li class="nav-link Active">
-							<a href="Calendar.html">
+							<a href="calendarPage.php">
 								  <i class='bx bx-calendar icon'></i>
-								  <!-- أيقونة التقويم -->
 								  <span class="text nav-text">Calendar</span>
 							</a>
 					   </li>
-
+					   <li class="nav-link">
+							<a href="addSubAdmin.php">
+								  <i class='bx bx-user-plus icon'></i>
+								  <span class="text nav-text">Add Sub Admin</span>
+							</a>
+					   </li>
 				 </ul>
 		    </div>
 
 		    <div class="bottom-content">
 				 <li class="">
-					   <a href="#">
+					   <a href="../logout.php">
 							<i class='bx bx-log-out icon'></i>
 							<span class="text nav-text">Logout</span>
 					   </a>
@@ -116,7 +136,6 @@
 							<span class="switch"></span>
 					   </div>
 				 </li>
-
 		    </div>
 	  </div>
 

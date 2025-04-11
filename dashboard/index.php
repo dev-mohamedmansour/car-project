@@ -24,6 +24,7 @@
 	  ?>
 	  <meta charset="UTF-8">
 	  <title>Dashboard | Home</title>
+	  <link rel="icon" href="../images/icons/index-icon.png">
 	  <link rel='stylesheet'
 		   href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'>
 	  <link rel='stylesheet'
@@ -60,13 +61,13 @@
 	  <header>
 		    <div class="image-text">
 				<span class="image">
-					<img src="../images/1726242011151.jpg"
+					<img src="../images/icons/index-icon.png"
 						alt="image gallery">
 				</span>
 
 				 <div class="text logo-text">
 					   <span class="name"><?php echo $_SESSION['adminName'] ?></span>
-					   <span class="profession">Development</span>
+					   <span class="profession"><?php echo $_SESSION['adminRole'] ?>></span>
 				 </div>
 		    </div>
 
@@ -85,14 +86,13 @@
 					   <li class="nav-link Active">
 							<a href="index.php">
 								  <i class='bx bx-home-alt icon'></i>
-								  <span class="text nav-text">Dashboard</span>
+								  <span class="text nav-text">Home</span>
 							</a>
 					   </li>
 
 					   <li class="nav-link">
 							<a href="usersMangerPage.php">
 								  <i class='bx bx-user icon'></i>
-								  <!-- أيقونة المستخدمين -->
 								  <span class="text nav-text">Users</span>
 							</a>
 					   </li>
@@ -100,27 +100,22 @@
 					   <li class="nav-link">
 							<a href="orderMangerPage.php">
 								  <i class='bx bx-calendar-check icon'></i>
-								  <!-- أيقونة الحجوزات -->
-								  <span class="text nav-text">Appointments</span>
+								  <span class="text nav-text">Orders</span>
 							</a>
 					   </li>
 
 					   <li class="nav-link">
 							<a href="calendarPage.php">
 								  <i class='bx bx-calendar icon'></i>
-								  <!-- أيقونة التقويم -->
 								  <span class="text nav-text">Calendar</span>
 							</a>
 					   </li>
 					   <li class="nav-link">
-							<a href="editData/addSubAdmin.php">
+							<a href="addSubAdmin.php">
 								  <i class='bx bx-user-plus icon'></i>
-								  <!-- أيقونة التقويم -->
-								  <span class="text nav-text">Calendar</span>
+								  <span class="text nav-text">Add Sub Admin</span>
 							</a>
 					   </li>
-
-
 				 </ul>
 		    </div>
 
@@ -210,7 +205,7 @@
 								  <div class="col-sm-12 col-md-12 col-lg-4 mb-30">
 									    <div class="card card-box customer-card">
 											 <img class="card-img-top"
-												 src="../images/users-img.jpg"
+												 src="../images/users.png"
 												 alt="Card image cap"/>
 											 <div class="card-body text-center">
 												   <h5 class="card-title weight-500">
@@ -240,16 +235,16 @@
 								  <div class="col-sm-12 col-md-12 col-lg-4 mb-30">
 									    <div class="card card-box customer-card">
 											 <img class="card-img-top"
-												 src="../images/users-img.jpg"
+												 src="../images/orders.jpeg"
 												 alt="Card image cap"/>
 											 <div class="card-body text-center">
 												   <h5 class="card-title weight-500">
-														Customer
+														Orders
 														Datatable</h5>
 												   <p class="card-text">
 														View and
 														manage
-														customer
+														Order
 														data
 														efficiently,
 														keeping
@@ -258,10 +253,10 @@
 														and
 														accessible.
 												   </p>
-												   <a href="editData/addSubAdmin.php"
+												   <a href="orderMangerPage.php"
 													 class="btn btn-primary btn-block">
 														View
-														Customers
+														Orders
 														<i class='bx bx-right-arrow-alt'></i>
 												   </a>
 											 </div>
@@ -270,7 +265,7 @@
 								  <div class="col-sm-12 col-md-12 col-lg-4 mb-30">
 									    <div class="card card-box customer-card">
 											 <img class="card-img-top"
-												 src="../images/Schedule & Events.jpg"
+												 src="../images/calinder.jpg"
 												 alt="Card image cap"/>
 											 <div class="card-body text-center">
 												   <h5 class="card-title weight-500">
@@ -288,7 +283,7 @@
 														deadlines
 														with ease.
 												   </p>
-												   <a href=""
+												   <a href="calendarPage.php"
 													 class="btn btn-primary btn-block">
 														View
 														Calendar
@@ -301,28 +296,22 @@
 								  <div class="col-sm-12 col-md-12 col-lg-4 mb-30">
 									    <div class="card card-box customer-card">
 											 <img class="card-img-top"
-												 src="../images/Schedule & Events.jpg"
+												 src="../images/admin.jpeg"
 												 alt="Card image cap"/>
 											 <div class="card-body text-center">
 												   <h5 class="card-title weight-500">
-														Schedule &
-														Events</h5>
+														Add Sub
+														Admin</h5>
 												   <p class="card-text">
-														Stay
-														organized
-														and keep
-														track of
-														your
-														meetings,
-														appointments,
-														and
-														deadlines
-														with ease.
+														Add Sub
+														Admin
+														and manage
+														by role
 												   </p>
-												   <a href="usersMangerPage.php"
+												   <a href="addSubAdmin.php"
 													 class="btn btn-primary btn-block">
-														View
-														Calendar
+														Add Sub
+														Admin
 														<i class='bx bx-right-arrow-alt'></i>
 												   </a>
 											 </div>

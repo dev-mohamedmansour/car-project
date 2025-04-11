@@ -3,14 +3,14 @@
 	  session_start();
 	  // if not, user redirects to login page
 	  if (!isset($_SESSION['adminId'])) {
-			 header('location:../../authLogin.php');
+				header('location:../authLogin.php');
 			 exit();
 	  } elseif ($_SESSION['adminRole'] != "admin") {
 			 $_SESSION['error'] = "You are not authorized to access this page!";
-			 header("Location:../index.php");
+				header("Location:index.php");
 			 exit();
 	  }
-	  require '../../Logic/adminLogic/addAdminLogic.php';
+	  require '../Logic/adminLogic/addAdminLogic.php';
 	  
 	  // Process any messages before HTML starts
 	  $successMessage = '';
@@ -31,6 +31,7 @@
 <head>
 	  <meta charset="UTF-8">
 	  <title>Dashboard | Add Admin</title>
+	  <link rel="icon" href="../images/icons/index-icon.png">
 	  <link rel='stylesheet'
 		   href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'>
 	  <link rel='stylesheet'
@@ -47,13 +48,13 @@
 		   rel="stylesheet">
 	  <!-- CSS -->
 	  <link rel="stylesheet" type="text/css"
-		   href="../../vendors/styles/core.css"/>
+		   href="../vendors/styles/core.css"/>
 	  <link rel="stylesheet" type="text/css"
-		   href="../../vendors/styles/icon-font.min.css"/>
+		   href="../vendors/styles/icon-font.min.css"/>
 	  <link rel="stylesheet" type="text/css"
-		   href="../../css/dataTables.bootstrap4.min.css"/>
+		   href="../css/dataTables.bootstrap4.min.css"/>
 	  <link rel="stylesheet" type="text/css"
-		   href="../../css/style-Dashboard.css"/>
+		   href="../css/style-Dashboard.css"/>
 </head>
 
 <body>
@@ -66,13 +67,13 @@
 	  <header>
 		    <div class="image-text">
 				<span class="image">
-					<img src="../../images/1726242011151.jpg"
+					<img src="../images/icons/index-icon.png"
 						alt="image gallery">
 				</span>
 
 				 <div class="text logo-text">
 					   <span class="name"><?php echo $_SESSION['adminName'] ?></span>
-					   <span class="profession">Development</span>
+					   <span class="profession"><?php echo $_SESSION['adminRole'] ?></span>
 				 </div>
 		    </div>
 
@@ -88,34 +89,37 @@
 				 </li>
 
 				 <ul class="menu-links">
-					   <li class="nav-link Active">
-							<a href="../index.php">
+					   <li class="nav-link">
+							<a href="index.php">
 								  <i class='bx bx-home-alt icon'></i>
 								  <span class="text nav-text">Dashboard</span>
 							</a>
 					   </li>
 
 					   <li class="nav-link">
-							<a href="../usersMangerPage.php">
+							<a href="usersMangerPage.php">
 								  <i class='bx bx-user icon'></i>
-								  <!-- أيقونة المستخدمين -->
 								  <span class="text nav-text">Users</span>
 							</a>
 					   </li>
 
 					   <li class="nav-link">
-							<a href="../orderMangerPage.php">
+							<a href="orderMangerPage.php">
 								  <i class='bx bx-calendar-check icon'></i>
-								  <!-- أيقونة الحجوزات -->
-								  <span class="text nav-text">Appointments</span>
+								  <span class="text nav-text">Orders</span>
 							</a>
 					   </li>
 
 					   <li class="nav-link">
-							<a href="../calendarPage.php">
+							<a href="calendarPage.php">
 								  <i class='bx bx-calendar icon'></i>
-								  <!-- أيقونة التقويم -->
 								  <span class="text nav-text">Calendar</span>
+							</a>
+					   </li>
+					   <li class="nav-link Active">
+							<a href="addSubAdmin.php">
+								  <i class='bx bx-user-plus icon'></i>
+								  <span class="text nav-text">Add Sub Admin</span>
 							</a>
 					   </li>
 
@@ -125,7 +129,7 @@
 
 		    <div class="bottom-content">
 				 <li class="">
-					   <a href="../../logout.php">
+					   <a href="../logout.php">
 							<i class='bx bx-log-out icon'></i>
 							<span class="text nav-text">Logout</span>
 					   </a>
@@ -279,11 +283,11 @@
 </section>
 
 <!-- partial -->
-<script src="../../js/script.js"></script>
+<script src="../js/script.js"></script>
 <!-- js -->
 <!-- js -->
-<script src="../../vendors/scripts/core.js"></script>
-<script src="../../vendors/scripts/script.min.js"></script>
+<script src="../vendors/scripts/core.js"></script>
+<script src="../vendors/scripts/script.min.js"></script>
 <!-- Google Tag Manager (noscript) -->
 <noscript>
 	  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"

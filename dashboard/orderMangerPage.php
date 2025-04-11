@@ -68,7 +68,7 @@
 
 				 <div class="text logo-text">
 					   <span class="name"><?php echo $_SESSION['adminName'] ?></span>
-					   <span class="profession"><?php ?></span>
+					   <span class="profession"><?php echo $_SESSION['adminRole'] ?></span>
 				 </div>
 		    </div>
 		    <i class="bx bx-chevron-right toggle"></i>
@@ -84,38 +84,34 @@
 					   <li class="nav-link">
 							<a href="index.php">
 								  <i class='bx bx-home-alt icon'></i>
-								  <span class="text nav-text">Dashboard</span>
+								  <span class="text nav-text">Home</span>
 							</a>
 					   </li>
 
-					   <li class="nav-link Active">
+					   <li class="nav-link">
 							<a href="usersMangerPage.php">
 								  <i class='bx bx-user icon'></i>
-								  <span class="text nav-text">Orders</span>
+								  <span class="text nav-text">Users</span>
 							</a>
 					   </li>
 
 					   <li class="nav-link Active">
 							<a href="orderMangerPage.php">
 								  <i class='bx bx-calendar-check icon'></i>
-								  <!-- أيقونة الحجوزات -->
 								  <span class="text nav-text">Orders</span>
 							</a>
 					   </li>
-					   <!--					   <li class="nav-link">-->
-					   <!--							<a href="usersMangerPage.php">-->
-					   <!--								  <i class='bx bx-calendar-check icon'></i>-->
-					   <!--								   أيقونة الحجوزات -->
-					   -->
-					   <!--								  <span class="text nav-text">Users</span>-->
-					   <!--							</a>-->
-					   <!--					   </li>-->
 
 					   <li class="nav-link">
 							<a href="calendarPage.php">
 								  <i class='bx bx-calendar icon'></i>
-								  <!-- أيقونة التقويم -->
 								  <span class="text nav-text">Calendar</span>
+							</a>
+					   </li>
+					   <li class="nav-link">
+							<a href="addSubAdmin.php">
+								  <i class='bx bx-user-plus icon'></i>
+								  <span class="text nav-text">Add Sub Admin</span>
 							</a>
 					   </li>
 				 </ul>
@@ -178,12 +174,12 @@
 											 <ol class="breadcrumb">
 												   <li class="breadcrumb-item">
 														<a
-															  href="index.php">Dashboard</a>
+															  href="index.php">Home</a>
 												   </li>
 												   <li class="breadcrumb-item active"
 													  aria-current="page">
 														Customer
-														Appointments
+														Orders
 												   </li>
 											 </ol>
 									    </nav>
@@ -214,7 +210,7 @@
 																											 <?php countOrdersForAdmin(
 																																													 ) ?></h5>
 															  <small>Total
-																    Appointments</small>
+																    Orders</small>
 														</div>
 												   </div>
 											 </div>

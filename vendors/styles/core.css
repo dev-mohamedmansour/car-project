@@ -810,7 +810,8 @@ pre code {
     position: relative;
     width: 100%;
     padding-right: 15px;
-    padding-left: 15px
+    padding-left: 15px;
+    padding-top: 15px;
 }
 
 .col {
@@ -1472,7 +1473,7 @@ pre code {
         -ms-flex: 0 0 50%;
         -webkit-box-flex: 0;
         flex: 0 0 50%;
-        max-width: 50%
+        max-width: 25%
     }
 
     .col-md-7 {

@@ -41,7 +41,13 @@
 	  function showClients(): void
 	  {
 			 $dbAction = new DB;
-			 $users = $dbAction->select('*', 'users')->getAll();
+			 if ($_SESSION['adminRole'] == 'admin') {
+					$users = $dbAction->select('*', 'users')->getAll();
+			 } else {
+					$users = $dbAction->select('*', 'users')->where(
+						 "role", "=", "user"
+					)->getAll();
+			 }
 			 
 			 if (count($users) > 0) {
 					foreach ($users as $information) {

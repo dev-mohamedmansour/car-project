@@ -26,13 +26,12 @@
 <html lang="en">
 <head>
 	  <meta charset="UTF-8"/>
-	  <title>Users</title>
+	  <title>Dashboard | Users</title>
+	  <link rel="icon" href="../images/icons/index-icon.png">
 	  <link rel="stylesheet"
 		   href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"/>
 	  <link rel="stylesheet"
 		   href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"/>
-	  <!--	  <link rel="stylesheet" href="../css/darkDashboard.css"/>-->
-	  <!-- Mobile Specific Metas -->
 	  <meta name="viewport"
 		   content="width=device-width, initial-scale=1, maximum-scale=1"/>
 	  <!-- Google Font -->
@@ -61,11 +60,12 @@
 	  <header>
 		    <div class="image-text">
                 <span class="image">
-                    <img src="/images/1726242011151.jpg" alt="image gallery"/>
+                    <img src="/images/icons/index-icon.png"
+					alt="image gallery"/>
                 </span>
 				 <div class="text logo-text">
 					   <span class="name"><?php echo $_SESSION['adminName'] ?></span>
-					   <span class="profession">Development</span>
+					   <span class="profession"><?php echo $_SESSION['adminRole'] ?></span>
 				 </div>
 		    </div>
 		    <i class="bx bx-chevron-right toggle"></i>
@@ -81,23 +81,21 @@
 					   <li class="nav-link">
 							<a href="index.php">
 								  <i class='bx bx-home-alt icon'></i>
-								  <span class="text nav-text">Dashboard</span>
+								  <span class="text nav-text">Home</span>
 							</a>
 					   </li>
 
 					   <li class="nav-link Active">
 							<a href="usersMangerPage.php">
 								  <i class='bx bx-user icon'></i>
-								  <!-- أيقونة المستخدمين -->
 								  <span class="text nav-text">Users</span>
 							</a>
 					   </li>
 
 					   <li class="nav-link">
-							<a href="appointmentPage.php">
+							<a href="orderMangerPage.php">
 								  <i class='bx bx-calendar-check icon'></i>
-								  <!-- أيقونة الحجوزات -->
-								  <span class="text nav-text">Appointments</span>
+								  <span class="text nav-text">Orders</span>
 							</a>
 					   </li>
 
@@ -106,6 +104,12 @@
 								  <i class='bx bx-calendar icon'></i>
 								  <!-- أيقونة التقويم -->
 								  <span class="text nav-text">Calendar</span>
+							</a>
+					   </li>
+					   <li class="nav-link">
+							<a href="addSubAdmin.php">
+								  <i class='bx bx-user-plus icon'></i>
+								  <span class="text nav-text">Add Sub Admin</span>
 							</a>
 					   </li>
 				 </ul>
