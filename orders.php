@@ -1,6 +1,6 @@
 <?php
 	  session_start();
-	  // if not user redirect to login page
+	  // if not, user redirects to login page
 	  if (!isset($_SESSION['userId'])) {
 			 header('location:authLogin.php');
 			 exit();
@@ -27,6 +27,7 @@
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  <title>Car House | Orders</title>
+	  <link rel="icon" href="images/icons/index-icon.png">
 	  <link rel="preconnect" href="https://fonts.googleapis.com">
 	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	  <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap"
@@ -83,8 +84,7 @@
 					    role="tab" aria-controls="nav-booking"
 					    aria-selected="true">
 					   <a href="index.php">
-							<i class="fas fa-calendar-plus"></i> New
-							Appointment
+							<i class="fas fa-calendar-plus"></i> Home
 					   </a>
 				 </button>
 
@@ -94,7 +94,7 @@
 					    type="button" role="tab"
 					    aria-controls="nav-inquiry" aria-selected="false">
 					   <a href="orders.php">
-							<i class="fas fa-search"></i> Check Booking
+							<i class="fas fa-search"></i> Check Orders
 					   </a>
 				 </button>
 

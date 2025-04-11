@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
 	  <?php
 			 require __DIR__ . '/vendor/autoload.php';
 			 session_start();
@@ -9,9 +6,13 @@
 					header('location:authLogin.php');
 			 }
 	  ?>
+	  <!DOCTYPE html>
+	  <html lang="en">
+	  <head>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  <title>Car House | Home</title>
+		    <link rel="icon" href="../images/icons/index-icon.png">
 	  <link rel="preconnect" href="https://fonts.googleapis.com">
 	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	  <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap"
@@ -60,8 +61,7 @@
 					    role="tab" aria-controls="nav-booking"
 					    aria-selected="true">
 					   <a href="index.php">
-							<i class="fas fa-calendar-plus"></i> New
-							Appointment
+							<i class="fas fa-calendar-plus"></i> Home
 					   </a>
 				 </button>
 
@@ -71,7 +71,7 @@
 					    type="button" role="tab"
 					    aria-controls="nav-inquiry" aria-selected="false">
 					   <a href="orders.php">
-							<i class="fas fa-search"></i> Check Booking
+							<i class="fas fa-search"></i> Check Orders
 					   </a>
 				 </button>
 
@@ -295,27 +295,6 @@
                 });
             }
         });
-        // عند تغيير الموديل
-        // $('#login_model').change(function () {
-        // 	 var makeId = $('#login_make').val();
-        // 	 var modelName = $(this).val();
-        // 	 $('#login_engine').empty().append('<option value="">جاري تحميل المحركات...</option>').prop('disabled', true);
-        // 	 if (modelName) {
-        // 		   $.getJSON('https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getTrims&make=' + makeId + '&model=' + modelName, function (data) {
-        // 				var engines = new Set(); // نستخدم Set لمنع التكرارات
-        // 				if (data.Trims.length > 0) {
-        // 					  $.each(data.Trims, function (index, trim) {
-        // 						    if (trim.engine_fuel && trim.engine_cyl && trim.engine_size_l) {
-        // 								 let engineData = `${trim.engine_size_l}L ${trim.engine_fuel} ${trim.engine_cyl}-Cyl`;
-        // 								 engines.add(engineData);
-        // 						    }
-        // 					  });
-        // 				} else {
-        // 					  $('#login_engine').empty().append('<option value="">لا توجد بيانات محرك متاحة</option>');
-        // 				}
-        // 		   });
-        // 	 }
-        // });
     });
 </script>
 </body>

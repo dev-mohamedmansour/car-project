@@ -1,9 +1,18 @@
+<?php
+	  require __DIR__ . '/vendor/autoload.php';
+	  session_start();
+	  // if not, user redirects to login page
+	  if (!isset($_SESSION['userId'])) {
+			 header('location:authLogin.php');
+	  }
+?>
+<!--  finish  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <title>Dashboard | Contact Us</title>
+	  <title>Car House | Contact Us</title>
 	  <link rel="icon" href="images/icons/index-icon.png">
 	  <link rel="preconnect" href="https://fonts.googleapis.com">
 	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,7 +69,7 @@
 					    type="button" role="tab"
 					    aria-controls="nav-inquiry" aria-selected="false">
 					   <a href="orders.php">
-							<i class="fas fa-search"></i> Check Order
+							<i class="fas fa-search"></i> Check Orders
 					   </a>
 				 </button>
 
@@ -87,20 +96,56 @@
 							<i class="fas fa-envelope"></i> Contact Us
 					   </a>
 				 </button>
-				 <!-- Login Button (Moved to bottom in small screens) -->
+				 <!-- Log out Button (Moved to bottom in small screens) -->
 				 <button class="nav-link login-btn mt-lg-0 ms-auto"
-					    id="nav-login-tab" data-bs-toggle="tab"
-					    data-bs-target="#nav-login" type="button"
-					    role="tab" aria-controls="nav-login"
+					    id="nav-logout-tab" data-bs-toggle="tab"
+					    data-bs-target="#nav-logout" type="button"
+					    role="tab" aria-controls="nav-logout"
 					    aria-selected="false">
-					   <a href="authLogin.php">
-							<i class="fas fa-user-lock"></i> Login
+					   <a href="logout.php">
+							<i class="fas fa-user-lock"></i> Log out
 					   </a>
 				 </button>
 		    </div>
 	  </div>
 </nav>
+<style>
+    .error-message {
+        color: red;
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #ffe6e6;
+        border: 1px solid #ff9999;
+        border-radius: 5px;
+    }
 
+    .success-message {
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: #20ad04;
+        border: 1px solid #3014db;
+        border-radius: 5px
+    }
+</style>
+<?php
+	  if (!empty($_SESSION['success'])
+	  ) {
+			 echo '<div id="error-message" class="success-message" style="display: block">'
+				  . htmlspecialchars($_SESSION['success'])
+				  . '</div>';
+			 unset($_SESSION['success']); // Clear the error message after displaying
+	  } elseif (!empty($_SESSION['error'])) {
+			 echo '<div id="error-message" class="error-message" style="display: block;">'
+				  . htmlspecialchars(
+						$_SESSION['error']
+				  )
+				  . '</div>';
+			 unset($_SESSION['error']); // Clear the error message after displaying
+	  }
+?>
 <!-- Contact Start -->
 <section class="container-xxl pb-5" id="contact">
 	  <div class="container py-5">
@@ -122,12 +167,12 @@
 					   <hr class="w-100">
 
 					   <p class="mb-2">Call Us :</p>
-					   <h5 class="fw-bold">+010 2075 5784</h5>
+					   <h5 class="fw-bold">+010 0783 2666</h5>
 					   <hr class="w-100">
 
 					   <p class="mb-2">WhatsApp Support :</p>
 					   <h5 class="fw-bold">
-							<a href="https://wa.me/201020755784"
+							<a href="https://wa.me/201007832666"
 							   class="btn btn-success btn-sm mt-2 p-3"><i
 									    class="fab fa-whatsapp me-2"></i>
 								  Chat on WhatsApp</a>
@@ -135,27 +180,19 @@
 					   <hr class="w-100">
 
 					   <p class="mb-2">Email Us :</p>
-					   <h5 class="fw-bold">i.mohamedsmsm123@gmail.com</h5>
+					   <h5 class="fw-bold">carhouse001.bn@gmail.com</h5>
 					   <hr class="w-100">
 
 					   <p class="mb-2">Follow Us :</p>
 					   <div class="d-flex pt-2">
 							<a class="btn btn-square submit me-2"
-							   href="https://www.facebook.com/isamail.mohamed19"
+							   href="https://web.facebook.com/people/Car-House/61569352688003/"
 							   target="_blank">
 								  <i class="fab fa-facebook-f"></i>
 							</a>
 							<a class="btn btn-square submit me-2"
-							   href="https://www.instagram.com/ismailmohamed194">
+							   href="https://www.instagram.com/car.house10?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
 								  <i class="fab fa-instagram"></i>
-							</a>
-							<a class="btn btn-square submit me-2"
-							   href="https://github.com/ismail-mohamedismail19">
-								  <i class="fab fa-github"></i>
-							</a>
-							<a class="btn btn-square submit me-2"
-							   href="https://www.linkedin.com/in/ismail-mohamed-7247592ba/">
-								  <i class="fab fa-linkedin-in"></i>
 							</a>
 					   </div>
 				 </div>
@@ -169,8 +206,8 @@
 							get back
 							to you promptly.
 					   </p>
-					   <form action="https://formspree.io/f/mldrrzzw"
-						    method="POST">
+					   <form action=""
+						    method="POST" novalidate>
 							<div class="row g-3">
 								  <div class="col-md-6">
 									    <div class="form-floating">
@@ -216,7 +253,9 @@
 								  <div class="col-12">
 									    <button
 											 class="btn submit py-3 px-5"
-											 type="submit">Send
+											 type="submit"
+											 name="submitSupport">
+											 Send
 											 Message
 									    </button>
 								  </div>
@@ -224,19 +263,13 @@
 					   </form>
 				 </div>
 		    </div>
-
 	  </div>
 </section>
 <!-- Contact End -->
-
-
 <script src="js/mdb.umd.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
 <script src="js/wow.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
-<script>
-    new WOW().init();
-</script>
 </body>
 
 </html>
