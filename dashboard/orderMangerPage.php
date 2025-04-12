@@ -195,7 +195,7 @@
 															  <h5 class="m-0">
 																											 <?php countFinishedOrdersForAdmin(
 																											 ); ?>
-																    ></h5>
+															  </h5>
 															  <small>Finished</small>
 														</div>
 												   </div>
