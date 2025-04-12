@@ -105,7 +105,7 @@
 					    type="button" role="tab"
 					    aria-controls="nav-maintenance"
 					    aria-selected="false">
-					   <a href="#">
+					   <a href="calendar.php">
 							<i class="fas fa-tools"></i> Monthly
 							Maintenance
 					   </a>

@@ -12,7 +12,7 @@
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  <title>Car House | Home</title>
-		    <link rel="icon" href="../images/icons/index-icon.png">
+		    <link rel="icon" href="images/icons/index-icon.png">
 	  <link rel="preconnect" href="https://fonts.googleapis.com">
 	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	  <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap"
@@ -34,9 +34,6 @@
 	  <link rel="stylesheet" href="css/animate.min.css">
 	  <link rel="stylesheet" href="css/bootstrap.min.css">
 	  <link rel="stylesheet" href="css/style.css">
-
-	  <!-- Bootstrap 5 JavaScript -->
-
 </head>
 
 <body>
@@ -82,7 +79,7 @@
 					    type="button" role="tab"
 					    aria-controls="nav-maintenance"
 					    aria-selected="false">
-					   <a href="#">
+					   <a href="calendar.php">
 							<i class="fas fa-tools"></i> Monthly
 							Maintenance
 					   </a>
