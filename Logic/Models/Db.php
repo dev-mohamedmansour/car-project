@@ -11,8 +11,7 @@
 			 public function __construct()
 			 {
 					$this->connection = mysqli_connect(
-						 "sql211.infinityfree.com", "if0_38609934", "2fGQPifltlr6",
-						 "if0_38609934_car_house"
+						 "localhost", "root", "2772003", "car_house"
 					);
 					
 			 }
