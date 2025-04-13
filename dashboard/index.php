@@ -266,37 +266,6 @@
 								  <div class="col-sm-12 col-md-12 col-lg-4 mb-30">
 									    <div class="card card-box customer-card">
 											 <img class="card-img-top"
-												 src="../images/calinder.jpg"
-												 alt="Card image cap"/>
-											 <div class="card-body text-center">
-												   <h5 class="card-title weight-500">
-														Schedule &
-														Events</h5>
-												   <p class="card-text">
-														Stay
-														organized
-														and keep
-														track of
-														your
-														meetings,
-														appointments,
-														and
-														deadlines
-														with ease.
-												   </p>
-												   <a href="calendarPage.php"
-													 class="btn btn-primary btn-block">
-														View
-														Calendar
-														<i class='bx bx-right-arrow-alt'></i>
-												   </a>
-											 </div>
-									    </div>
-								  </div>
-
-								  <div class="col-sm-12 col-md-12 col-lg-4 mb-30">
-									    <div class="card card-box customer-card">
-											 <img class="card-img-top"
 												 src="../images/admin.jpeg"
 												 alt="Card image cap"/>
 											 <div class="card-body text-center">
