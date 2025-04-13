@@ -72,19 +72,6 @@
 					   </a>
 				 </button>
 
-				 <!-- Monthly Maintenance Button -->
-				 <button class="nav-link" id="nav-maintenance-tab"
-					    data-bs-toggle="tab"
-					    data-bs-target="#nav-maintenance"
-					    type="button" role="tab"
-					    aria-controls="nav-maintenance"
-					    aria-selected="false">
-					   <a href="calendar.php">
-							<i class="fas fa-tools"></i> Monthly
-							Maintenance
-					   </a>
-				 </button>
-
 				 <!-- Contact Us Button -->
 				 <button class="nav-link" id="nav-contact-tab"
 					    data-bs-toggle="tab" data-bs-target="#nav-contact"

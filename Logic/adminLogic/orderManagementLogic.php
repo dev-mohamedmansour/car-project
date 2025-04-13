@@ -227,7 +227,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
 											  >
-                            <a class="dropdown-item" href = "orderMangerPage?delete='
+                            <a class="dropdown-item" href = "?delete='
 								. (int)$information['id'] . '"><i class="dw dw-delete-3"
 											  ></i > Delete</a >
                         </div >

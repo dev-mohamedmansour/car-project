@@ -63,7 +63,7 @@
 				  "role"                    => $role,
 				  "phone"                   => $phone,
 				  "verify_email"            => 1,
-				  "email_confirmation_time" => "now()",
+				  "email_confirmation_time" => date('Y-m-d H:i:s'),
 				  "is_admin"                => 1
 			 
 			 ])->execution();

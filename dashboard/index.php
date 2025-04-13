@@ -105,11 +105,12 @@
 					   </li>
 
 					   <li class="nav-link">
-							<a href="calendarPage.php">
-								  <i class='bx bx-calendar icon'></i>
-								  <span class="text nav-text">Calendar</span>
+							<a href="messagePage.php">
+								  <i class='bx bxs-message icon'></i>
+								  <span class="text nav-text">messages</span>
 							</a>
 					   </li>
+
 					   <li class="nav-link">
 							<a href="addSubAdmin.php">
 								  <i class='bx bx-user-plus icon'></i>
@@ -312,6 +313,29 @@
 													 class="btn btn-primary btn-block">
 														Add Sub
 														Admin
+														<i class='bx bx-right-arrow-alt'></i>
+												   </a>
+											 </div>
+									    </div>
+								  </div>
+								  <div class="col-sm-12 col-md-12 col-lg-4 mb-30">
+									    <div class="card card-box customer-card">
+											 <img class="card-img-top"
+												 src="../images/icons/Messages.webp"
+												 alt="Card image cap"/>
+											 <div class="card-body text-center">
+												   <h5 class="card-title weight-500">
+														Show
+														Messages</h5>
+												   <p class="card-text">
+														Show
+														Messages
+														From Users
+												   </p>
+												   <a href="messagePage.php"
+													 class="btn btn-primary btn-block">
+														Show
+														Messages
 														<i class='bx bx-right-arrow-alt'></i>
 												   </a>
 											 </div>

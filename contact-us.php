@@ -73,19 +73,6 @@
 					   </a>
 				 </button>
 
-				 <!-- Monthly Maintenance Button -->
-				 <button class="nav-link" id="nav-maintenance-tab"
-					    data-bs-toggle="tab"
-					    data-bs-target="#nav-maintenance"
-					    type="button" role="tab"
-					    aria-controls="nav-maintenance"
-					    aria-selected="false">
-					   <a href="calendar.php">
-							<i class="fas fa-tools"></i> Monthly
-							Maintenance
-					   </a>
-				 </button>
-
 				 <!-- Contact Us Button -->
 				 <button class="nav-link active-link" id="nav-contact-tab"
 					    data-bs-toggle="tab"
@@ -206,7 +193,7 @@
 							get back
 							to you promptly.
 					   </p>
-					   <form action=""
+					   <form action="Logic/userLogic/requestMessage.php"
 						    method="POST" novalidate>
 							<div class="row g-3">
 								  <div class="col-md-6">
@@ -215,6 +202,7 @@
 												   class="form-control"
 												   id="name"
 												   name="name"
+												   required
 												   placeholder="Your Name">
 											 <label for="name">Your
 												   Name</label>
@@ -226,6 +214,7 @@
 												   class="form-control"
 												   id="email"
 												   name="email"
+												   required
 												   placeholder="Your Email">
 											 <label for="email">Your
 												   Email</label>
@@ -237,6 +226,7 @@
 												   class="form-control"
 												   id="subject"
 												   name="subject"
+												   required
 												   placeholder="Subject">
 											 <label for="subject">Subject</label>
 									    </div>
@@ -244,6 +234,7 @@
 								  <div class="col-12">
 									    <div class="form-floating">
                                     <textarea class="form-control" id="message"
+									 required
 									 name="message"
 									 placeholder="Leave a message here"
 									 style="height: 100px"></textarea>

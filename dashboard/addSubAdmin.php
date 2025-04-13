@@ -111,11 +111,12 @@
 					   </li>
 
 					   <li class="nav-link">
-							<a href="calendarPage.php">
-								  <i class='bx bx-calendar icon'></i>
-								  <span class="text nav-text">Calendar</span>
+							<a href="messagePage.php">
+								  <i class='bx bxs-message icon'></i>
+								  <span class="text nav-text">messages</span>
 							</a>
 					   </li>
+
 					   <li class="nav-link Active">
 							<a href="addSubAdmin.php">
 								  <i class='bx bx-user-plus icon'></i>

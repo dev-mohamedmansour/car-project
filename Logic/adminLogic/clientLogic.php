@@ -88,7 +88,7 @@
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                             <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
                             <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                            <a class="dropdown-item" href="usersMangerPage.php?delete='
+                            <a class="dropdown-item" href="?delete='
 								. (int)$information['id'] . '"><i class="dw dw-delete-3"></i> Delete</a>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
 					$_SESSION['error']
 						 = "Admin can not Edit, Please contact your administrator.";
 					header('Location:index.php');
-
+					
 			 }
 			 $checkUser = $dbAction->select('id', 'users')->where(
 				  'id', "=", $userId
@@ -140,6 +140,21 @@
 				  'id', "=", $userId
 			 )->getRow();
 			 if ($checkUser) {
+					$checkAdmin = $dbAction->select('id', 'users')->where(
+						 "role", "=", "admin"
+					)->getRow();
+					if ($checkAdmin) {
+						  $deleteUser = $dbAction->delete('users')
+								->where('id', '=', $userId)
+								->execution();
+						  
+						  if ($deleteUser == "something error") {
+								 $_SESSION['error'] = "Something Went Wrong";
+						  } else {
+								 $_SESSION['success'] = "User Deleted Successfully";
+						  }
+						  
+					}
 					$deleteUser = $dbAction->delete('users')
 						 ->where('id', '=', $userId)
 						 ->andWhere("role", "=", "user")
