@@ -124,11 +124,11 @@
 								->getRow();
 						  $_SESSION['success']
 								= "Sign-up successful.";
-						  $_SESSION['userName'] = $getUser['name'];
-						  $_SESSION['userEmail'] = $getUser['email'];
-						  $_SESSION['userPhone'] = $getUser['phone'];
-						  $_SESSION['userId'] = $getUser['id'];
-						  header('Location:../../index.php');
+//						  $_SESSION['userName'] = $getUser['name'];
+//						  $_SESSION['userEmail'] = $getUser['email'];
+//						  $_SESSION['userPhone'] = $getUser['phone'];
+//						  $_SESSION['userId'] = $getUser['id'];
+//						  header('Location:../../index.php');
 						  // Send verification email
 						  try {
 								 $mail->isSMTP();
@@ -153,6 +153,7 @@
 									  = "Please click the link to verify your email: <a href='https://carhouse.ct.ws/verify.php?token=$verificationToken'>Verify Email</a>";
 								 $mail->send();
 								 $_SESSION['success'] = 'Verification email sent!';
+								 header('Location: ../../authLogin.php');
 						  } catch (Exception $e) {
 								 $_SESSION['error']
 									  = "Email could not be sent. Error: $mail->ErrorInfo";
