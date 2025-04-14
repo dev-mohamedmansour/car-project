@@ -101,7 +101,7 @@
 			 
 			 // Check if email already exists in the database
 			 $checkEmailOrPhone = $dbAction->select("*", "users")
-				  ->where("email", "=", $email)->orWhere("phone", "=", $phone)
+				  ->where("email", "=", $email)
 				  ->getRow();
 			 
 			 if ($checkEmailOrPhone) {
@@ -150,7 +150,7 @@
 								 $mail->Subject = 'Email Verification';
 								 $mail->Body
 									  // here edit the url of web in host */*/*
-									  = "Please click the link to verify your email: <a href='https://carhouse.ct.ws/verify.php?token=$verificationToken'>Verify Email</a>";
+									  = "Please click the link to verify your email: <a href='https://car-house.test/verify.php?token=$verificationToken'>Verify Email</a>";
 								 $mail->send();
 								 $_SESSION['success'] = 'Verification email sent!';
 								 header('Location: ../../authLogin.php');

@@ -19,13 +19,13 @@
 					)->where("id", "=", $getUser['id'])->execution();
 					
 					$_SESSION['success'] = 'Email verified successfully!';
-					header('location:index.php');
+					header('location:authLogin.php');
 					
 			 } else {
 					$_SESSION['error'] = 'Invalid token.';
-					header('location:index.php');
+					header('location:authLogin.php');
 			 }
 	  } else {
 			 $_SESSION['error'] = 'No token provided.';
-			 header('location:index.php');
+			 header('location:authRegister.php');
 	  }
