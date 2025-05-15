@@ -7,7 +7,7 @@
 	  
 	  session_start();
 	  $dbAction = new Db();
-	  function printUserName($userName)
+	  function printUserName($userName): void
 	  {
 			 $nameParts = explode(" ", $userName);
 			 
@@ -291,6 +291,10 @@
 			 $orderPhone = mysqli_real_escape_string(
 				  $dbAction->connection, $filterOrderPhone
 			 );
+			 $filterOrderPopularProblems = strip_tags($_POST['popularProblems']);
+			 $orderPopularProblems = mysqli_real_escape_string(
+				  $dbAction->connection, $filterOrderPopularProblems
+			 );
 			 $orderDate = $selectedDate->format(
 				  'Y-m-d H:i:s'
 			 ); // MySQL DATETIME format
@@ -337,9 +341,10 @@
 						 'serviceName' => $serviceName,
 						 'orderPhone'  => $orderPhone,
 						 'orderTime'   => $orderDate,
-						 'orderNotes'  => $orderNotes,
+						 'orderNotes'      => $orderNotes ?: 'not thing',
 						 'carMake'     => $carMake,
-						 'carModel'    => $carModel,
+						 'carModel'        => $carModel ?: 'not selected',
+						 'popularProblems' => $orderPopularProblems,
 					];
 					
 					$orderDetails = $dbAction->insert("orders", $orderData)

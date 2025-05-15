@@ -124,11 +124,10 @@
 								->getRow();
 						  $_SESSION['success']
 								= "Sign-up successful.";
-//						  $_SESSION['userName'] = $getUser['name'];
-//						  $_SESSION['userEmail'] = $getUser['email'];
-//						  $_SESSION['userPhone'] = $getUser['phone'];
-//						  $_SESSION['userId'] = $getUser['id'];
-//						  header('Location:../../index.php');
+						  $_SESSION['userName'] = $getUser['name'];
+						  $_SESSION['userEmail'] = $getUser['email'];
+						  $_SESSION['userPhone'] = $getUser['phone'];
+						  $_SESSION['userId'] = $getUser['id'];
 						  // Send verification email
 						  try {
 								 $mail->isSMTP();
@@ -149,7 +148,7 @@
 								 $mail->isHTML(true);
 								 $mail->Subject = 'Email Verification';
 								 $mail->Body
-									  // here edit the url of web in host */*/*
+									  // here edit the url of web in host
 									  = "Please click the link to verify your email: <a href='https://car-house.test/verify.php?token=$verificationToken'>Verify Email</a>";
 								 $mail->send();
 								 $_SESSION['success'] = 'Verification email sent!';

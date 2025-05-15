@@ -4,10 +4,10 @@
 	  <?php
 			 require __DIR__ . '/../vendor/autoload.php';
 			 session_start();
-			 // if not user redirect to login page
-			 if (!isset($_SESSION['adminId'])) {
-					header('Location:../authLogin.php');
-			 }
+				//			 // if not user redirect to login page
+				//			 if (!isset($_SESSION['adminId'])) {
+				//					header('Location:../authLogin.php');
+				//			 }
 			 // Process any messages before HTML starts
 			 $successMessage = '';
 			 $errorMessage = '';

@@ -158,7 +158,8 @@
 												'orderCode', 'carMake',
 												'carModel', 'orderNotes',
 												'orderTime',
-												'orderStuts', 'orderDateActive'];
+												'orderStuts', 'orderDateActive',
+												'popularProblems'];
 						  // First get the user email if userID exists
 						  if (isset($information['userID'])) {
 								 $userId = $information['userID'];

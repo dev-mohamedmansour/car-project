@@ -1,18 +1,18 @@
-	  <?php
-			 require __DIR__ . '/vendor/autoload.php';
-			 session_start();
-			 // if not user redirect to login page
-			 if (!isset($_SESSION['userId'])) {
-					header('location:authLogin.php');
-			 }
-	  ?>
-	  <!DOCTYPE html>
-	  <html lang="en">
-	  <head>
+<?php
+	  require __DIR__ . '/vendor/autoload.php';
+	  session_start();
+	  //			  if not, user redirects to login page
+	  if (!isset($_SESSION['userId'])) {
+			 header('location:authLogin.php');
+	  }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 	  <meta charset="UTF-8">
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  <title>Car House | Home</title>
-		    <link rel="icon" href="images/icons/index-icon.png">
+	  <link rel="icon" href="images/icons/index-icon.png">
 	  <link rel="preconnect" href="https://fonts.googleapis.com">
 	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	  <link href="https://fonts.googleapis.com/css2?family=Monomakh&display=swap"
@@ -233,6 +233,30 @@
 					   class="form-control" name="orderTime" required/>
 		    </div>
 		    <div data-mdb-input-init class="form-outline mb-4">
+				 <div data-mdb-input-init class="form-outline">
+					   <input disabled class="form-control d-none"
+							type="text" id="f2-username2">
+					   <select class="form-control form-select"
+							 name="popularProblems"
+							 id="popularProblems"
+					   >
+							<option selected value="Not Popular problem">
+								  Select if Popular problem
+							</option>
+							<option value="Dead Battery">Dead Battery
+							</option>
+							<option value="Check Engine Light">Check
+								  Engine Light
+							</option>
+							<option value="Transmission Slipping">
+								  Transmission Slipping
+							</option>
+							<option value="Brake Grind">Brake Grind
+							</option>
+					   </select>
+				 </div>
+		    </div>
+		    <div data-mdb-input-init class="form-outline mb-4">
                 <textarea class="form-control"
 					 name="orderNotes" maxlength="500"
 					 placeholder="Additional Notes (optional)"
@@ -259,7 +283,7 @@
     $(document).ready(function () {
         // تحميل قائمة الشركات المصنعة
         $.getJSON('https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getMakes', function (data) {
-            $('#login_make').append('<option value="">Select your car</option>');
+            $('#login_make').append('<option value="not selected">Select your car</option>');
             $.each(data.Makes, function (index, make) {
                 $('#login_make').append('<option value="' + make.make_id + '">' + make.make_display + '</option>');
             });
@@ -267,7 +291,7 @@
         // عند تغيير الشركة المصنعة
         $('#login_make').change(function () {
             var makeId = $(this).val();
-            $('#login_model').empty().append('<option value="">Select model of car</option>').prop('disabled', true);
+            $('#login_model').empty().append('<option value="not selected">Select model of car</option>').prop('disabled', true);
             if (makeId) {
                 $.getJSON('https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getModels&make=' + makeId, function (data) {
                     if (data.Models.length > 0) {

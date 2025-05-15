@@ -298,6 +298,9 @@
 											 <th>
 												   Order Date
 											 </th>
+											 <th>
+												   Popular Problems
+											 </th>
 											 <th class="datatable-nosort">
 												   Action
 											 </th>

@@ -143,13 +143,13 @@
 					return $this->query;
 			 }
 			 
-			 public function getRow()
+			 public function getRow(): false|array|null
 			 {
 					$this->runQuery();
 					$q = mysqli_fetch_assoc($this->query);
 					if ($q == []) {
-//						  reecho "<h2 style='color: red'>Data Not Found</h2>";
-					} elseif ($q != []) {
+						  return false;
+					} else {
 						  return $q;
 					}
 			 }
