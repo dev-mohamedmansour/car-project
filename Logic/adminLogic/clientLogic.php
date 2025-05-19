@@ -12,7 +12,9 @@
 	  function countClients(): void
 	  {
 			 $dbAction = new DB;
-			 $clients = $dbAction->select("COUNT(id)", "users")->getRow();
+			 $clients = $dbAction->select("COUNT(id)", "users")->where(
+				  'role', '!=', 'admin'
+			 )->getRow();
 			 echo $clients['COUNT(id)'];
 			 
 	  }
@@ -21,7 +23,7 @@
 	  {
 			 $db = new DB();
 			 
-			 // More precise way to get current month range
+			 // More precise way to get the current month range
 			 $currentMonthStart = new DateTime('first day of this month');
 			 $currentMonthEnd = new DateTime('last day of this month');
 			 
@@ -33,7 +35,7 @@
 				  ->andWhere(
 						'created_at', '<=',
 						$currentMonthEnd->format('Y-m-d 23:59:59')
-				  )
+				  )->andWhere('role', '!=', 'admin')
 				  ->getRow();
 			 echo $newUsers['newUsers'];
 	  }
@@ -42,14 +44,31 @@
 	  {
 			 $dbAction = new DB;
 			 if ($_SESSION['adminRole'] == 'admin') {
-					$users = $dbAction->select('*', 'users')->getAll();
+					$users = $dbAction->select('*', 'users')->where(
+						 'role', '!=', 'admin'
+					)->getAll();
 			 } else {
 					$users = $dbAction->select('*', 'users')->where(
 						 "role", "=", "user"
 					)->getAll();
 			 }
 			 
-			 if (count($users) > 0) {
+			 if ($users == "No results found") {
+					echo '<tr>';
+					// Output "nothing" for each of the 11 data columns
+					for ($i = 0; $i < 7; $i++) {
+						  echo '<td class="table-plus">no users</td>';
+					}
+					// Output an empty Action column
+					echo '<td>
+						  <div class="dropdown">
+							  <a class="btn btn-link font-24 p-0 line-height-1 no-arrow" href="#" role="button" data-toggle="dropdown">
+								  <i class="dw dw-more"></i>
+							  </a>
+						  </div>
+						  </td>';
+					echo '</tr>';
+			 } elseif (count($users) > 0) {
 					foreach ($users as $information) {
 						  echo '<tr>';
 						  $displayKeys = ['id', 'name', 'email', 'phone', 'role',

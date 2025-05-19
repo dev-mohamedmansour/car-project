@@ -19,7 +19,7 @@
 					)->where("id", "=", $getUser['id'])->execution();
 					
 					$_SESSION['success'] = 'Email verified successfully!';
-					header('location:authLogin.php');
+					header('location:index.php');
 					
 			 } else {
 					$_SESSION['error'] = 'Invalid token.';

@@ -146,9 +146,18 @@
 			 
 			 if ($orders == "No results found") {
 					echo '<tr>';
-					echo '<h5 style="color: #dc3545"><strong>No orders found,</strong>
-				   Please try again later Or book a New ServiceNow!!</h5>
-				   <a class="btn" style="color: #6610f2" href="index.php">HOME</a><br>';
+					// Output "nothing" for each of the 11 data columns
+					for ($i = 0; $i < 13; $i++) {
+						  echo '<td class="table-plus">no orders</td>';
+					}
+					// Output an empty Action column
+					echo '<td>
+								 <div class="dropdown">
+									 <a class="btn btn-link font-24 p-0 line-height-1 no-arrow" href="#" role="button" data-toggle="dropdown">
+										 <i class="dw dw-more"></i>
+									 </a>
+								 </div>
+								 </td>';
 					echo '</tr>';
 			 } elseif (count($orders) > 0) {
 					foreach ($orders as $information) {

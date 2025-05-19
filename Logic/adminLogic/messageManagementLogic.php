@@ -21,11 +21,21 @@
 			 $dbAction = new DB;
 			 $messages = $dbAction->select('*', 'messages')->getAll();
 			 if ($messages == "No results found") {
-					echo "<tr>";
-					echo '<h5 style="color: #dc3545"><strong>No messages found,</strong>
-				   Please try again later</h5>
-				   <a class="btn" style="color: #6610f2" href="index.php">HOME</a><br>';
-					echo "</tr>";
+					echo '<tr>';
+					// Output "nothing" for each of the 11 data columns
+					for ($i = 0; $i < 5; $i++) {
+						  echo '<td class="table-plus">no messages</td>';
+					}
+					// Output an empty Action column
+					echo '<td>
+						  <div class="dropdown">
+							  <a class="btn btn-link font-24 p-0 line-height-1 no-arrow" href="#" role="button" data-toggle="dropdown">
+								  <i class="dw dw-more"></i>
+							  </a>
+						  </div>
+						  </td>';
+					echo '</tr>';
+					
 			 } elseif (count($messages) > 0) {
 					foreach ($messages as $information) {
 						  echo '<tr>';
